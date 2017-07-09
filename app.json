@@ -1,0 +1,17 @@
+{
+  "name": "nigerianpostcodes-api",
+  "scripts": {
+  },
+  "env": {
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/gradle"
+    }
+  ]
+}
