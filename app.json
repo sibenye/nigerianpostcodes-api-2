@@ -3,6 +3,21 @@
   "scripts": {
   },
   "env": {
+    "APP_DATASOURCE_PASSWORD": {
+            "required": true
+    },
+    "APP_DATASOURCE_URL": {
+            "required": true
+    },
+    "APP_DATASOURCE_USERNAME": {
+            "required": true
+    },
+    "APP_PROP_ENVIRONMENT": {
+            "required": true
+    },
+    "APP_PROP_SWAGGERACCTKEY": {
+            "required": true
+    }
   },
   "formation": {
   },
