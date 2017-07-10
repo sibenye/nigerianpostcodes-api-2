@@ -3,6 +3,9 @@
   "scripts": {
   },
   "env": {
+    "APP_DATASOURCE_DRIVERCLASSNAME": {
+            "required": true
+    },
     "APP_DATASOURCE_PASSWORD": {
             "required": true
     },
