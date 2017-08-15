@@ -1,9 +1,10 @@
 package com.elsynergy.nigerianpostcodes.model.response;
 
-import com.elsynergy.nigerianpostcodes.model.DAO.BaseDAO;
-
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import com.elsynergy.nigerianpostcodes.model.DAO.BaseDAO;
 
 public class ApiFindResponse extends BaseResponse
 {
@@ -17,7 +18,7 @@ public class ApiFindResponse extends BaseResponse
     }
 
     public ApiFindResponse(final BaseDAO content) {
-        this.content = Arrays.asList(content);
+        this.content = content != null ? Arrays.asList(content) : new ArrayList<>();
         this.numberOfResults = content != null ? 1 : 0;
     }
 

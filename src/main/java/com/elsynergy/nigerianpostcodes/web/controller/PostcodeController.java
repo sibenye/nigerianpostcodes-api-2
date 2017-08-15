@@ -1,16 +1,21 @@
 package com.elsynergy.nigerianpostcodes.web.controller;
 
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.elsynergy.nigerianpostcodes.model.request.FacilityPostcodeRequest;
 import com.elsynergy.nigerianpostcodes.model.request.RuralPostcodeRequest;
 import com.elsynergy.nigerianpostcodes.model.request.UrbanPostcodeRequest;
 import com.elsynergy.nigerianpostcodes.model.response.ApiResponse;
 import com.elsynergy.nigerianpostcodes.service.postcodeentities.PostcodeService;
 import com.elsynergy.nigerianpostcodes.web.exception.ResourceNotFoundException;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -53,6 +58,17 @@ public class PostcodeController
             ) throws ResourceNotFoundException
     {
         return new ApiResponse(this.postcodeService.getFacilityPostcodes(request));
+    }
+
+    @ApiOperation(value = "Search Urban Postcodes by Street.")
+    @RequestMapping(method = RequestMethod.GET, value = "/urban-postcodes/search")
+    public @ResponseBody ApiResponse searchUrbanPostcodes(
+            @Valid @RequestParam ( required = true ) final String stateCode,
+            @Valid @RequestParam ( required = true ) final String town,
+            @Valid @RequestParam ( required = true ) final String hint
+            ) throws ResourceNotFoundException
+    {
+        return new ApiResponse(this.postcodeService.searchUrbanPostcodes(stateCode, town, hint));
     }
 
 }

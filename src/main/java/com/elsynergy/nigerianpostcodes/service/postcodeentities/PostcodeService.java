@@ -1,5 +1,11 @@
 package com.elsynergy.nigerianpostcodes.service.postcodeentities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.elsynergy.nigerianpostcodes.mapper.FacilityPostcodeResponseMapper;
 import com.elsynergy.nigerianpostcodes.mapper.RuralPostcodeResponseMapper;
 import com.elsynergy.nigerianpostcodes.mapper.UrbanPostcodeResponseMapper;
@@ -17,12 +23,6 @@ import com.elsynergy.nigerianpostcodes.repo.postcodeentities.FacilityPostcodeRep
 import com.elsynergy.nigerianpostcodes.repo.postcodeentities.RuralPostcodeRepositoryCustom;
 import com.elsynergy.nigerianpostcodes.repo.postcodeentities.UrbanPostcodeRepositoryCustom;
 import com.elsynergy.nigerianpostcodes.web.exception.ResourceNotFoundException;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -50,8 +50,7 @@ public class PostcodeService
     @Autowired
     private UrbanPostcodeResponseMapper urbanPostcodeResponseMapper;
 
-    public ApiFindResponse getFacilityPostcodes(final FacilityPostcodeRequest request) throws ResourceNotFoundException
-    {
+    public ApiFindResponse getFacilityPostcodes(final FacilityPostcodeRequest request) throws ResourceNotFoundException {
         final List<FacilityPostcode> facilityPostcodes = this.facilityPostcodeRepository.getFacilityPostcodes(
                 request.getStateCode(), request.getLocalGovtAreaName(), request.getFacilityName());
 
@@ -67,8 +66,7 @@ public class PostcodeService
         return new ApiFindResponse(facilityPostcodeResponses);
     }
 
-    public ApiFindResponse getRuralPostcodes(final RuralPostcodeRequest request) throws ResourceNotFoundException
-    {
+    public ApiFindResponse getRuralPostcodes(final RuralPostcodeRequest request) throws ResourceNotFoundException {
         final List<RuralPostcode> ruralPostcodes = this.ruralPostcodeRepository.getRuralPostcodes(
                 request.getStateCode(), request.getLocalGovtAreaName(), request.getDistrict(), request.getTown());
 
@@ -84,8 +82,7 @@ public class PostcodeService
         return new ApiFindResponse(ruralPostcodeResponses);
     }
 
-    public ApiFindResponse getUrbanPostcodes(final UrbanPostcodeRequest request) throws ResourceNotFoundException
-    {
+    public ApiFindResponse getUrbanPostcodes(final UrbanPostcodeRequest request) throws ResourceNotFoundException {
         final List<UrbanPostcode> urbanPostcodes = this.urbanPostcodeRepository.getUrbanPostcodes(
                 request.getStateCode(), request.getTown(), request.getArea(), request.getStreet());
 
@@ -99,5 +96,18 @@ public class PostcodeService
             urbanPostcodeResponses.add(this.urbanPostcodeResponseMapper.map(urbanPostcode));
         }
         return new ApiFindResponse(urbanPostcodeResponses);
+    }
+
+    public ApiFindResponse searchUrbanPostcodes(final String stateCode, final String town, final String hint) {
+        final List<UrbanPostcode> urbanPostcodes = this.urbanPostcodeRepository.searchUrbanPostcodes(
+                stateCode, town, hint);
+
+        final List<UrbanPostcodeResponse> urbanPostcodeResponses = new ArrayList<>();
+
+        for (final UrbanPostcode urbanPostcode : urbanPostcodes) {
+            urbanPostcodeResponses.add(this.urbanPostcodeResponseMapper.map(urbanPostcode));
+        }
+        return new ApiFindResponse(urbanPostcodeResponses);
+
     }
 }
