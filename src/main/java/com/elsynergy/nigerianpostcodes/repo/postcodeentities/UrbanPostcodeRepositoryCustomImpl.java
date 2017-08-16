@@ -93,7 +93,9 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
             "AND " +
                 "up.town = ? " +
             "AND " +
-                "up.street LIKE ? ";
+                "up.street LIKE ? " +
+            "ORDER BY " +
+                "up.street";
 
         List<UrbanPostcode> urbanPostcodes = new ArrayList<>();
 
