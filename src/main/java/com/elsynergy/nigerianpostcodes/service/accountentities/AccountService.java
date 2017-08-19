@@ -1,20 +1,38 @@
 package com.elsynergy.nigerianpostcodes.service.accountentities;
 
-import com.elsynergy.nigerianpostcodes.mapper.AccountResponseMapper;
-import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.*;
-import com.elsynergy.nigerianpostcodes.model.request.AccountIpAccessRequest;
-import com.elsynergy.nigerianpostcodes.model.request.AccountSubscribeRequest;
-import com.elsynergy.nigerianpostcodes.model.request.RegisterAccountRequest;
-import com.elsynergy.nigerianpostcodes.model.response.AccountResponse;
-import com.elsynergy.nigerianpostcodes.repo.accountentities.*;
-import com.elsynergy.nigerianpostcodes.service.DateTimeService;
-import com.elsynergy.nigerianpostcodes.web.exception.BadRequestException;
-import com.elsynergy.nigerianpostcodes.web.exception.ResourceNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import com.elsynergy.nigerianpostcodes.mapper.AccountResponseMapper;
+import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.Account;
+import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.AccountIpAccess;
+import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.AccountSubscription;
+import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.PackageType;
+import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.Role;
+import com.elsynergy.nigerianpostcodes.model.request.AccountIpAccessRequest;
+import com.elsynergy.nigerianpostcodes.model.request.AccountSubscribeRequest;
+import com.elsynergy.nigerianpostcodes.model.request.RegisterAccountRequest;
+import com.elsynergy.nigerianpostcodes.model.response.accountentities.AccountResponse;
+import com.elsynergy.nigerianpostcodes.repo.accountentities.AccountIpAccessRepository;
+import com.elsynergy.nigerianpostcodes.repo.accountentities.AccountRepository;
+import com.elsynergy.nigerianpostcodes.repo.accountentities.PackageRepository;
+import com.elsynergy.nigerianpostcodes.repo.accountentities.RoleRepository;
+import com.elsynergy.nigerianpostcodes.repo.accountentities.SubscriptionRepository;
+import com.elsynergy.nigerianpostcodes.service.DateTimeService;
+import com.elsynergy.nigerianpostcodes.web.exception.BadRequestException;
+import com.elsynergy.nigerianpostcodes.web.exception.ResourceNotFoundException;
 
 /**
  * User Service Class.

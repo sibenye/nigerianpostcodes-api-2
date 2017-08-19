@@ -93,7 +93,9 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
             "AND " +
                 "up.town = ? " +
             "AND " +
-                "up.street LIKE ? ";
+                "up.street LIKE ? " +
+            "ORDER BY " +
+                "up.street";
 
         List<UrbanPostcode> urbanPostcodes = new ArrayList<>();
 
@@ -122,6 +124,51 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
 
         return urbanPostcodes;
 
+    }
+
+    @Override
+    public List<UrbanPostcode> reverseLookup(final String postcode)
+    {
+        final String query = "SELECT " +
+                "s.id AS stateId, " +
+                "s.name AS stateName, " +
+                "s.code AS stateCode, " +
+                "up.id, " +
+                "up.town, " +
+                "up.street, " +
+                "up.area, " +
+                "up.postcode " +
+            "FROM " +
+                "urban_postcodes up " +
+            "INNER JOIN " +
+                "states s ON up.stateId = s.id " +
+            "WHERE " +
+                "up.postcode = ? ";
+
+        List<UrbanPostcode> urbanPostcodes = new ArrayList<>();
+
+        urbanPostcodes = this.jdbcTemplate.query(
+                query,
+                new Object[] { postcode }, (rs, rowNum) -> {
+                    final UrbanPostcode urbanPostcode = new UrbanPostcode();
+            final State state = new State();
+
+            state.setId(rs.getInt("stateId"));
+            state.setCode(rs.getString("stateCode"));
+            state.setName(rs.getString("stateName"));
+
+
+            urbanPostcode.setId(rs.getInt("id"));
+            urbanPostcode.setTown(rs.getString("town"));
+            urbanPostcode.setArea(rs.getString("area"));
+            urbanPostcode.setStreet(rs.getString("street"));
+            urbanPostcode.setPostcode(rs.getString("postcode"));
+            urbanPostcode.setState(state);
+
+            return urbanPostcode;
+        });
+
+        return urbanPostcodes;
     }
 
 }

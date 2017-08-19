@@ -1,8 +1,8 @@
-package com.elsynergy.nigerianpostcodes.model.response;
+package com.elsynergy.nigerianpostcodes.model.response.postcodeentities;
 
-import com.elsynergy.nigerianpostcodes.model.DAO.BaseDAO;
+import com.elsynergy.nigerianpostcodes.model.response.BaseEntityResponse;
 
-public class RuralPostcodeResponse extends BaseDAO
+public class RuralPostcodeResponse extends BaseEntityResponse
 {
     private String town;
 
@@ -18,60 +18,60 @@ public class RuralPostcodeResponse extends BaseDAO
 
     public String getTown()
     {
-        return town;
+        return this.town;
     }
 
-    public void setTown(String town)
+    public void setTown(final String town)
     {
         this.town = town;
     }
 
     public String getDistrict()
     {
-        return district;
+        return this.district;
     }
 
-    public void setDistrict(String district)
+    public void setDistrict(final String district)
     {
         this.district = district;
     }
 
     public String getLocalGovernmentAreaName()
     {
-        return localGovernmentAreaName;
+        return this.localGovernmentAreaName;
     }
 
-    public void setLocalGovernmentAreaName(String localGovernmentAreaName)
+    public void setLocalGovernmentAreaName(final String localGovernmentAreaName)
     {
         this.localGovernmentAreaName = localGovernmentAreaName;
     }
 
     public String getStateCode()
     {
-        return stateCode;
+        return this.stateCode;
     }
 
-    public void setStateCode(String stateCode)
+    public void setStateCode(final String stateCode)
     {
         this.stateCode = stateCode;
     }
 
     public String getStateName()
     {
-        return stateName;
+        return this.stateName;
     }
 
-    public void setStateName(String stateName)
+    public void setStateName(final String stateName)
     {
         this.stateName = stateName;
     }
 
     public String getPostcode()
     {
-        return postcode;
+        return this.postcode;
     }
 
-    public void setPostcode(String postcode)
+    public void setPostcode(final String postcode)
     {
         this.postcode = postcode;
     }
