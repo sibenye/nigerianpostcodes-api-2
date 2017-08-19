@@ -1,10 +1,10 @@
 package com.elsynergy.nigerianpostcodes.repo.postcodeentities;
 
-import com.elsynergy.nigerianpostcodes.model.DAO.postcodeentities.FacilityPostcode;
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import com.elsynergy.nigerianpostcodes.model.DAO.postcodeentities.FacilityPostcode;
 
 /**
  *
@@ -15,5 +15,7 @@ import java.util.List;
 public interface FacilityPostcodeRepositoryCustom
 {
     public List<FacilityPostcode> getFacilityPostcodes(String stateCode,String localGovtAreaName, String facilityName);
+
+    public List<FacilityPostcode> reverseLookup(String postcode);
 
 }

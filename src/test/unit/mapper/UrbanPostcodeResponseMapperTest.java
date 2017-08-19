@@ -1,16 +1,16 @@
 package mapper;
 
-import com.elsynergy.nigerianpostcodes.mapper.UrbanPostcodeResponseMapper;
-import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.State;
-import com.elsynergy.nigerianpostcodes.model.DAO.postcodeentities.UrbanPostcode;
-import com.elsynergy.nigerianpostcodes.model.response.UrbanPostcodeResponse;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static org.junit.Assert.assertEquals;
+import com.elsynergy.nigerianpostcodes.mapper.UrbanPostcodeResponseMapper;
+import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.State;
+import com.elsynergy.nigerianpostcodes.model.DAO.postcodeentities.UrbanPostcode;
+import com.elsynergy.nigerianpostcodes.model.response.postcodeentities.UrbanPostcodeResponse;
 
 /**
  *

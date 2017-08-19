@@ -15,4 +15,6 @@ public interface UrbanPostcodeRepositoryCustom
 
     public List<UrbanPostcode> searchUrbanPostcodes(String stateCode, String town, String hint);
 
+    public List<UrbanPostcode> reverseLookup(String postcode);
+
 }

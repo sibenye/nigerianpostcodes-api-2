@@ -1,18 +1,18 @@
 package com.elsynergy.nigerianpostcodes.mapper;
 
-import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.Account;
-import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.AccountIpAccess;
-import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.PackageType;
-import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.Privilege;
-import com.elsynergy.nigerianpostcodes.model.response.AccountResponse;
-import com.elsynergy.nigerianpostcodes.model.response.AccountResponse.SubscriptionDetails;
-import com.elsynergy.nigerianpostcodes.service.DateTimeService;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.Account;
+import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.AccountIpAccess;
+import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.PackageType;
+import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.Privilege;
+import com.elsynergy.nigerianpostcodes.model.response.accountentities.AccountResponse;
+import com.elsynergy.nigerianpostcodes.model.response.accountentities.AccountResponse.SubscriptionDetails;
+import com.elsynergy.nigerianpostcodes.service.DateTimeService;
 
 /**
  * Maps Account to AccountResponse.

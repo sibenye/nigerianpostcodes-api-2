@@ -1,22 +1,22 @@
 package com.elsynergy.nigerianpostcodes.service.geographyentities;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.elsynergy.nigerianpostcodes.mapper.LocalGovernmentAreaResponseMapper;
 import com.elsynergy.nigerianpostcodes.mapper.StateResponseMapper;
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.LocalGovernmentArea;
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.State;
 import com.elsynergy.nigerianpostcodes.model.response.ApiFindResponse;
-import com.elsynergy.nigerianpostcodes.model.response.LocalGovernmentAreaResponse;
-import com.elsynergy.nigerianpostcodes.model.response.StateResponse;
+import com.elsynergy.nigerianpostcodes.model.response.geographyentities.LocalGovernmentAreaResponse;
+import com.elsynergy.nigerianpostcodes.model.response.geographyentities.StateResponse;
 import com.elsynergy.nigerianpostcodes.repo.geographyentities.LocalGovernmentAreaRepository;
 import com.elsynergy.nigerianpostcodes.repo.geographyentities.StateRepository;
 import com.elsynergy.nigerianpostcodes.web.exception.ResourceNotFoundException;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 /**
  *

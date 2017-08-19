@@ -1,9 +1,9 @@
 package com.elsynergy.nigerianpostcodes.mapper;
 
-import com.elsynergy.nigerianpostcodes.model.DAO.postcodeentities.FacilityPostcode;
-import com.elsynergy.nigerianpostcodes.model.response.FacilityPostcodeResponse;
-
 import org.springframework.stereotype.Component;
+
+import com.elsynergy.nigerianpostcodes.model.DAO.postcodeentities.FacilityPostcode;
+import com.elsynergy.nigerianpostcodes.model.response.postcodeentities.FacilityPostcodeResponse;
 
 /**
  * Maps FacilityPostcode to FacilityPostcodeResponse.

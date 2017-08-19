@@ -1,6 +1,8 @@
-package com.elsynergy.nigerianpostcodes.model.response;
+package com.elsynergy.nigerianpostcodes.model.response.accountentities;
 
 import java.util.List;
+
+import com.elsynergy.nigerianpostcodes.model.response.BaseResponse;
 
 /**
  *

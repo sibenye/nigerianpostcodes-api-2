@@ -16,10 +16,12 @@ import com.elsynergy.nigerianpostcodes.model.request.FacilityPostcodeRequest;
 import com.elsynergy.nigerianpostcodes.model.request.RuralPostcodeRequest;
 import com.elsynergy.nigerianpostcodes.model.request.UrbanPostcodeRequest;
 import com.elsynergy.nigerianpostcodes.model.response.ApiFindResponse;
-import com.elsynergy.nigerianpostcodes.model.response.FacilityPostcodeResponse;
-import com.elsynergy.nigerianpostcodes.model.response.RuralPostcodeResponse;
-import com.elsynergy.nigerianpostcodes.model.response.UrbanPostcodeResponse;
+import com.elsynergy.nigerianpostcodes.model.response.PostcodeReverseLookupResponse;
+import com.elsynergy.nigerianpostcodes.model.response.postcodeentities.FacilityPostcodeResponse;
+import com.elsynergy.nigerianpostcodes.model.response.postcodeentities.RuralPostcodeResponse;
+import com.elsynergy.nigerianpostcodes.model.response.postcodeentities.UrbanPostcodeResponse;
 import com.elsynergy.nigerianpostcodes.repo.postcodeentities.FacilityPostcodeRepositoryCustom;
+import com.elsynergy.nigerianpostcodes.repo.postcodeentities.PostcodeRepositoryCustom;
 import com.elsynergy.nigerianpostcodes.repo.postcodeentities.RuralPostcodeRepositoryCustom;
 import com.elsynergy.nigerianpostcodes.repo.postcodeentities.UrbanPostcodeRepositoryCustom;
 import com.elsynergy.nigerianpostcodes.web.exception.ResourceNotFoundException;
@@ -49,6 +51,9 @@ public class PostcodeService
 
     @Autowired
     private UrbanPostcodeResponseMapper urbanPostcodeResponseMapper;
+
+    @Autowired
+    private PostcodeRepositoryCustom postcodeRepository;
 
     public ApiFindResponse getFacilityPostcodes(final FacilityPostcodeRequest request) throws ResourceNotFoundException {
         final List<FacilityPostcode> facilityPostcodes = this.facilityPostcodeRepository.getFacilityPostcodes(
@@ -108,6 +113,63 @@ public class PostcodeService
             urbanPostcodeResponses.add(this.urbanPostcodeResponseMapper.map(urbanPostcode));
         }
         return new ApiFindResponse(urbanPostcodeResponses);
+
+    }
+
+    public PostcodeReverseLookupResponse reverseLookup(final String postcode) throws ResourceNotFoundException {
+        final String postcodeType = this.postcodeRepository.getPostcodeType(postcode);
+
+        if (postcodeType == null || postcodeType.isEmpty()) {
+            throw new ResourceNotFoundException();
+        }
+
+        final PostcodeReverseLookupResponse postcodeReverseLookupResponse = new PostcodeReverseLookupResponse();
+
+        switch (postcodeType) {
+        case "rural":
+            final List<RuralPostcode> ruralPostcodes = this.ruralPostcodeRepository.reverseLookup(postcode);
+
+            final List<RuralPostcodeResponse> ruralPostcodeResponses = new ArrayList<>();
+
+            for (final RuralPostcode ruralPostcode : ruralPostcodes) {
+                ruralPostcodeResponses.add(this.ruralPostcodeResponseMapper.map(ruralPostcode));
+            }
+
+            postcodeReverseLookupResponse.setPostcodeType(postcodeType);
+            postcodeReverseLookupResponse.setRuralPostcodeResponses(ruralPostcodeResponses);
+            break;
+
+        case "urban":
+            final List<UrbanPostcode> urbanPostcodes = this.urbanPostcodeRepository.reverseLookup(postcode);
+
+            final List<UrbanPostcodeResponse> urbanPostcodeResponses = new ArrayList<>();
+
+            for (final UrbanPostcode urbanPostcode : urbanPostcodes) {
+                urbanPostcodeResponses.add(this.urbanPostcodeResponseMapper.map(urbanPostcode));
+            }
+
+            postcodeReverseLookupResponse.setPostcodeType(postcodeType);
+            postcodeReverseLookupResponse.setUrbanPostcodeResponses(urbanPostcodeResponses);
+            break;
+
+        case "facility":
+            final List<FacilityPostcode> facilityPostcodes = this.facilityPostcodeRepository.reverseLookup(postcode);
+
+            final List<FacilityPostcodeResponse> facilityPostcodeResponses = new ArrayList<>();
+
+            for (final FacilityPostcode facilityPostcode : facilityPostcodes) {
+                facilityPostcodeResponses.add(this.facilityPostcodeResponseMapper.map(facilityPostcode));
+            }
+
+            postcodeReverseLookupResponse.setPostcodeType(postcodeType);
+            postcodeReverseLookupResponse.setFacilityPostcodeResponses(facilityPostcodeResponses);
+            break;
+
+        default:
+            break;
+        }
+
+        return postcodeReverseLookupResponse;
 
     }
 }

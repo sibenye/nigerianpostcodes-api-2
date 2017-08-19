@@ -1,8 +1,8 @@
-package com.elsynergy.nigerianpostcodes.model.response;
+package com.elsynergy.nigerianpostcodes.model.response.postcodeentities;
 
-import com.elsynergy.nigerianpostcodes.model.DAO.BaseDAO;
+import com.elsynergy.nigerianpostcodes.model.response.BaseEntityResponse;
 
-public class FacilityPostcodeResponse extends BaseDAO
+public class FacilityPostcodeResponse extends BaseEntityResponse
 {
     private String facilityName;
 
@@ -16,50 +16,50 @@ public class FacilityPostcodeResponse extends BaseDAO
 
     public String getFacilityName()
     {
-        return facilityName;
+        return this.facilityName;
     }
 
-    public void setFacilityName(String facilityName)
+    public void setFacilityName(final String facilityName)
     {
         this.facilityName = facilityName;
     }
 
     public String getLocalGovernmentAreaName()
     {
-        return localGovernmentAreaName;
+        return this.localGovernmentAreaName;
     }
 
-    public void setLocalGovernmentAreaName(String localGovernmentAreaName)
+    public void setLocalGovernmentAreaName(final String localGovernmentAreaName)
     {
         this.localGovernmentAreaName = localGovernmentAreaName;
     }
 
     public String getStateCode()
     {
-        return stateCode;
+        return this.stateCode;
     }
 
-    public void setStateCode(String stateCode)
+    public void setStateCode(final String stateCode)
     {
         this.stateCode = stateCode;
     }
 
     public String getStateName()
     {
-        return stateName;
+        return this.stateName;
     }
 
-    public void setStateName(String stateName)
+    public void setStateName(final String stateName)
     {
         this.stateName = stateName;
     }
 
     public String getPostcode()
     {
-        return postcode;
+        return this.postcode;
     }
 
-    public void setPostcode(String postcode)
+    public void setPostcode(final String postcode)
     {
         this.postcode = postcode;
     }
