@@ -1,5 +1,23 @@
 package service;
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+
 import com.elsynergy.nigerianpostcodes.mapper.FacilityPostcodeResponseMapper;
 import com.elsynergy.nigerianpostcodes.mapper.RuralPostcodeResponseMapper;
 import com.elsynergy.nigerianpostcodes.mapper.UrbanPostcodeResponseMapper;
@@ -12,28 +30,11 @@ import com.elsynergy.nigerianpostcodes.model.request.FacilityPostcodeRequest;
 import com.elsynergy.nigerianpostcodes.model.request.RuralPostcodeRequest;
 import com.elsynergy.nigerianpostcodes.model.request.UrbanPostcodeRequest;
 import com.elsynergy.nigerianpostcodes.repo.postcodeentities.FacilityPostcodeRepositoryCustom;
+import com.elsynergy.nigerianpostcodes.repo.postcodeentities.PostcodeRepositoryCustom;
 import com.elsynergy.nigerianpostcodes.repo.postcodeentities.RuralPostcodeRepositoryCustom;
 import com.elsynergy.nigerianpostcodes.repo.postcodeentities.UrbanPostcodeRepositoryCustom;
 import com.elsynergy.nigerianpostcodes.service.postcodeentities.PostcodeService;
 import com.elsynergy.nigerianpostcodes.web.exception.ResourceNotFoundException;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PostcodeServiceTest
@@ -46,6 +47,9 @@ public class PostcodeServiceTest
 
     @Mock
     private UrbanPostcodeRepositoryCustom urbanPostcodeRepository;
+
+    @Mock
+    private PostcodeRepositoryCustom postcodeRepository;
 
     @Mock
     private FacilityPostcodeResponseMapper facilityPostcodeResponseMapper;
@@ -373,6 +377,111 @@ public class PostcodeServiceTest
                 anyString(), anyString(), anyString(), anyString());
 
         verify(this.urbanPostcodeResponseMapper, times(0)).map(any(UrbanPostcode.class));
+    }
+
+    @Test
+    public void testSearchUrbanPostcodes()
+    {
+        final List<UrbanPostcode> urbanPostcodes = Arrays.asList(this.urbanPostcode);
+
+        when(this.urbanPostcodeRepository.searchUrbanPostcodes(
+                anyString(), anyString(), anyString()))
+                .thenReturn(urbanPostcodes);
+
+        this.postcodeService.searchUrbanPostcodes("testState", "testTown", "testHint");
+
+        verify(this.urbanPostcodeRepository, times(1)).searchUrbanPostcodes(
+                anyString(), anyString(), anyString());
+
+        verify(this.urbanPostcodeResponseMapper, atLeastOnce()).map(any(UrbanPostcode.class));
+    }
+
+    @Test
+    public void testSearchUrbanPostcodesWillNotThrow()
+    {
+        final List<UrbanPostcode> urbanPostcodes = new ArrayList<>();
+
+        when(this.urbanPostcodeRepository.searchUrbanPostcodes(
+                anyString(), anyString(), anyString()))
+                .thenReturn(urbanPostcodes);
+
+        this.postcodeService.searchUrbanPostcodes("testState", "testTown", "testHint");
+
+        verify(this.urbanPostcodeRepository, times(1)).searchUrbanPostcodes(
+                anyString(), anyString(), anyString());
+
+        verify(this.urbanPostcodeResponseMapper, times(0)).map(any(UrbanPostcode.class));
+    }
+
+    @Test
+    public void testReverseLookup() throws ResourceNotFoundException
+    {
+        final String postcode = "12345";
+        //test rural
+        final List<RuralPostcode> ruralPostcodes = Arrays.asList(this.ruralPostcode);
+
+        when(this.postcodeRepository.getPostcodeType(
+                anyString()))
+                .thenReturn("rural");
+
+        when(this.ruralPostcodeRepository.reverseLookup(postcode)).thenReturn(ruralPostcodes);
+
+        this.postcodeService.reverseLookup(postcode);
+
+        verify(this.ruralPostcodeRepository, times(1)).reverseLookup(anyString());
+        verify(this.ruralPostcodeResponseMapper, atLeastOnce()).map(any(RuralPostcode.class));
+
+        //test urban
+        final List<UrbanPostcode> urbanPostcodes = Arrays.asList(this.urbanPostcode);
+
+        when(this.postcodeRepository.getPostcodeType(
+                anyString()))
+                .thenReturn("urban");
+
+        when(this.urbanPostcodeRepository.reverseLookup(postcode)).thenReturn(urbanPostcodes);
+
+        this.postcodeService.reverseLookup(postcode);
+
+        verify(this.urbanPostcodeRepository, times(1)).reverseLookup(anyString());
+        verify(this.urbanPostcodeResponseMapper, atLeastOnce()).map(any(UrbanPostcode.class));
+
+        //test facility
+        final List<FacilityPostcode> facilityPostcodes = Arrays.asList(this.facilityPostcode);
+
+        when(this.postcodeRepository.getPostcodeType(
+                anyString()))
+                .thenReturn("facility");
+
+        when(this.facilityPostcodeRepository.reverseLookup(postcode)).thenReturn(facilityPostcodes);
+
+        this.postcodeService.reverseLookup(postcode);
+
+        verify(this.facilityPostcodeRepository, times(1)).reverseLookup(anyString());
+        verify(this.facilityPostcodeResponseMapper, atLeastOnce()).map(any(FacilityPostcode.class));
+
+    }
+
+
+    @Test(expected=ResourceNotFoundException.class)
+    public void testReverseLookupWillThrow() throws ResourceNotFoundException
+    {
+        final String postcode = "12345";
+        final String type = null;
+
+        when(this.postcodeRepository.getPostcodeType(
+                anyString()))
+                .thenReturn(type);
+
+        this.postcodeService.reverseLookup(postcode);
+
+        verify(this.ruralPostcodeRepository, times(0)).reverseLookup(anyString());
+        verify(this.ruralPostcodeResponseMapper, times(0)).map(any(RuralPostcode.class));
+
+        verify(this.urbanPostcodeRepository, times(0)).reverseLookup(anyString());
+        verify(this.urbanPostcodeResponseMapper, times(0)).map(any(UrbanPostcode.class));
+
+        verify(this.facilityPostcodeRepository, times(0)).reverseLookup(anyString());
+        verify(this.facilityPostcodeResponseMapper, times(0)).map(any(FacilityPostcode.class));
     }
 
 }
