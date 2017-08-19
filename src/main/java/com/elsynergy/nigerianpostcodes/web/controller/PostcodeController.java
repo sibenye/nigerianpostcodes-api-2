@@ -71,4 +71,13 @@ public class PostcodeController
         return new ApiResponse(this.postcodeService.searchUrbanPostcodes(stateCode, town, hint));
     }
 
+    @ApiOperation(value = "Reverse Lookup Postcode")
+    @RequestMapping(method = RequestMethod.GET, value = "/reverse-lookup")
+    public @ResponseBody ApiResponse reverseLookup(
+            @Valid @RequestParam ( required = true ) final String postcode
+            ) throws ResourceNotFoundException
+    {
+        return new ApiResponse(this.postcodeService.reverseLookup(postcode));
+    }
+
 }

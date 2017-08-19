@@ -1,9 +1,9 @@
 package com.elsynergy.nigerianpostcodes.mapper;
 
-import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.State;
-import com.elsynergy.nigerianpostcodes.model.response.StateResponse;
-
 import org.springframework.stereotype.Component;
+
+import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.State;
+import com.elsynergy.nigerianpostcodes.model.response.geographyentities.StateResponse;
 
 /**
  * Maps State to StateResponse

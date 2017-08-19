@@ -1,10 +1,13 @@
 package mapper;
 
-import com.elsynergy.nigerianpostcodes.mapper.AccountResponseMapper;
-import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.*;
-import com.elsynergy.nigerianpostcodes.model.response.AccountResponse;
-import com.elsynergy.nigerianpostcodes.model.response.AccountResponse.SubscriptionDetails;
-import com.elsynergy.nigerianpostcodes.service.DateTimeService;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
+
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,10 +16,15 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.*;
-
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
+import com.elsynergy.nigerianpostcodes.mapper.AccountResponseMapper;
+import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.Account;
+import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.AccountSubscription;
+import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.PackageType;
+import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.Privilege;
+import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.Role;
+import com.elsynergy.nigerianpostcodes.model.response.accountentities.AccountResponse;
+import com.elsynergy.nigerianpostcodes.model.response.accountentities.AccountResponse.SubscriptionDetails;
+import com.elsynergy.nigerianpostcodes.service.DateTimeService;
 
 /**
  *

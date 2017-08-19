@@ -1,9 +1,9 @@
 package com.elsynergy.nigerianpostcodes.mapper;
 
-import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.LocalGovernmentArea;
-import com.elsynergy.nigerianpostcodes.model.response.LocalGovernmentAreaResponse;
-
 import org.springframework.stereotype.Component;
+
+import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.LocalGovernmentArea;
+import com.elsynergy.nigerianpostcodes.model.response.geographyentities.LocalGovernmentAreaResponse;
 
 /**
  * Maps LocalGovernmentArea to LocalGovernmentAreaResponse

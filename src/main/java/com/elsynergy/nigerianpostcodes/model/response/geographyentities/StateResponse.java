@@ -1,8 +1,8 @@
-package com.elsynergy.nigerianpostcodes.model.response;
+package com.elsynergy.nigerianpostcodes.model.response.geographyentities;
 
-import com.elsynergy.nigerianpostcodes.model.DAO.BaseDAO;
+import com.elsynergy.nigerianpostcodes.model.response.BaseEntityResponse;
 
-public class StateResponse extends BaseDAO
+public class StateResponse extends BaseEntityResponse
 {
     private String stateCode;
 
