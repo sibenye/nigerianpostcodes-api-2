@@ -15,6 +15,9 @@
     "APP_DATASOURCE_USERNAME": {
             "required": true
     },
+    "APP_DATASOURCE_MAX-ACTIVE": {
+            "required": true
+    },
     "APP_PROP_ENVIRONMENT": {
             "required": true
     },
