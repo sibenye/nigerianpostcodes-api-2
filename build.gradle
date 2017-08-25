@@ -83,6 +83,12 @@ task copyNewrelicAgent(type: Copy) {
     rename ("newrelic-agent-${newrelicVersion}.jar", 'newrelic.jar')
 }
 
+// Add default New Relic Configuration
+task copyNewRelicConfig(type: Copy, group: 'build') {
+    from 'resources/newrelic.yml'
+    into "$buildDir/newrelic"
+}
+
 compileJava {
     dependsOn copyVersionFile
 }
