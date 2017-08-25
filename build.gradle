@@ -23,6 +23,14 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    newrelic // Allow for the copying of the NewRelic agent at run time.
+}
+
+ext {
+    newrelicVersion='3.41.0'
+}
+
 dependencies {
 
     compile 'com.googlecode.json-simple:json-simple:1.1.1'
@@ -41,6 +49,8 @@ dependencies {
     compile 'org.springframework:spring-jdbc:4.3.3.RELEASE'
     
     compile 'mysql:mysql-connector-java:6.0.5'
+    
+    newrelic "com.newrelic.agent.java:newrelic-agent:${newrelicVersion}"
 
     testCompile 'com.jayway.jsonpath:json-path'
     testCompile 'com.jayway.jsonpath:json-path-assert'
@@ -64,6 +74,17 @@ task copyVersionFile(type: Copy, group: 'build') {
     into "${project.getBuildDir()}/resources/main"
 }
 
+// Add New Relic Java Agent
+task copyNewrelicAgent(type: Copy) {
+    from {
+        configurations.newrelic
+    }
+    into "$buildDir/newrelic"
+    rename ("newrelic-agent-${newrelicVersion}.jar", 'newrelic.jar')
+}
+
 compileJava {
     dependsOn copyVersionFile
 }
+
+project.tasks.build.dependsOn('copyNewrelicAgent')
