@@ -94,3 +94,4 @@ compileJava {
 }
 
 project.tasks.build.dependsOn('copyNewrelicAgent')
+project.tasks.build.dependsOn('copyNewRelicConfig')
