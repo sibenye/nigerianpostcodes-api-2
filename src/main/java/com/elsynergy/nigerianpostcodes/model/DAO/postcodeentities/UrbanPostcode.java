@@ -1,8 +1,17 @@
 package com.elsynergy.nigerianpostcodes.model.DAO.postcodeentities;
 
-import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.State;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-import javax.persistence.*;
+import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.Audit;
+import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.State;
+import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.UrbanArea;
 
 /**
 *
@@ -11,7 +20,7 @@ import javax.persistence.*;
 */
 @Entity
 @Table(name = "urban_postcodes")
-public class UrbanPostcode
+public class UrbanPostcode extends Audit
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,6 +42,10 @@ public class UrbanPostcode
     @ManyToOne(optional=false)
     @JoinColumn(name="stateid", nullable=false)
     private State state;
+
+    @ManyToOne(optional=false)
+    @JoinColumn(name="urbanAreaId", nullable=false)
+    private UrbanArea urbanArea;
 
     public Integer getId()
     {
@@ -92,6 +105,16 @@ public class UrbanPostcode
     public void setState(final State state)
     {
         this.state = state;
+    }
+
+    public UrbanArea getUrbanArea()
+    {
+        return this.urbanArea;
+    }
+
+    public void setUrbanArea(final UrbanArea urbanArea)
+    {
+        this.urbanArea = urbanArea;
     }
 
 }

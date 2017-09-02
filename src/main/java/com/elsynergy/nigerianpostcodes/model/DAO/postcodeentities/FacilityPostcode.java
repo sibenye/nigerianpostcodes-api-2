@@ -1,8 +1,16 @@
 package com.elsynergy.nigerianpostcodes.model.DAO.postcodeentities;
 
-import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.LocalGovernmentArea;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-import javax.persistence.*;
+import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.Audit;
+import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.LocalGovernmentArea;
 
 /**
 *
@@ -11,7 +19,7 @@ import javax.persistence.*;
 */
 @Entity
 @Table(name = "facility_postcodes")
-public class FacilityPostcode
+public class FacilityPostcode extends Audit
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
