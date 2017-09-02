@@ -1,8 +1,16 @@
 package com.elsynergy.nigerianpostcodes.model.DAO.postcodeentities;
 
-import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.State;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-import javax.persistence.*;
+import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.Audit;
+import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.UrbanArea;
 
 /**
 *
@@ -11,7 +19,7 @@ import javax.persistence.*;
 */
 @Entity
 @Table(name = "urban_postcodes")
-public class UrbanPostcode
+public class UrbanPostcode extends Audit
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,15 +32,12 @@ public class UrbanPostcode
     @Column(name = "street")
     private String street;
 
-    @Column(name = "area")
-    private String area;
-
     @Column(name = "postcode")
     private String postcode;
 
     @ManyToOne(optional=false)
-    @JoinColumn(name="stateid", nullable=false)
-    private State state;
+    @JoinColumn(name="urbanAreaId", nullable=false)
+    private UrbanArea urbanArea;
 
     public Integer getId()
     {
@@ -64,16 +69,6 @@ public class UrbanPostcode
         this.street = street;
     }
 
-    public String getArea()
-    {
-        return this.area;
-    }
-
-    public void setArea(final String area)
-    {
-        this.area = area;
-    }
-
     public String getPostcode()
     {
         return this.postcode;
@@ -84,14 +79,14 @@ public class UrbanPostcode
         this.postcode = postcode;
     }
 
-    public State getState()
+    public UrbanArea getUrbanArea()
     {
-        return this.state;
+        return this.urbanArea;
     }
 
-    public void setState(final State state)
+    public void setUrbanArea(final UrbanArea urbanArea)
     {
-        this.state = state;
+        this.urbanArea = urbanArea;
     }
 
 }

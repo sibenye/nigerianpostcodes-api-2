@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.LocalGovernmentArea;
+import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.RuralArea;
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.State;
 import com.elsynergy.nigerianpostcodes.model.DAO.postcodeentities.RuralPostcode;
 
@@ -32,14 +33,17 @@ public class RuralPostcodeRepositoryCustomImpl implements RuralPostcodeRepositor
                                 "s.code AS stateCode, " +
                                 "l.id AS lgaId, " +
                                 "l.name AS lgaName, " +
+                                "ra.id AS ruralAreaId, " +
+                                "ra.name AS district, " +
                                 "rp.id, " +
                                 "rp.town, " +
-                                "rp.district, " +
                                 "rp.postcode " +
                             "FROM " +
                                 "rural_postcodes rp " +
                             "INNER JOIN " +
-                                "lgas l ON rp.lgaId = l.id " +
+                                "rural_areas ra ON rp.ruralAreaId = ra.id " +
+                            "INNER JOIN " +
+                                "lgas l ON ra.lgaId = l.id " +
                             "INNER JOIN " +
                                 "states s ON l.stateId = s.id " +
                             "WHERE " +
@@ -47,7 +51,7 @@ public class RuralPostcodeRepositoryCustomImpl implements RuralPostcodeRepositor
                             "AND " +
                                 "l.name = COALESCE(?, l.name) " +
                             "AND " +
-                                "rp.district = COALESCE(?, rp.district) " +
+                                "ra.name = COALESCE(?, ra.name) " +
                             "AND " +
                                 "rp.town = COALESCE(?, rp.town)";
 
@@ -57,6 +61,7 @@ public class RuralPostcodeRepositoryCustomImpl implements RuralPostcodeRepositor
                 query,
                 new Object[] { stateCode, localGovtAreaName, district, town }, (rs, rowNum) -> {
                     final RuralPostcode ruralPostcode = new RuralPostcode();
+            final RuralArea ruralArea = new RuralArea();
             final LocalGovernmentArea lga = new LocalGovernmentArea();
             final State state = new State();
 
@@ -68,11 +73,14 @@ public class RuralPostcodeRepositoryCustomImpl implements RuralPostcodeRepositor
             lga.setName(rs.getString("lgaName"));
             lga.setState(state);
 
+            ruralArea.setId(rs.getInt("ruralAreaId"));
+            ruralArea.setName(rs.getString("district"));
+            ruralArea.setLocalGovernmentArea(lga);
+
             ruralPostcode.setId(rs.getInt("id"));
             ruralPostcode.setTown(rs.getString("town"));
-            ruralPostcode.setDistrict(rs.getString("district"));
             ruralPostcode.setPostcode(rs.getString("postcode"));
-            ruralPostcode.setLocalGovernmentArea(lga);
+            ruralPostcode.setRuralArea(ruralArea);
 
             return ruralPostcode;
         });
@@ -88,14 +96,17 @@ public class RuralPostcodeRepositoryCustomImpl implements RuralPostcodeRepositor
                 "s.code AS stateCode, " +
                 "l.id AS lgaId, " +
                 "l.name AS lgaName, " +
+                "ra.id AS ruralAreaId, " +
+                "ra.name AS district, " +
                 "rp.id, " +
                 "rp.town, " +
-                "rp.district, " +
                 "rp.postcode " +
             "FROM " +
                 "rural_postcodes rp " +
             "INNER JOIN " +
-                "lgas l ON rp.lgaId = l.id " +
+                "rural_areas ra ON rp.ruralAreaId = ra.id " +
+            "INNER JOIN " +
+                "lgas l ON ra.lgaId = l.id " +
             "INNER JOIN " +
                 "states s ON l.stateId = s.id " +
             "WHERE " +
@@ -107,6 +118,7 @@ public class RuralPostcodeRepositoryCustomImpl implements RuralPostcodeRepositor
                 query,
                 new Object[] { postcode }, (rs, rowNum) -> {
                     final RuralPostcode ruralPostcode = new RuralPostcode();
+            final RuralArea ruralArea = new RuralArea();
             final LocalGovernmentArea lga = new LocalGovernmentArea();
             final State state = new State();
 
@@ -118,11 +130,14 @@ public class RuralPostcodeRepositoryCustomImpl implements RuralPostcodeRepositor
             lga.setName(rs.getString("lgaName"));
             lga.setState(state);
 
+            ruralArea.setId(rs.getInt("ruralAreaId"));
+            ruralArea.setName(rs.getString("district"));
+            ruralArea.setLocalGovernmentArea(lga);
+
             ruralPostcode.setId(rs.getInt("id"));
             ruralPostcode.setTown(rs.getString("town"));
-            ruralPostcode.setDistrict(rs.getString("district"));
             ruralPostcode.setPostcode(rs.getString("postcode"));
-            ruralPostcode.setLocalGovernmentArea(lga);
+            ruralPostcode.setRuralArea(ruralArea);
 
             return ruralPostcode;
         });

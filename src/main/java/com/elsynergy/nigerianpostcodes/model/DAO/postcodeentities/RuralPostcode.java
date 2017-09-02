@@ -1,8 +1,16 @@
 package com.elsynergy.nigerianpostcodes.model.DAO.postcodeentities;
 
-import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.LocalGovernmentArea;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-import javax.persistence.*;
+import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.Audit;
+import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.RuralArea;
 
 /**
 *
@@ -11,7 +19,7 @@ import javax.persistence.*;
 */
 @Entity
 @Table(name = "rural_postcodes")
-public class RuralPostcode
+public class RuralPostcode extends Audit
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,15 +29,12 @@ public class RuralPostcode
     @Column(name = "town")
     private String town;
 
-    @Column(name = "district")
-    private String district;
-
     @Column(name = "postcode")
     private String postcode;
 
     @ManyToOne(optional=false)
-    @JoinColumn(name="lgaid", nullable=false)
-    private LocalGovernmentArea localGovernmentArea;
+    @JoinColumn(name="ruralAreaId", nullable=false)
+    private RuralArea ruralArea;
 
     public Integer getId()
     {
@@ -51,16 +56,6 @@ public class RuralPostcode
         this.town = town;
     }
 
-    public String getDistrict()
-    {
-        return this.district;
-    }
-
-    public void setDistrict(final String district)
-    {
-        this.district = district;
-    }
-
     public String getPostcode()
     {
         return this.postcode;
@@ -71,14 +66,14 @@ public class RuralPostcode
         this.postcode = postcode;
     }
 
-    public LocalGovernmentArea getLocalGovernmentArea()
+    public RuralArea getRuralArea()
     {
-        return this.localGovernmentArea;
+        return this.ruralArea;
     }
 
-    public void setLocalGovernmentArea(final LocalGovernmentArea localGovernmentArea)
+    public void setRuralArea(final RuralArea ruralArea)
     {
-        this.localGovernmentArea = localGovernmentArea;
+        this.ruralArea = ruralArea;
     }
 
 }
