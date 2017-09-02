@@ -72,7 +72,6 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
             urbanPostcode.setTown(rs.getString("town"));
             urbanPostcode.setStreet(rs.getString("street"));
             urbanPostcode.setPostcode(rs.getString("postcode"));
-            urbanPostcode.setState(state);
             urbanPostcode.setUrbanArea(urbanArea);
 
             return urbanPostcode;

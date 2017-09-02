@@ -10,7 +10,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.Audit;
-import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.LocalGovernmentArea;
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.RuralArea;
 
 /**
@@ -30,15 +29,8 @@ public class RuralPostcode extends Audit
     @Column(name = "town")
     private String town;
 
-    @Column(name = "district")
-    private String district;
-
     @Column(name = "postcode")
     private String postcode;
-
-    @ManyToOne(optional=false)
-    @JoinColumn(name="lgaid", nullable=false)
-    private LocalGovernmentArea localGovernmentArea;
 
     @ManyToOne(optional=false)
     @JoinColumn(name="ruralAreaId", nullable=false)
@@ -64,16 +56,6 @@ public class RuralPostcode extends Audit
         this.town = town;
     }
 
-    public String getDistrict()
-    {
-        return this.district;
-    }
-
-    public void setDistrict(final String district)
-    {
-        this.district = district;
-    }
-
     public String getPostcode()
     {
         return this.postcode;
@@ -82,16 +64,6 @@ public class RuralPostcode extends Audit
     public void setPostcode(final String postcode)
     {
         this.postcode = postcode;
-    }
-
-    public LocalGovernmentArea getLocalGovernmentArea()
-    {
-        return this.localGovernmentArea;
-    }
-
-    public void setLocalGovernmentArea(final LocalGovernmentArea localGovernmentArea)
-    {
-        this.localGovernmentArea = localGovernmentArea;
     }
 
     public RuralArea getRuralArea()

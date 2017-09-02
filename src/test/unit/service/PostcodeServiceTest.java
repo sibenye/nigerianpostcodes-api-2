@@ -22,7 +22,9 @@ import com.elsynergy.nigerianpostcodes.mapper.FacilityPostcodeResponseMapper;
 import com.elsynergy.nigerianpostcodes.mapper.RuralPostcodeResponseMapper;
 import com.elsynergy.nigerianpostcodes.mapper.UrbanPostcodeResponseMapper;
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.LocalGovernmentArea;
+import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.RuralArea;
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.State;
+import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.UrbanArea;
 import com.elsynergy.nigerianpostcodes.model.DAO.postcodeentities.FacilityPostcode;
 import com.elsynergy.nigerianpostcodes.model.DAO.postcodeentities.RuralPostcode;
 import com.elsynergy.nigerianpostcodes.model.DAO.postcodeentities.UrbanPostcode;
@@ -87,6 +89,15 @@ public class PostcodeServiceTest
         localGovernmentArea.setName("testLga");
         localGovernmentArea.setState(state);
 
+        final UrbanArea urbanArea = new UrbanArea();
+        urbanArea.setName("testDestrict");
+        urbanArea.setState(state);
+
+        final RuralArea ruralArea = new RuralArea();
+        ruralArea.setName("testArea");
+        ruralArea.setLocalGovernmentArea(localGovernmentArea);
+
+
         this.facilityPostcode = new FacilityPostcode();
         this.facilityPostcode.setId(1);
         this.facilityPostcode.setFacility("testFacility");
@@ -95,18 +106,16 @@ public class PostcodeServiceTest
 
         this.ruralPostcode = new RuralPostcode();
         this.ruralPostcode.setId(1);
-        this.ruralPostcode.setDistrict("testDistrict");
         this.ruralPostcode.setTown("testTown");
         this.ruralPostcode.setPostcode("120983");
-        this.ruralPostcode.setLocalGovernmentArea(localGovernmentArea);
+        this.ruralPostcode.setRuralArea(ruralArea);;
 
         this.urbanPostcode = new UrbanPostcode();
         this.urbanPostcode.setId(1);
         this.urbanPostcode.setStreet("testStreet");
         this.urbanPostcode.setTown("testTown");
         this.urbanPostcode.setPostcode("120983");
-        this.urbanPostcode.setArea("testArea");
-        this.urbanPostcode.setState(state);
+        this.urbanPostcode.setUrbanArea(urbanArea);
 
         this.facilityPostcodeRequest = new FacilityPostcodeRequest();
         this.facilityPostcodeRequest.setStateCode("AB");

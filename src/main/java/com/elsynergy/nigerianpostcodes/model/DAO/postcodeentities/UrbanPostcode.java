@@ -10,7 +10,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.Audit;
-import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.State;
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.UrbanArea;
 
 /**
@@ -33,15 +32,8 @@ public class UrbanPostcode extends Audit
     @Column(name = "street")
     private String street;
 
-    @Column(name = "area")
-    private String area;
-
     @Column(name = "postcode")
     private String postcode;
-
-    @ManyToOne(optional=false)
-    @JoinColumn(name="stateid", nullable=false)
-    private State state;
 
     @ManyToOne(optional=false)
     @JoinColumn(name="urbanAreaId", nullable=false)
@@ -77,16 +69,6 @@ public class UrbanPostcode extends Audit
         this.street = street;
     }
 
-    public String getArea()
-    {
-        return this.area;
-    }
-
-    public void setArea(final String area)
-    {
-        this.area = area;
-    }
-
     public String getPostcode()
     {
         return this.postcode;
@@ -95,16 +77,6 @@ public class UrbanPostcode extends Audit
     public void setPostcode(final String postcode)
     {
         this.postcode = postcode;
-    }
-
-    public State getState()
-    {
-        return this.state;
-    }
-
-    public void setState(final State state)
-    {
-        this.state = state;
     }
 
     public UrbanArea getUrbanArea()
