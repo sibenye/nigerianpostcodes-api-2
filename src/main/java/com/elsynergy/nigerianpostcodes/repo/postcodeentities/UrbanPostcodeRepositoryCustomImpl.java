@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.State;
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.UrbanArea;
+import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.UrbanTown;
 import com.elsynergy.nigerianpostcodes.model.DAO.postcodeentities.UrbanPostcode;
 
 /**
@@ -29,10 +30,11 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
                             "s.id AS stateId, " +
                             "s.name AS stateName, " +
                             "s.code AS stateCode, " +
+                            "ut.id AS urbanTownId, " +
+                            "ut.name AS town, " +
                             "ua.id AS urbanAreaId, " +
                             "ua.name AS area, " +
                             "up.id, " +
-                            "up.town, " +
                             "up.street, " +
                             "up.postcode " +
                         "FROM " +
@@ -40,11 +42,13 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
                         "INNER JOIN " +
                             "urban_areas ua ON up.urbanAreaId = ua.id " +
                         "INNER JOIN " +
-                            "states s ON ua.stateId = s.id " +
+                            "urban_towns ut ON ua.urbanTownId = ut.id " +
+                        "INNER JOIN " +
+                            "states s ON ut.stateId = s.id " +
                         "WHERE " +
                             "s.code = ? " +
                         "AND " +
-                            "up.town = COALESCE(?, up.town) " +
+                            "ut.name = COALESCE(?, ut.name) " +
                         "AND " +
                             "ua.name = COALESCE(?, ua.name) " +
                         "AND " +
@@ -56,6 +60,7 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
                 query,
                 new Object[] { stateCode, town, area, street }, (rs, rowNum) -> {
                     final UrbanPostcode urbanPostcode = new UrbanPostcode();
+                    final UrbanTown urbanTown = new UrbanTown();
             final UrbanArea urbanArea = new UrbanArea();
             final State state = new State();
 
@@ -63,13 +68,15 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
             state.setCode(rs.getString("stateCode"));
             state.setName(rs.getString("stateName"));
 
+            urbanTown.setId(rs.getInt("urbanTownId"));
+            urbanTown.setName(rs.getString("town"));
+            urbanTown.setState(state);
+
             urbanArea.setId(rs.getInt("urbanAreaId"));
             urbanArea.setName(rs.getString("area"));
-            urbanArea.setState(state);
-
+            urbanArea.setUrbanTown(urbanTown);
 
             urbanPostcode.setId(rs.getInt("id"));
-            urbanPostcode.setTown(rs.getString("town"));
             urbanPostcode.setStreet(rs.getString("street"));
             urbanPostcode.setPostcode(rs.getString("postcode"));
             urbanPostcode.setUrbanArea(urbanArea);
@@ -87,10 +94,11 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
                 "s.id AS stateId, " +
                 "s.name AS stateName, " +
                 "s.code AS stateCode, " +
+                "ut.id AS urbanTownId, " +
+                "ut.name AS town, " +
                 "ua.id AS urbanAreaId, " +
                 "ua.name AS area, " +
                 "up.id, " +
-                "up.town, " +
                 "up.street, " +
                 "up.postcode " +
             "FROM " +
@@ -98,11 +106,13 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
             "INNER JOIN " +
                 "urban_areas ua ON up.urbanAreaId = ua.id " +
             "INNER JOIN " +
-                "states s ON ua.stateId = s.id " +
+                "urban_towns ut ON ua.urbanTownId = ut.id " +
+            "INNER JOIN " +
+                "states s ON ut.stateId = s.id " +
             "WHERE " +
                 "s.code = ? " +
             "AND " +
-                "up.town = ? " +
+                "ut.name = ? " +
             "AND " +
                 "up.street LIKE ? " +
             "ORDER BY " +
@@ -116,6 +126,7 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
                 query,
                 new Object[] { stateCode, town, formattedHint }, (rs, rowNum) -> {
                     final UrbanPostcode urbanPostcode = new UrbanPostcode();
+                    final UrbanTown urbanTown = new UrbanTown();
             final UrbanArea urbanArea = new UrbanArea();
             final State state = new State();
 
@@ -123,12 +134,15 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
             state.setCode(rs.getString("stateCode"));
             state.setName(rs.getString("stateName"));
 
+            urbanTown.setId(rs.getInt("urbanTownId"));
+            urbanTown.setName(rs.getString("town"));
+            urbanTown.setState(state);
+
             urbanArea.setId(rs.getInt("urbanAreaId"));
             urbanArea.setName(rs.getString("area"));
-            urbanArea.setState(state);
+            urbanArea.setUrbanTown(urbanTown);
 
             urbanPostcode.setId(rs.getInt("id"));
-            urbanPostcode.setTown(rs.getString("town"));
             urbanPostcode.setStreet(rs.getString("street"));
             urbanPostcode.setPostcode(rs.getString("postcode"));
             urbanPostcode.setUrbanArea(urbanArea);
@@ -147,10 +161,11 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
                 "s.id AS stateId, " +
                 "s.name AS stateName, " +
                 "s.code AS stateCode, " +
+                "ut.id AS urbanTownId, " +
+                "ut.name AS town, " +
                 "ua.id AS urbanAreaId, " +
                 "ua.name AS area, " +
                 "up.id, " +
-                "up.town, " +
                 "up.street, " +
                 "up.postcode " +
             "FROM " +
@@ -158,7 +173,9 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
             "INNER JOIN " +
                 "urban_areas ua ON up.urbanAreaId = ua.id " +
             "INNER JOIN " +
-                "states s ON ua.stateId = s.id " +
+                "urban_towns ut ON ua.urbanTownId = ut.id " +
+            "INNER JOIN " +
+                "states s ON ut.stateId = s.id " +
             "WHERE " +
                 "up.postcode = ? ";
 
@@ -168,6 +185,7 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
                 query,
                 new Object[] { postcode }, (rs, rowNum) -> {
                     final UrbanPostcode urbanPostcode = new UrbanPostcode();
+                    final UrbanTown urbanTown = new UrbanTown();
             final UrbanArea urbanArea = new UrbanArea();
             final State state = new State();
 
@@ -175,12 +193,15 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
             state.setCode(rs.getString("stateCode"));
             state.setName(rs.getString("stateName"));
 
+            urbanTown.setId(rs.getInt("urbanTownId"));
+            urbanTown.setName(rs.getString("town"));
+            urbanTown.setState(state);
+
             urbanArea.setId(rs.getInt("urbanAreaId"));
             urbanArea.setName(rs.getString("area"));
-            urbanArea.setState(state);
+            urbanArea.setUrbanTown(urbanTown);
 
             urbanPostcode.setId(rs.getInt("id"));
-            urbanPostcode.setTown(rs.getString("town"));
             urbanPostcode.setStreet(rs.getString("street"));
             urbanPostcode.setPostcode(rs.getString("postcode"));
             urbanPostcode.setUrbanArea(urbanArea);
