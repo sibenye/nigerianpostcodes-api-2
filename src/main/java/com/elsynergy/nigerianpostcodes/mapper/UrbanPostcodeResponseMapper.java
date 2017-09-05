@@ -22,9 +22,9 @@ public class UrbanPostcodeResponseMapper implements IResponseMapper<UrbanPostcod
         out.setArea(toMap.getUrbanArea().getName());
         out.setPostcode(toMap.getPostcode());
         out.setStreet(toMap.getStreet());
-        out.setTown(toMap.getTown());
-        out.setStateCode(toMap.getUrbanArea().getState().getCode());
-        out.setStateName(toMap.getUrbanArea().getState().getName());
+        out.setTown(toMap.getUrbanArea().getUrbanTown().getName());
+        out.setStateCode(toMap.getUrbanArea().getUrbanTown().getState().getCode());
+        out.setStateName(toMap.getUrbanArea().getUrbanTown().getState().getName());
         return out;
     }
 

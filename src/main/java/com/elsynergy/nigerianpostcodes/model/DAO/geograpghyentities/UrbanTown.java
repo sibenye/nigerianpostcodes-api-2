@@ -17,8 +17,8 @@ import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.Audit;
 *
 */
 @Entity
-@Table(name = "urban_areas")
-public class UrbanArea extends Audit
+@Table(name = "urban_towns")
+public class UrbanTown extends Audit
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,8 +29,8 @@ public class UrbanArea extends Audit
     private String name;
 
     @ManyToOne(optional=false)
-    @JoinColumn(name="urbantownid", nullable=false)
-    private UrbanTown urbanTown;
+    @JoinColumn(name="stateid", nullable=false)
+    private State state;
 
     public Integer getId()
     {
@@ -52,15 +52,14 @@ public class UrbanArea extends Audit
         this.name = name;
     }
 
-    public UrbanTown getUrbanTown()
+    public State getState()
     {
-        return this.urbanTown;
+        return this.state;
     }
 
-    public void setUrbanTown(final UrbanTown urbanTown)
+    public void setState(final State state)
     {
-        this.urbanTown = urbanTown;
+        this.state = state;
     }
-
 
 }

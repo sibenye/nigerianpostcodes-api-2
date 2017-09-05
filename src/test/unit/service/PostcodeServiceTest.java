@@ -25,6 +25,7 @@ import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.LocalGovernm
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.RuralArea;
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.State;
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.UrbanArea;
+import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.UrbanTown;
 import com.elsynergy.nigerianpostcodes.model.DAO.postcodeentities.FacilityPostcode;
 import com.elsynergy.nigerianpostcodes.model.DAO.postcodeentities.RuralPostcode;
 import com.elsynergy.nigerianpostcodes.model.DAO.postcodeentities.UrbanPostcode;
@@ -89,9 +90,13 @@ public class PostcodeServiceTest
         localGovernmentArea.setName("testLga");
         localGovernmentArea.setState(state);
 
+        final UrbanTown urbanTown = new UrbanTown();
+        urbanTown.setName("testTown");
+        urbanTown.setState(state);
+
         final UrbanArea urbanArea = new UrbanArea();
         urbanArea.setName("testDestrict");
-        urbanArea.setState(state);
+        urbanArea.setUrbanTown(urbanTown);
 
         final RuralArea ruralArea = new RuralArea();
         ruralArea.setName("testArea");
@@ -113,7 +118,6 @@ public class PostcodeServiceTest
         this.urbanPostcode = new UrbanPostcode();
         this.urbanPostcode.setId(1);
         this.urbanPostcode.setStreet("testStreet");
-        this.urbanPostcode.setTown("testTown");
         this.urbanPostcode.setPostcode("120983");
         this.urbanPostcode.setUrbanArea(urbanArea);
 

@@ -26,9 +26,6 @@ public class UrbanPostcode extends Audit
     @Column(name = "id", nullable = false, updatable = false)
     private Integer id;
 
-    @Column(name = "town")
-    private String town;
-
     @Column(name = "street")
     private String street;
 
@@ -47,16 +44,6 @@ public class UrbanPostcode extends Audit
     public void setId(final Integer id)
     {
         this.id = id;
-    }
-
-    public String getTown()
-    {
-        return this.town;
-    }
-
-    public void setTown(final String town)
-    {
-        this.town = town;
     }
 
     public String getStreet()
