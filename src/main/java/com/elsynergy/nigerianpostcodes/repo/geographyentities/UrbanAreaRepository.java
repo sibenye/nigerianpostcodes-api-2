@@ -1,6 +1,7 @@
 package com.elsynergy.nigerianpostcodes.repo.geographyentities;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 
@@ -20,4 +21,6 @@ public interface UrbanAreaRepository extends CrudRepository<UrbanArea, Integer>
     public List<UrbanArea> findByUrbanTownStateCodeAndName(String stateCode, String urbanAreaName);
 
     public List<UrbanArea> findByUrbanTownStateCodeAndUrbanTownNameAndName(String stateCode, String urbanTownName, String urbanAreaName);
+
+    public Optional<UrbanArea> findOneByUrbanTownStateCodeAndUrbanTownNameAndName(String stateCode, String urbanTownName, String urbanAreaName);
 }

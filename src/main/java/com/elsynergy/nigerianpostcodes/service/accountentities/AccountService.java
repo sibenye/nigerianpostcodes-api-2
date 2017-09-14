@@ -21,9 +21,9 @@ import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.AccountIpAccess
 import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.AccountSubscription;
 import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.PackageType;
 import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.Role;
-import com.elsynergy.nigerianpostcodes.model.request.AccountIpAccessRequest;
-import com.elsynergy.nigerianpostcodes.model.request.AccountSubscribeRequest;
 import com.elsynergy.nigerianpostcodes.model.request.RegisterAccountRequest;
+import com.elsynergy.nigerianpostcodes.model.request.admin.AccountIpAccessRequest;
+import com.elsynergy.nigerianpostcodes.model.request.admin.AccountSubscribeRequest;
 import com.elsynergy.nigerianpostcodes.model.response.accountentities.AccountResponse;
 import com.elsynergy.nigerianpostcodes.repo.accountentities.AccountIpAccessRepository;
 import com.elsynergy.nigerianpostcodes.repo.accountentities.AccountRepository;

@@ -1,10 +1,10 @@
-package com.elsynergy.nigerianpostcodes.model.request;
+package com.elsynergy.nigerianpostcodes.model.request.admin;
 
-import com.elsynergy.nigerianpostcodes.model.enums.PackageEnum;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.validation.constraints.NotNull;
+import com.elsynergy.nigerianpostcodes.model.enums.PackageEnum;
 
 import io.swagger.annotations.ApiParam;
 

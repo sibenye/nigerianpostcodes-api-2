@@ -37,6 +37,7 @@ public class LocalGovernmentAreaResponseMapperTest
 
         final LocalGovernmentAreaResponse out = this.localGovernmentAreaResponseMapper.map(in);
 
+        assertEquals(in.getId(), out.getLocalGovernmentAreaId());
         assertEquals(in.getName(), out.getLocalGovernmentAreaName());
         assertEquals(in.getState().getCode(), out.getStateCode());
         assertEquals(in.getState().getName(), out.getStateName());

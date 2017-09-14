@@ -4,6 +4,8 @@ import com.elsynergy.nigerianpostcodes.model.response.BaseEntityResponse;
 
 public class RuralAreaResponse extends BaseEntityResponse
 {
+    private Integer ruralAreaId;
+
     private String ruralAreaName;
 
     private String localGovernmentAreaName;
@@ -11,6 +13,16 @@ public class RuralAreaResponse extends BaseEntityResponse
     private String stateCode;
 
     private String stateName;
+
+    public Integer getRuralAreaId()
+    {
+        return ruralAreaId;
+    }
+
+    public void setRuralAreaId(Integer ruralAreaId)
+    {
+        this.ruralAreaId = ruralAreaId;
+    }
 
     public String getRuralAreaName()
     {

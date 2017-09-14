@@ -36,11 +36,13 @@ public class RuralAreaResponseMapperTest
         lga.setState(state);
 
         final RuralArea in = new RuralArea();
+        in.setId(1);
         in.setName("testRuralArea");
         in.setLocalGovernmentArea(lga);
 
         final RuralAreaResponse out = this.ruralAreaResponseMapper.map(in);
 
+        assertEquals(in.getId(), out.getRuralAreaId());
         assertEquals(in.getName(), out.getRuralAreaName());
         assertEquals(in.getLocalGovernmentArea().getState().getCode(), out.getStateCode());
         assertEquals(in.getLocalGovernmentArea().getState().getName(), out.getStateName());

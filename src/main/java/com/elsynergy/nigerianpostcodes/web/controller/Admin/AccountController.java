@@ -1,17 +1,22 @@
 package com.elsynergy.nigerianpostcodes.web.controller.Admin;
 
-import com.elsynergy.nigerianpostcodes.model.request.AccountIpAccessRequest;
-import com.elsynergy.nigerianpostcodes.model.request.AccountSubscribeRequest;
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.elsynergy.nigerianpostcodes.model.request.RegisterAccountRequest;
+import com.elsynergy.nigerianpostcodes.model.request.admin.AccountIpAccessRequest;
+import com.elsynergy.nigerianpostcodes.model.request.admin.AccountSubscribeRequest;
 import com.elsynergy.nigerianpostcodes.model.response.ApiResponse;
 import com.elsynergy.nigerianpostcodes.service.accountentities.AccountService;
 import com.elsynergy.nigerianpostcodes.web.exception.BadRequestException;
 import com.elsynergy.nigerianpostcodes.web.exception.ResourceNotFoundException;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -42,7 +47,7 @@ public class AccountController
 
     @ApiOperation(value = "Subscribe Account")
     @RequestMapping(value = "/subscribe", method = RequestMethod.POST)
-    public ApiResponse registerAccount(@Valid @RequestBody final AccountSubscribeRequest request) throws ResourceNotFoundException, BadRequestException {
+    public ApiResponse subscribeAccount(@Valid @RequestBody final AccountSubscribeRequest request) throws ResourceNotFoundException, BadRequestException {
         return new ApiResponse(this.accountService.subscribeAccount(request));
     }
 

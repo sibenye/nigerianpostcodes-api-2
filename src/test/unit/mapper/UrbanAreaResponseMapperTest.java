@@ -36,11 +36,13 @@ public class UrbanAreaResponseMapperTest
         urbanTown.setState(state);
 
         final UrbanArea in = new UrbanArea();
+        in.setId(1);
         in.setName("testArea");
         in.setUrbanTown(urbanTown);
 
         final UrbanAreaResponse out = this.urbanAreaResponseMapper.map(in);
 
+        assertEquals(in.getId(), out.getUrbanAreaId());
         assertEquals(in.getName(), out.getUrbanAreaName());
         assertEquals(in.getUrbanTown().getName(), out.getUrbanTownName());
         assertEquals(in.getUrbanTown().getState().getCode(), out.getStateCode());

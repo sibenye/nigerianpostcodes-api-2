@@ -1,8 +1,6 @@
-package com.elsynergy.nigerianpostcodes.model.response.geographyentities;
+package com.elsynergy.nigerianpostcodes.model.request.admin;
 
-import com.elsynergy.nigerianpostcodes.model.response.BaseEntityResponse;
-
-public class UrbanTownResponse extends BaseEntityResponse
+public class UrbanTownRequest extends GeographyRequest
 {
     private Integer urbanTownId;
 
@@ -10,14 +8,12 @@ public class UrbanTownResponse extends BaseEntityResponse
 
     private String stateCode;
 
-    private String stateName;
-
     public Integer getUrbanTownId()
     {
-        return urbanTownId;
+        return this.urbanTownId;
     }
 
-    public void setUrbanTownId(Integer urbanTownId)
+    public void setUrbanTownId(final Integer urbanTownId)
     {
         this.urbanTownId = urbanTownId;
     }
@@ -40,16 +36,6 @@ public class UrbanTownResponse extends BaseEntityResponse
     public void setStateCode(final String stateCode)
     {
         this.stateCode = stateCode;
-    }
-
-    public String getStateName()
-    {
-        return this.stateName;
-    }
-
-    public void setStateName(final String stateName)
-    {
-        this.stateName = stateName;
     }
 
 }

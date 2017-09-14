@@ -1,10 +1,10 @@
 package com.elsynergy.nigerianpostcodes.repo.geographyentities;
 
-import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.State;
+import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 
-import java.util.Optional;
+import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.State;
 
 /**
  *
@@ -14,4 +14,6 @@ import java.util.Optional;
 public interface StateRepository extends CrudRepository<State, Integer>
 {
     Optional<State> findOneByCode(String stateCode);
+
+    Optional<State> findOneByName(String stateName);
 }

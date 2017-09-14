@@ -17,6 +17,11 @@ import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.RuralArea;
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.State;
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.UrbanArea;
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.UrbanTown;
+import com.elsynergy.nigerianpostcodes.model.request.admin.LocalGovernmentAreaRequest;
+import com.elsynergy.nigerianpostcodes.model.request.admin.RuralAreaRequest;
+import com.elsynergy.nigerianpostcodes.model.request.admin.StateRequest;
+import com.elsynergy.nigerianpostcodes.model.request.admin.UrbanAreaRequest;
+import com.elsynergy.nigerianpostcodes.model.request.admin.UrbanTownRequest;
 import com.elsynergy.nigerianpostcodes.model.response.ApiFindResponse;
 import com.elsynergy.nigerianpostcodes.model.response.geographyentities.LocalGovernmentAreaResponse;
 import com.elsynergy.nigerianpostcodes.model.response.geographyentities.RuralAreaResponse;
@@ -28,6 +33,7 @@ import com.elsynergy.nigerianpostcodes.repo.geographyentities.RuralAreaRepositor
 import com.elsynergy.nigerianpostcodes.repo.geographyentities.StateRepository;
 import com.elsynergy.nigerianpostcodes.repo.geographyentities.UrbanAreaRepository;
 import com.elsynergy.nigerianpostcodes.repo.geographyentities.UrbanTownRepository;
+import com.elsynergy.nigerianpostcodes.web.exception.BadRequestException;
 import com.elsynergy.nigerianpostcodes.web.exception.ResourceNotFoundException;
 
 /**
@@ -198,6 +204,385 @@ public class GeographyService
 
         return new ApiFindResponse(urbanTownResponses);
 
+    }
+
+    public StateResponse postState(final StateRequest stateRequest)
+            throws BadRequestException, ResourceNotFoundException
+    {
+        if (stateRequest.getId() != null) {
+            return this.updateState(stateRequest.getId(), stateRequest.getStateCode(), stateRequest.getStateName());
+        } else {
+            return this.addState(stateRequest.getStateCode(), stateRequest.getStateName());
+        }
+    }
+
+    public LocalGovernmentAreaResponse postLga(final LocalGovernmentAreaRequest request)
+            throws BadRequestException, ResourceNotFoundException
+    {
+        if (request.getLgaId() != null) {
+            return this.updateLga(request.getLgaId(), request.getLgaName(), request.getStateCode());
+        } else {
+            return this.addLga(request.getLgaName(), request.getStateCode());
+        }
+    }
+
+    public RuralAreaResponse postRuralArea(final RuralAreaRequest request)
+            throws BadRequestException, ResourceNotFoundException
+    {
+        if (request.getRuralAreaId() != null) {
+            return this.updateRuralArea(request.getRuralAreaId(), request.getRuralAreaName(), request.getLgaName(), request.getStateCode());
+        } else {
+            return this.addRuralArea(request.getRuralAreaName(), request.getLgaName(), request.getStateCode());
+        }
+    }
+
+    public UrbanTownResponse postUrbanTown(final UrbanTownRequest request)
+            throws BadRequestException, ResourceNotFoundException
+    {
+        if (request.getUrbanTownId() != null) {
+            return this.updateUrbanTown(request.getUrbanTownId(), request.getUrbanTownName(), request.getStateCode());
+        } else {
+            return this.addUrbanTown(request.getUrbanTownName(), request.getStateCode());
+        }
+    }
+
+    public UrbanAreaResponse postUrbanArea(final UrbanAreaRequest request)
+            throws BadRequestException, ResourceNotFoundException
+    {
+        if (request.getUrbanAreaId() != null) {
+            return this.updateUrbanArea(request.getUrbanAreaId(), request.getUrbanAreaName(), request.getUrbanTownName(), request.getStateCode());
+        } else {
+            return this.addUrbanArea(request.getUrbanAreaName(), request.getUrbanTownName(), request.getStateCode());
+        }
+    }
+
+    private StateResponse updateState(final Integer id, final String stateCode, final String stateName)
+            throws ResourceNotFoundException, BadRequestException
+    {
+        //ensurre the id is valid
+        final State existingState = this.stateRepository.findOne(id);
+
+        if (existingState == null) {
+            throw new ResourceNotFoundException(String.format("State with id:'%s' was not found", id));
+        }
+
+        //ensure the new stateCode or stateName does not belong to another
+        final Optional<State> existingStateWithStateCode = this.stateRepository.findOneByCode(stateCode);
+
+        if (existingStateWithStateCode.isPresent()
+                && existingStateWithStateCode.get().getId() != existingState.getId()) {
+            throw new BadRequestException(String.format("State code:'%s' already belongs to another", stateCode));
+        }
+
+        final Optional<State> existingStateWithStateName = this.stateRepository.findOneByName(stateName);
+
+        if (existingStateWithStateName.isPresent()
+                && existingStateWithStateName.get().getId() != existingState.getId()) {
+            throw new BadRequestException(String.format("State name:'%s' already belongs to another", stateName));
+        }
+
+        final State state = new State();
+        state.setId(id);
+        if (stateCode != null && !stateCode.isEmpty()) {
+            state.setCode(stateCode);
+        }
+        if (stateName != null && !stateName.isEmpty()) {
+            state.setName(stateName);
+        }
+
+        final State updatedState = this.stateRepository.save(state);
+
+        return this.stateResponseMapper.map(updatedState);
+    }
+
+    private StateResponse addState(final String stateCode, final String stateName)
+            throws BadRequestException
+    {
+        //ensure the stateCode and stateName do not exist
+        Optional<State> existingState = this.stateRepository.findOneByCode(stateCode);
+
+        if (existingState.isPresent()) {
+            throw new BadRequestException(String.format("The State code: '%s' already exists", stateCode));
+        }
+
+        existingState = this.stateRepository.findOneByName(stateName);
+
+        if (existingState.isPresent()) {
+            throw new BadRequestException(String.format("The State name: '%s' already exists", stateName));
+        }
+
+        final State state = new State();
+        state.setCode(stateCode);
+        state.setName(stateName);
+
+        final State savedState = this.stateRepository.save(state);
+
+        return this.stateResponseMapper.map(savedState);
+
+    }
+
+    private LocalGovernmentAreaResponse addLga(final String lgaName, final String stateCode)
+            throws ResourceNotFoundException, BadRequestException
+    {
+        //ensure stateCode is valid
+        final Optional<State> stateByCode = this.stateRepository.findOneByCode(stateCode);
+
+        if (!stateByCode.isPresent()) {
+            throw new ResourceNotFoundException(String.format("State with code:'%s' was not found", stateCode));
+        }
+        //ensure LgaName does not belong to another
+        final Optional<LocalGovernmentArea> existingLga = this.localGovernmentAreaRepository.findOneByStateCodeAndName(stateCode, lgaName);
+
+        if (existingLga.isPresent()) {
+            throw new BadRequestException(String.format("The LGA name: '%1s' in State: '%2s' already exists", lgaName, stateCode));
+        }
+
+        final LocalGovernmentArea localGovernmentArea = new LocalGovernmentArea();
+        localGovernmentArea.setName(lgaName);
+        localGovernmentArea.setState(stateByCode.get());
+
+        final LocalGovernmentArea savedLga = this.localGovernmentAreaRepository.save(localGovernmentArea);
+
+        return this.localGovernmentAreaResponseMapper.map(savedLga);
+    }
+
+    private LocalGovernmentAreaResponse updateLga(final Integer lgaId, final String lgaName, final String stateCode)
+            throws ResourceNotFoundException, BadRequestException
+    {
+        //ensure LGA Id is valid
+        final LocalGovernmentArea existingLgaById = this.localGovernmentAreaRepository.findOne(lgaId);
+
+        if (existingLgaById == null) {
+            throw new ResourceNotFoundException(String.format("The LGA Id: '%s' was not found", lgaId));
+        }
+        //ensure stateCode is valid
+        final Optional<State> stateByCode = this.stateRepository.findOneByCode(stateCode);
+
+        if (!stateByCode.isPresent()) {
+            throw new ResourceNotFoundException(String.format("State with code:'%s' was not found", stateCode));
+        }
+
+        //ensure LgaName does not belong to another
+        final Optional<LocalGovernmentArea> existingLga = this.localGovernmentAreaRepository.findOneByStateCodeAndName(stateCode, lgaName);
+
+        if (existingLga.isPresent() && existingLga.get().getId() != lgaId) {
+            throw new BadRequestException(String.format("The LGA name: '%1s' in State: '%2s' already exist for a different LGA Id", lgaName, stateCode));
+        }
+
+        final LocalGovernmentArea localGovernmentArea = new LocalGovernmentArea();
+        localGovernmentArea.setId(lgaId);
+        localGovernmentArea.setName(lgaName);
+        localGovernmentArea.setState(stateByCode.get());
+
+        final LocalGovernmentArea savedLga = this.localGovernmentAreaRepository.save(localGovernmentArea);
+
+        return this.localGovernmentAreaResponseMapper.map(savedLga);
+    }
+
+    private RuralAreaResponse addRuralArea(final String ruralAreaName, final String lgaName, final String stateCode)
+            throws ResourceNotFoundException, BadRequestException
+    {
+        //ensure stateCode is valid
+        final Optional<State> stateByCode = this.stateRepository.findOneByCode(stateCode);
+
+        if (!stateByCode.isPresent()) {
+            throw new ResourceNotFoundException(String.format("State with code:'%s' was not found", stateCode));
+        }
+
+        //ensure LgaName is valid
+        final Optional<LocalGovernmentArea> existingLga = this.localGovernmentAreaRepository.findOneByStateCodeAndName(stateCode, lgaName);
+
+        if (!existingLga.isPresent()) {
+            throw new ResourceNotFoundException(String.format("The LGA name: '%1s' in State: '%2s' was not found", lgaName, stateCode));
+        }
+
+        //ensure the ruralAreaName does not already exist
+        final Optional<RuralArea> existingRuralArea = this.ruralAreaRepository
+                .findOneByLocalGovernmentAreaStateCodeAndLocalGovernmentAreaNameAndName(stateCode, lgaName, ruralAreaName);
+
+        if (existingRuralArea.isPresent()) {
+            throw new BadRequestException(String.format("The Rural Area name: '%1s' in LGA: '%2s', in State: '%3s' already exists", ruralAreaName, lgaName, stateCode));
+        }
+
+        final RuralArea ruralArea = new RuralArea();
+        ruralArea.setLocalGovernmentArea(existingLga.get());
+        ruralArea.setName(ruralAreaName);
+
+        final RuralArea savedRuralArea = this.ruralAreaRepository.save(ruralArea);
+
+        return this.ruralAreaResponseMapper.map(savedRuralArea);
+    }
+
+    private RuralAreaResponse updateRuralArea(final Integer ruralAreaId, final String ruralAreaName, final String lgaName, final String stateCode)
+            throws ResourceNotFoundException, BadRequestException
+    {
+        //ensure LGA Id is valid
+        final RuralArea existingRuralAreaById = this.ruralAreaRepository.findOne(ruralAreaId);
+
+        if (existingRuralAreaById == null) {
+            throw new ResourceNotFoundException(String.format("The Rural Area Id: '%s' was not found", ruralAreaId));
+        }
+        //ensure stateCode is valid
+        final Optional<State> stateByCode = this.stateRepository.findOneByCode(stateCode);
+
+        if (!stateByCode.isPresent()) {
+            throw new ResourceNotFoundException(String.format("State with code:'%s' was not found", stateCode));
+        }
+
+      //ensure LgaName is valid
+        final Optional<LocalGovernmentArea> existingLga = this.localGovernmentAreaRepository.findOneByStateCodeAndName(stateCode, lgaName);
+
+        if (!existingLga.isPresent()) {
+            throw new ResourceNotFoundException(String.format("The LGA name: '%1s' in State: '%2s' was not found", lgaName, stateCode));
+        }
+
+        //ensure ruralAreaName does not belong to another
+        final Optional<RuralArea> existingRuralArea = this.ruralAreaRepository.findOneByLocalGovernmentAreaStateCodeAndLocalGovernmentAreaNameAndName(stateCode, lgaName, ruralAreaName);
+
+        if (existingRuralArea.isPresent() && existingRuralArea.get().getId() != ruralAreaId) {
+            throw new BadRequestException(String.format("The Rural Area name: '%1s' in LGA: '%2s', in State: '%3s' already exist for a different Rural Area Id", ruralAreaName, lgaName, stateCode));
+        }
+
+        final RuralArea ruralArea = new RuralArea();
+        ruralArea.setId(ruralAreaId);
+        ruralArea.setLocalGovernmentArea(existingLga.get());
+        ruralArea.setName(ruralAreaName);
+
+        final RuralArea savedRuralArea = this.ruralAreaRepository.save(ruralArea);
+
+        return this.ruralAreaResponseMapper.map(savedRuralArea);
+    }
+
+    private UrbanTownResponse addUrbanTown(final String urbanTownName, final String stateCode)
+            throws ResourceNotFoundException, BadRequestException
+    {
+        //ensure stateCode is valid
+        final Optional<State> stateByCode = this.stateRepository.findOneByCode(stateCode);
+
+        if (!stateByCode.isPresent()) {
+            throw new ResourceNotFoundException(String.format("State with code:'%s' was not found", stateCode));
+        }
+        //ensure urbanTownName does not belong to another
+        final Optional<UrbanTown> existingUrbanTown = this.urbanTownRepository.findOneByStateCodeAndName(stateCode, urbanTownName);
+
+        if (existingUrbanTown.isPresent()) {
+            throw new BadRequestException(String.format("The Urban Town name: '%1s' in State: '%2s' already exists", urbanTownName, stateCode));
+        }
+
+        final UrbanTown urbanTown = new UrbanTown();
+        urbanTown.setName(urbanTownName);
+        urbanTown.setState(stateByCode.get());
+
+        final UrbanTown savedUrbanTown = this.urbanTownRepository.save(urbanTown);
+
+        return this.urbanTownResponseMapper.map(savedUrbanTown);
+    }
+
+    private UrbanTownResponse updateUrbanTown(final Integer urbanTownId, final String urbanTownName, final String stateCode)
+            throws ResourceNotFoundException, BadRequestException
+    {
+        //ensure UrbanTown Id is valid
+        final UrbanTown existingUrbanTownById = this.urbanTownRepository.findOne(urbanTownId);
+
+        if (existingUrbanTownById == null) {
+            throw new ResourceNotFoundException(String.format("The Urban Town Id: '%s' was not found", urbanTownId));
+        }
+        //ensure stateCode is valid
+        final Optional<State> stateByCode = this.stateRepository.findOneByCode(stateCode);
+
+        if (!stateByCode.isPresent()) {
+            throw new ResourceNotFoundException(String.format("State with code:'%s' was not found", stateCode));
+        }
+
+        //ensure UrbanTownName does not belong to another
+        final Optional<UrbanTown> existingUrbanTown = this.urbanTownRepository.findOneByStateCodeAndName(stateCode, urbanTownName);
+
+        if (existingUrbanTown.isPresent() && existingUrbanTown.get().getId() != urbanTownId) {
+            throw new BadRequestException(String.format("The Urban Town name: '%1s' in State: '%2s' already exist for a different LGA Id", urbanTownName, stateCode));
+        }
+
+        final UrbanTown urbanTown = new UrbanTown();
+        urbanTown.setId(urbanTownId);
+        urbanTown.setName(urbanTownName);
+        urbanTown.setState(stateByCode.get());
+
+        final UrbanTown savedUrbanTown = this.urbanTownRepository.save(urbanTown);
+
+        return this.urbanTownResponseMapper.map(savedUrbanTown);
+    }
+
+    private UrbanAreaResponse addUrbanArea(final String urbanAreaName, final String urbanTownName, final String stateCode)
+            throws ResourceNotFoundException, BadRequestException
+    {
+        //ensure stateCode is valid
+        final Optional<State> stateByCode = this.stateRepository.findOneByCode(stateCode);
+
+        if (!stateByCode.isPresent()) {
+            throw new ResourceNotFoundException(String.format("State with code:'%s' was not found", stateCode));
+        }
+
+        //ensure urbanTownName is valid
+        final Optional<UrbanTown> existingUrbanTown = this.urbanTownRepository.findOneByStateCodeAndName(stateCode, urbanTownName);
+
+        if (!existingUrbanTown.isPresent()) {
+            throw new ResourceNotFoundException(String.format("The Urban Town name: '%1s' in State: '%2s' was not found", urbanTownName, stateCode));
+        }
+
+        //ensure the urbanAreaName does not already exist
+        final Optional<UrbanArea> existingUrbanArea = this.urbanAreaRepository
+                .findOneByUrbanTownStateCodeAndUrbanTownNameAndName(stateCode, urbanTownName, urbanAreaName);
+
+        if (existingUrbanArea.isPresent()) {
+            throw new BadRequestException(String.format("The Urban Area name: '%1s' in Urban Town: '%2s', in State: '%3s' already exists", urbanAreaName, urbanTownName, stateCode));
+        }
+
+        final UrbanArea urbanArea = new UrbanArea();
+        urbanArea.setUrbanTown(existingUrbanTown.get());
+        urbanArea.setName(urbanAreaName);
+
+        final UrbanArea savedUrbanArea = this.urbanAreaRepository.save(urbanArea);
+
+        return this.urbanAreaResponseMapper.map(savedUrbanArea);
+    }
+
+    private UrbanAreaResponse updateUrbanArea(final Integer urbanAreaId, final String urbanAreaName, final String urbanTownName, final String stateCode)
+            throws ResourceNotFoundException, BadRequestException
+    {
+        //ensure Urban Area Id is valid
+        final UrbanArea existingUrbanAreaById = this.urbanAreaRepository.findOne(urbanAreaId);
+
+        if (existingUrbanAreaById == null) {
+            throw new ResourceNotFoundException(String.format("The Urban Area Id: '%s' was not found", urbanAreaId));
+        }
+        //ensure stateCode is valid
+        final Optional<State> stateByCode = this.stateRepository.findOneByCode(stateCode);
+
+        if (!stateByCode.isPresent()) {
+            throw new ResourceNotFoundException(String.format("State with code:'%s' was not found", stateCode));
+        }
+
+      //ensure urbanTownName is valid
+        final Optional<UrbanTown> existingUrbanTown = this.urbanTownRepository.findOneByStateCodeAndName(stateCode, urbanTownName);
+
+        if (!existingUrbanTown.isPresent()) {
+            throw new ResourceNotFoundException(String.format("The Urban Town name: '%1s' in State: '%2s' was not found", urbanTownName, stateCode));
+        }
+
+        //ensure urbanAreaName does not belong to another
+        final Optional<UrbanArea> existingUrbanArea = this.urbanAreaRepository.findOneByUrbanTownStateCodeAndUrbanTownNameAndName(stateCode, urbanTownName, urbanAreaName);
+
+        if (existingUrbanArea.isPresent() && existingUrbanArea.get().getId() != urbanAreaId) {
+            throw new BadRequestException(String.format("The Urban Area name: '%1s' in Urban Town: '%2s', in State: '%3s' already exist for a different Urban Area Id", urbanAreaName, urbanTownName, stateCode));
+        }
+
+        final UrbanArea urbanArea = new UrbanArea();
+        urbanArea.setId(urbanAreaId);
+        urbanArea.setUrbanTown(existingUrbanTown.get());
+        urbanArea.setName(urbanAreaName);
+
+        final UrbanArea savedUrbanArea = this.urbanAreaRepository.save(urbanArea);
+
+        return this.urbanAreaResponseMapper.map(savedUrbanArea);
     }
 
 
