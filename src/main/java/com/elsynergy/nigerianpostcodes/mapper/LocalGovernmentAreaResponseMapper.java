@@ -18,6 +18,7 @@ public class LocalGovernmentAreaResponseMapper implements IResponseMapper<LocalG
     public LocalGovernmentAreaResponse map(final LocalGovernmentArea toMap)
     {
         final LocalGovernmentAreaResponse localGovernmentAreaResponse = new LocalGovernmentAreaResponse();
+        localGovernmentAreaResponse.setLocalGovernmentAreaId(toMap.getId());
         localGovernmentAreaResponse.setLocalGovernmentAreaName(toMap.getName());
         localGovernmentAreaResponse.setStateCode(toMap.getState().getCode());
         localGovernmentAreaResponse.setStateName(toMap.getState().getName());

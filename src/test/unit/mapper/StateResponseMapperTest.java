@@ -32,6 +32,7 @@ public class StateResponseMapperTest
 
         final StateResponse out = this.stateResponseMapper.map(in);
 
+        assertEquals(in.getId(), out.getStateId());
         assertEquals(in.getCode(), out.getStateCode());
         assertEquals(in.getName(), out.getStateName());
     }

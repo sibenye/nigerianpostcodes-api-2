@@ -1,11 +1,11 @@
 package com.elsynergy.nigerianpostcodes.repo.geographyentities;
 
-import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.LocalGovernmentArea;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
-import java.util.Optional;
+import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.LocalGovernmentArea;
 
 /**
  *
@@ -19,4 +19,6 @@ public interface LocalGovernmentAreaRepository extends CrudRepository<LocalGover
     public List<LocalGovernmentArea> findByStateCode(String stateCode);
 
     public List<LocalGovernmentArea> findByStateCodeAndName(String stateCode, String localGovtAreaName);
+
+    public Optional<LocalGovernmentArea> findOneByStateCodeAndName(String stateCode, String localGovtAreaName);
 }

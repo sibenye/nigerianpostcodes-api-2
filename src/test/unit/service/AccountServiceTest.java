@@ -1,17 +1,17 @@
 package service;
 
-import com.elsynergy.nigerianpostcodes.mapper.AccountResponseMapper;
-import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.*;
-import com.elsynergy.nigerianpostcodes.model.enums.PackageEnum;
-import com.elsynergy.nigerianpostcodes.model.enums.RoleEnum;
-import com.elsynergy.nigerianpostcodes.model.request.AccountIpAccessRequest;
-import com.elsynergy.nigerianpostcodes.model.request.AccountSubscribeRequest;
-import com.elsynergy.nigerianpostcodes.model.request.RegisterAccountRequest;
-import com.elsynergy.nigerianpostcodes.repo.accountentities.*;
-import com.elsynergy.nigerianpostcodes.service.DateTimeService;
-import com.elsynergy.nigerianpostcodes.service.accountentities.AccountService;
-import com.elsynergy.nigerianpostcodes.web.exception.BadRequestException;
-import com.elsynergy.nigerianpostcodes.web.exception.ResourceNotFoundException;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anySet;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,14 +20,26 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.*;
-
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anySet;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import com.elsynergy.nigerianpostcodes.mapper.AccountResponseMapper;
+import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.Account;
+import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.AccountSubscription;
+import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.PackageType;
+import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.Privilege;
+import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.Role;
+import com.elsynergy.nigerianpostcodes.model.enums.PackageEnum;
+import com.elsynergy.nigerianpostcodes.model.enums.RoleEnum;
+import com.elsynergy.nigerianpostcodes.model.request.RegisterAccountRequest;
+import com.elsynergy.nigerianpostcodes.model.request.admin.AccountIpAccessRequest;
+import com.elsynergy.nigerianpostcodes.model.request.admin.AccountSubscribeRequest;
+import com.elsynergy.nigerianpostcodes.repo.accountentities.AccountIpAccessRepository;
+import com.elsynergy.nigerianpostcodes.repo.accountentities.AccountRepository;
+import com.elsynergy.nigerianpostcodes.repo.accountentities.PackageRepository;
+import com.elsynergy.nigerianpostcodes.repo.accountentities.RoleRepository;
+import com.elsynergy.nigerianpostcodes.repo.accountentities.SubscriptionRepository;
+import com.elsynergy.nigerianpostcodes.service.DateTimeService;
+import com.elsynergy.nigerianpostcodes.service.accountentities.AccountService;
+import com.elsynergy.nigerianpostcodes.web.exception.BadRequestException;
+import com.elsynergy.nigerianpostcodes.web.exception.ResourceNotFoundException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AccountServiceTest

@@ -1,23 +1,31 @@
-package com.elsynergy.nigerianpostcodes.model.response.geographyentities;
+package com.elsynergy.nigerianpostcodes.model.request.admin;
 
-import com.elsynergy.nigerianpostcodes.model.response.BaseEntityResponse;
+import io.swagger.annotations.ApiParam;
 
-public class StateResponse extends BaseEntityResponse
+/**
+ *
+ * @author silver.ibenye
+ *
+ */
+public class StateRequest extends GeographyRequest
 {
-    private Integer stateId;
+    @ApiParam(value = "State id")
+    private Integer id;
 
+    @ApiParam(value = "State code")
     private String stateCode;
 
+    @ApiParam(value = "State name")
     private String stateName;
 
-    public Integer getStateId()
+    public Integer getId()
     {
-        return stateId;
+        return this.id;
     }
 
-    public void setStateId(Integer stateId)
+    public void setId(final Integer id)
     {
-        this.stateId = stateId;
+        this.id = id;
     }
 
     public String getStateCode()

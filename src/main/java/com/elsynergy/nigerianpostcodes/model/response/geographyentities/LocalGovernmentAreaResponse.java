@@ -4,11 +4,23 @@ import com.elsynergy.nigerianpostcodes.model.response.BaseEntityResponse;
 
 public class LocalGovernmentAreaResponse extends BaseEntityResponse
 {
+    private Integer localGovernmentAreaId;
+
     private String localGovernmentAreaName;
 
     private String stateCode;
 
     private String stateName;
+
+    public Integer getLocalGovernmentAreaId()
+    {
+        return this.localGovernmentAreaId;
+    }
+
+    public void setLocalGovernmentAreaId(final Integer localGovernmentAreaId)
+    {
+        this.localGovernmentAreaId = localGovernmentAreaId;
+    }
 
     public String getLocalGovernmentAreaName()
     {

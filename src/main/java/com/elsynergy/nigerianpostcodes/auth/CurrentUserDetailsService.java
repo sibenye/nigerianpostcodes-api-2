@@ -1,19 +1,19 @@
 package com.elsynergy.nigerianpostcodes.auth;
 
-import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.Account;
-import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.CurrentAccountDetails;
-import com.elsynergy.nigerianpostcodes.model.enums.PackageEnum;
-import com.elsynergy.nigerianpostcodes.model.request.AccountSubscribeRequest;
-import com.elsynergy.nigerianpostcodes.service.accountentities.AccountService;
-import com.elsynergy.nigerianpostcodes.web.exception.BadRequestException;
-import com.elsynergy.nigerianpostcodes.web.exception.ResourceNotFoundException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
+import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.Account;
+import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.CurrentAccountDetails;
+import com.elsynergy.nigerianpostcodes.model.enums.PackageEnum;
+import com.elsynergy.nigerianpostcodes.model.request.admin.AccountSubscribeRequest;
+import com.elsynergy.nigerianpostcodes.service.accountentities.AccountService;
+import com.elsynergy.nigerianpostcodes.web.exception.BadRequestException;
+import com.elsynergy.nigerianpostcodes.web.exception.ResourceNotFoundException;
 
 /**
  *

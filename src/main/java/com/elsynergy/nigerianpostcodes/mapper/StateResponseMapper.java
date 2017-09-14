@@ -18,7 +18,7 @@ public class StateResponseMapper implements IResponseMapper<State, StateResponse
     public StateResponse map(final State toMap)
     {
         final StateResponse stateResponse = new StateResponse();
-
+        stateResponse.setStateId(toMap.getId());
         stateResponse.setStateCode(toMap.getCode());
         stateResponse.setStateName(toMap.getName());
         return stateResponse;

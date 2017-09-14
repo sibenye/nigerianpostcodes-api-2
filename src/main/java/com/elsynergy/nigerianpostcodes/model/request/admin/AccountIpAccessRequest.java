@@ -1,4 +1,4 @@
-package com.elsynergy.nigerianpostcodes.model.request;
+package com.elsynergy.nigerianpostcodes.model.request.admin;
 
 import org.hibernate.validator.constraints.NotEmpty;
 

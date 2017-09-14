@@ -31,12 +31,14 @@ public class UrbanTownResponseMapperTest
         state.setName("Abia");
 
         final UrbanTown in = new UrbanTown();
+        in.setId(1);
         in.setName("testTown");
         in.setState(state);
 
 
         final UrbanTownResponse out = this.urbanTownResponseMapper.map(in);
 
+        assertEquals(in.getId(), out.getUrbanTownId());
         assertEquals(in.getName(), out.getUrbanTownName());
         assertEquals(in.getState().getCode(), out.getStateCode());
         assertEquals(in.getState().getName(), out.getStateName());
