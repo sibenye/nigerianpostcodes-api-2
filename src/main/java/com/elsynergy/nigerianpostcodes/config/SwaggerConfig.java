@@ -1,17 +1,17 @@
 package com.elsynergy.nigerianpostcodes.config;
 
-import com.google.common.base.Predicate;
+import static com.google.common.base.Predicates.not;
+import static com.google.common.base.Predicates.or;
+import static springfox.documentation.builders.PathSelectors.regex;
+
+import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
-import java.util.Arrays;
-
-import static com.google.common.base.Predicates.not;
-import static com.google.common.base.Predicates.or;
-import static springfox.documentation.builders.PathSelectors.regex;
+import com.google.common.base.Predicate;
 
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -72,7 +72,7 @@ public class SwaggerConfig
     {
         final ApiInfo apiInfo = new ApiInfoBuilder()
                 .title(this.appName)
-                .contact(new Contact("El-Synergy Dev Team", "http://www.el-synergy.com", "dev@el-synergy.com"))
+                .contact(new Contact("Silver Ibenye", "http://concepts-app.app/postcodeFinder", "sibenye@gmail.com"))
                 .version(this.version)
                 .build();
 
