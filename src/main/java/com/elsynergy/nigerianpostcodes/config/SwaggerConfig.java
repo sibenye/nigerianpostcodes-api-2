@@ -72,7 +72,7 @@ public class SwaggerConfig
     {
         final ApiInfo apiInfo = new ApiInfoBuilder()
                 .title(this.appName)
-                .contact(new Contact("Silver Ibenye", "http://concepts-app.app/postcodeFinder", "sibenye@gmail.com"))
+                .contact(new Contact("Silver Ibenye", "http://nigeriapostcodes.naijaz.com/postcodeFinder", "sibenye@gmail.com"))
                 .version(this.version)
                 .build();
 
