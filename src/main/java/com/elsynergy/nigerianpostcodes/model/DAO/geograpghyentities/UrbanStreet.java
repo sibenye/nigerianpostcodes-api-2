@@ -17,23 +17,20 @@ import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.Audit;
 *
 */
 @Entity
-@Table(name = "rural_areas")
-public class RuralArea extends Audit
+@Table(name = "urban_streets")
+public class UrbanStreet extends Audit
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false, updatable = false)
     private Integer id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "street")
+    private String street;
 
     @ManyToOne(optional=false)
-    @JoinColumn(name="lgaid", nullable=false)
-    private LocalGovernmentArea localGovernmentArea;
-
-    @Column(name = "postcode")
-    private Integer postcode;
+    @JoinColumn(name="urbanAreaId", nullable=false)
+    private UrbanArea urbanArea;
 
     public Integer getId()
     {
@@ -45,34 +42,24 @@ public class RuralArea extends Audit
         this.id = id;
     }
 
-    public String getName()
+    public String getStreet()
     {
-        return this.name;
+        return this.street;
     }
 
-    public void setName(final String name)
+    public void setStreet(final String street)
     {
-        this.name = name;
+        this.street = street;
     }
 
-    public LocalGovernmentArea getLocalGovernmentArea()
+    public UrbanArea getUrbanArea()
     {
-        return this.localGovernmentArea;
+        return this.urbanArea;
     }
 
-    public void setLocalGovernmentArea(final LocalGovernmentArea localGovernmentArea)
+    public void setUrbanArea(final UrbanArea urbanArea)
     {
-        this.localGovernmentArea = localGovernmentArea;
-    }
-
-    public Integer getPostcode()
-    {
-        return this.postcode;
-    }
-
-    public void setPostcode(final Integer postcode)
-    {
-        this.postcode = postcode;
+        this.urbanArea = urbanArea;
     }
 
 }

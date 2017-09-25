@@ -96,10 +96,12 @@ public class PostcodeServiceTest
 
         final UrbanArea urbanArea = new UrbanArea();
         urbanArea.setName("testDestrict");
+        urbanArea.setPostcode(120983);
         urbanArea.setUrbanTown(urbanTown);
 
         final RuralArea ruralArea = new RuralArea();
         ruralArea.setName("testArea");
+        ruralArea.setPostcode(120983);
         ruralArea.setLocalGovernmentArea(localGovernmentArea);
 
 
@@ -112,13 +114,11 @@ public class PostcodeServiceTest
         this.ruralPostcode = new RuralPostcode();
         this.ruralPostcode.setId(1);
         this.ruralPostcode.setTown("testTown");
-        this.ruralPostcode.setPostcode("120983");
         this.ruralPostcode.setRuralArea(ruralArea);;
 
         this.urbanPostcode = new UrbanPostcode();
         this.urbanPostcode.setId(1);
         this.urbanPostcode.setStreet("testStreet");
-        this.urbanPostcode.setPostcode("120983");
         this.urbanPostcode.setUrbanArea(urbanArea);
 
         this.facilityPostcodeRequest = new FacilityPostcodeRequest();

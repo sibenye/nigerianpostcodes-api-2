@@ -25,7 +25,7 @@ public class PostcodeRepositoryCustomImpl implements PostcodeRepositoryCustom
                 "DISTINCT postcode, " +
                 "'rural' AS type " +
             "FROM " +
-                "rural_postcodes " +
+                "rural_areas " +
             "WHERE " +
                 "postcode = ? " +
             "UNION ALL " +
@@ -33,7 +33,7 @@ public class PostcodeRepositoryCustomImpl implements PostcodeRepositoryCustom
                 "DISTINCT postcode, " +
                 "'urban' AS type " +
             "FROM " +
-                "urban_postcodes " +
+                "urban_areas " +
             "WHERE " +
                 "postcode = ? " +
             "UNION ALL " +

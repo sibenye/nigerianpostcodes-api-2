@@ -35,13 +35,13 @@ public class RuralPostcodeRepositoryCustomImpl implements RuralPostcodeRepositor
                                 "l.name AS lgaName, " +
                                 "ra.id AS ruralAreaId, " +
                                 "ra.name AS district, " +
-                                "rp.id, " +
-                                "rp.town, " +
-                                "rp.postcode " +
+                                "rt.id, " +
+                                "rt.town, " +
+                                "ra.postcode " +
                             "FROM " +
-                                "rural_postcodes rp " +
+                                "rural_towns rt " +
                             "INNER JOIN " +
-                                "rural_areas ra ON rp.ruralAreaId = ra.id " +
+                                "rural_areas ra ON rt.ruralAreaId = ra.id " +
                             "INNER JOIN " +
                                 "lgas l ON ra.lgaId = l.id " +
                             "INNER JOIN " +
@@ -53,7 +53,7 @@ public class RuralPostcodeRepositoryCustomImpl implements RuralPostcodeRepositor
                             "AND " +
                                 "ra.name = COALESCE(?, ra.name) " +
                             "AND " +
-                                "rp.town = COALESCE(?, rp.town)";
+                                "rt.town = COALESCE(?, rt.town)";
 
         List<RuralPostcode> ruralPostcodes = new ArrayList<>();
 
@@ -75,11 +75,11 @@ public class RuralPostcodeRepositoryCustomImpl implements RuralPostcodeRepositor
 
             ruralArea.setId(rs.getInt("ruralAreaId"));
             ruralArea.setName(rs.getString("district"));
+            ruralArea.setPostcode(rs.getInt("postcode"));
             ruralArea.setLocalGovernmentArea(lga);
 
             ruralPostcode.setId(rs.getInt("id"));
             ruralPostcode.setTown(rs.getString("town"));
-            ruralPostcode.setPostcode(rs.getString("postcode"));
             ruralPostcode.setRuralArea(ruralArea);
 
             return ruralPostcode;
@@ -98,19 +98,19 @@ public class RuralPostcodeRepositoryCustomImpl implements RuralPostcodeRepositor
                 "l.name AS lgaName, " +
                 "ra.id AS ruralAreaId, " +
                 "ra.name AS district, " +
-                "rp.id, " +
-                "rp.town, " +
-                "rp.postcode " +
+                "rt.id, " +
+                "rt.town, " +
+                "ra.postcode " +
             "FROM " +
-                "rural_postcodes rp " +
+                "rural_towns rt " +
             "INNER JOIN " +
-                "rural_areas ra ON rp.ruralAreaId = ra.id " +
+                "rural_areas ra ON rt.ruralAreaId = ra.id " +
             "INNER JOIN " +
                 "lgas l ON ra.lgaId = l.id " +
             "INNER JOIN " +
                 "states s ON l.stateId = s.id " +
             "WHERE " +
-                "rp.postcode = ? ";
+                "ra.postcode = ? ";
 
         List<RuralPostcode> ruralPostcodes = new ArrayList<>();
 
@@ -132,11 +132,11 @@ public class RuralPostcodeRepositoryCustomImpl implements RuralPostcodeRepositor
 
             ruralArea.setId(rs.getInt("ruralAreaId"));
             ruralArea.setName(rs.getString("district"));
+            ruralArea.setPostcode(rs.getInt("postcode"));
             ruralArea.setLocalGovernmentArea(lga);
 
             ruralPostcode.setId(rs.getInt("id"));
             ruralPostcode.setTown(rs.getString("town"));
-            ruralPostcode.setPostcode(rs.getString("postcode"));
             ruralPostcode.setRuralArea(ruralArea);
 
             return ruralPostcode;

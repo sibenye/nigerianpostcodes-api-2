@@ -20,7 +20,7 @@ public class UrbanPostcodeResponseMapper implements IResponseMapper<UrbanPostcod
     {
         final UrbanPostcodeResponse out = new UrbanPostcodeResponse();
         out.setArea(toMap.getUrbanArea().getName());
-        out.setPostcode(toMap.getPostcode());
+        out.setPostcode(toMap.getUrbanArea().getPostcode());
         out.setStreet(toMap.getStreet());
         out.setTown(toMap.getUrbanArea().getUrbanTown().getName());
         out.setStateCode(toMap.getUrbanArea().getUrbanTown().getState().getCode());
