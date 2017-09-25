@@ -29,9 +29,6 @@ public class UrbanPostcode extends Audit
     @Column(name = "street")
     private String street;
 
-    @Column(name = "postcode")
-    private String postcode;
-
     @ManyToOne(optional=false)
     @JoinColumn(name="urbanAreaId", nullable=false)
     private UrbanArea urbanArea;
@@ -54,16 +51,6 @@ public class UrbanPostcode extends Audit
     public void setStreet(final String street)
     {
         this.street = street;
-    }
-
-    public String getPostcode()
-    {
-        return this.postcode;
-    }
-
-    public void setPostcode(final String postcode)
-    {
-        this.postcode = postcode;
     }
 
     public UrbanArea getUrbanArea()

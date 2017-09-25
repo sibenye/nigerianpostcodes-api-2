@@ -37,7 +37,7 @@ public class RuralPostcodeRepositoryCustomImpl implements RuralPostcodeRepositor
                                 "ra.name AS district, " +
                                 "rp.id, " +
                                 "rp.town, " +
-                                "rp.postcode " +
+                                "ra.postcode " +
                             "FROM " +
                                 "rural_postcodes rp " +
                             "INNER JOIN " +
@@ -75,11 +75,11 @@ public class RuralPostcodeRepositoryCustomImpl implements RuralPostcodeRepositor
 
             ruralArea.setId(rs.getInt("ruralAreaId"));
             ruralArea.setName(rs.getString("district"));
+            ruralArea.setPostcode(rs.getInt("postcode"));
             ruralArea.setLocalGovernmentArea(lga);
 
             ruralPostcode.setId(rs.getInt("id"));
             ruralPostcode.setTown(rs.getString("town"));
-            ruralPostcode.setPostcode(rs.getString("postcode"));
             ruralPostcode.setRuralArea(ruralArea);
 
             return ruralPostcode;
@@ -100,7 +100,7 @@ public class RuralPostcodeRepositoryCustomImpl implements RuralPostcodeRepositor
                 "ra.name AS district, " +
                 "rp.id, " +
                 "rp.town, " +
-                "rp.postcode " +
+                "ra.postcode " +
             "FROM " +
                 "rural_postcodes rp " +
             "INNER JOIN " +
@@ -110,7 +110,7 @@ public class RuralPostcodeRepositoryCustomImpl implements RuralPostcodeRepositor
             "INNER JOIN " +
                 "states s ON l.stateId = s.id " +
             "WHERE " +
-                "rp.postcode = ? ";
+                "ra.postcode = ? ";
 
         List<RuralPostcode> ruralPostcodes = new ArrayList<>();
 
@@ -132,11 +132,11 @@ public class RuralPostcodeRepositoryCustomImpl implements RuralPostcodeRepositor
 
             ruralArea.setId(rs.getInt("ruralAreaId"));
             ruralArea.setName(rs.getString("district"));
+            ruralArea.setPostcode(rs.getInt("postcode"));
             ruralArea.setLocalGovernmentArea(lga);
 
             ruralPostcode.setId(rs.getInt("id"));
             ruralPostcode.setTown(rs.getString("town"));
-            ruralPostcode.setPostcode(rs.getString("postcode"));
             ruralPostcode.setRuralArea(ruralArea);
 
             return ruralPostcode;

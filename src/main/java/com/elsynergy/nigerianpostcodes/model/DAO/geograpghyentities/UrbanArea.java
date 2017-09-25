@@ -32,6 +32,9 @@ public class UrbanArea extends Audit
     @JoinColumn(name="urbantownid", nullable=false)
     private UrbanTown urbanTown;
 
+    @Column(name = "postcode")
+    private Integer postcode;
+
     public Integer getId()
     {
         return this.id;
@@ -60,6 +63,16 @@ public class UrbanArea extends Audit
     public void setUrbanTown(final UrbanTown urbanTown)
     {
         this.urbanTown = urbanTown;
+    }
+
+    public Integer getPostcode()
+    {
+        return this.postcode;
+    }
+
+    public void setPostcode(final Integer postcode)
+    {
+        this.postcode = postcode;
     }
 
 

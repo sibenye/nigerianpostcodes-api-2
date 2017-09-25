@@ -39,16 +39,16 @@ public class RuralPostcodeResponseMapperTest
 
         final RuralArea ruralArea = new RuralArea();
         ruralArea.setName("testDistrict");
+        ruralArea.setPostcode(23444);
         ruralArea.setLocalGovernmentArea(localGovernmentArea);
 
         final RuralPostcode in = new RuralPostcode();
-        in.setPostcode("23444");
         in.setTown("testTown");
         in.setRuralArea(ruralArea);
 
         final RuralPostcodeResponse out = this.ruralPostcodeResponseMapper.map(in);
 
-        assertEquals(in.getPostcode(), out.getPostcode());
+        assertEquals(in.getRuralArea().getPostcode(), out.getPostcode());
         assertEquals(in.getTown(), out.getTown());
         assertEquals(in.getRuralArea().getName(), out.getDistrict());
         assertEquals(in.getRuralArea().getLocalGovernmentArea().getName(), out.getLocalGovernmentAreaName());

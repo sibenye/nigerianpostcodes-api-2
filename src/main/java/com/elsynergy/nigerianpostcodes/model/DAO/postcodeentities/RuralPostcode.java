@@ -29,9 +29,6 @@ public class RuralPostcode extends Audit
     @Column(name = "town")
     private String town;
 
-    @Column(name = "postcode")
-    private String postcode;
-
     @ManyToOne(optional=false)
     @JoinColumn(name="ruralAreaId", nullable=false)
     private RuralArea ruralArea;
@@ -54,16 +51,6 @@ public class RuralPostcode extends Audit
     public void setTown(final String town)
     {
         this.town = town;
-    }
-
-    public String getPostcode()
-    {
-        return this.postcode;
-    }
-
-    public void setPostcode(final String postcode)
-    {
-        this.postcode = postcode;
     }
 
     public RuralArea getRuralArea()

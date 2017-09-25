@@ -14,7 +14,7 @@ public class RuralPostcodeResponse extends BaseEntityResponse
 
     private String stateName;
 
-    private String postcode;
+    private Integer postcode;
 
     public String getTown()
     {
@@ -66,12 +66,12 @@ public class RuralPostcodeResponse extends BaseEntityResponse
         this.stateName = stateName;
     }
 
-    public String getPostcode()
+    public Integer getPostcode()
     {
         return this.postcode;
     }
 
-    public void setPostcode(final String postcode)
+    public void setPostcode(final Integer postcode)
     {
         this.postcode = postcode;
     }

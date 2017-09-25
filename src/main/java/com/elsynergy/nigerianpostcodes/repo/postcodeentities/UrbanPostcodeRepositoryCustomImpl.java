@@ -36,7 +36,7 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
                             "ua.name AS area, " +
                             "up.id, " +
                             "up.street, " +
-                            "up.postcode " +
+                            "ua.postcode " +
                         "FROM " +
                             "urban_postcodes up " +
                         "INNER JOIN " +
@@ -74,11 +74,11 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
 
             urbanArea.setId(rs.getInt("urbanAreaId"));
             urbanArea.setName(rs.getString("area"));
+            urbanArea.setPostcode(rs.getInt("postcode"));
             urbanArea.setUrbanTown(urbanTown);
 
             urbanPostcode.setId(rs.getInt("id"));
             urbanPostcode.setStreet(rs.getString("street"));
-            urbanPostcode.setPostcode(rs.getString("postcode"));
             urbanPostcode.setUrbanArea(urbanArea);
 
             return urbanPostcode;
@@ -100,7 +100,7 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
                 "ua.name AS area, " +
                 "up.id, " +
                 "up.street, " +
-                "up.postcode " +
+                "ua.postcode " +
             "FROM " +
                 "urban_postcodes up " +
             "INNER JOIN " +
@@ -140,11 +140,11 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
 
             urbanArea.setId(rs.getInt("urbanAreaId"));
             urbanArea.setName(rs.getString("area"));
+            urbanArea.setPostcode(rs.getInt("postcode"));
             urbanArea.setUrbanTown(urbanTown);
 
             urbanPostcode.setId(rs.getInt("id"));
             urbanPostcode.setStreet(rs.getString("street"));
-            urbanPostcode.setPostcode(rs.getString("postcode"));
             urbanPostcode.setUrbanArea(urbanArea);
 
             return urbanPostcode;
@@ -167,7 +167,7 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
                 "ua.name AS area, " +
                 "up.id, " +
                 "up.street, " +
-                "up.postcode " +
+                "ua.postcode " +
             "FROM " +
                 "urban_postcodes up " +
             "INNER JOIN " +
@@ -177,7 +177,7 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
             "INNER JOIN " +
                 "states s ON ut.stateId = s.id " +
             "WHERE " +
-                "up.postcode = ? ";
+                "ua.postcode = ? ";
 
         List<UrbanPostcode> urbanPostcodes = new ArrayList<>();
 
@@ -199,11 +199,11 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
 
             urbanArea.setId(rs.getInt("urbanAreaId"));
             urbanArea.setName(rs.getString("area"));
+            urbanArea.setPostcode(rs.getInt("postcode"));
             urbanArea.setUrbanTown(urbanTown);
 
             urbanPostcode.setId(rs.getInt("id"));
             urbanPostcode.setStreet(rs.getString("street"));
-            urbanPostcode.setPostcode(rs.getString("postcode"));
             urbanPostcode.setUrbanArea(urbanArea);
 
             return urbanPostcode;
