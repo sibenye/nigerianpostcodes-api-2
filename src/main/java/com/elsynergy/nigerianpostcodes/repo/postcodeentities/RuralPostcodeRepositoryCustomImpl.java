@@ -35,13 +35,13 @@ public class RuralPostcodeRepositoryCustomImpl implements RuralPostcodeRepositor
                                 "l.name AS lgaName, " +
                                 "ra.id AS ruralAreaId, " +
                                 "ra.name AS district, " +
-                                "rp.id, " +
-                                "rp.town, " +
+                                "rt.id, " +
+                                "rt.town, " +
                                 "ra.postcode " +
                             "FROM " +
-                                "rural_postcodes rp " +
+                                "rural_towns rt " +
                             "INNER JOIN " +
-                                "rural_areas ra ON rp.ruralAreaId = ra.id " +
+                                "rural_areas ra ON rt.ruralAreaId = ra.id " +
                             "INNER JOIN " +
                                 "lgas l ON ra.lgaId = l.id " +
                             "INNER JOIN " +
@@ -53,7 +53,7 @@ public class RuralPostcodeRepositoryCustomImpl implements RuralPostcodeRepositor
                             "AND " +
                                 "ra.name = COALESCE(?, ra.name) " +
                             "AND " +
-                                "rp.town = COALESCE(?, rp.town)";
+                                "rt.town = COALESCE(?, rt.town)";
 
         List<RuralPostcode> ruralPostcodes = new ArrayList<>();
 
@@ -98,13 +98,13 @@ public class RuralPostcodeRepositoryCustomImpl implements RuralPostcodeRepositor
                 "l.name AS lgaName, " +
                 "ra.id AS ruralAreaId, " +
                 "ra.name AS district, " +
-                "rp.id, " +
-                "rp.town, " +
+                "rt.id, " +
+                "rt.town, " +
                 "ra.postcode " +
             "FROM " +
-                "rural_postcodes rp " +
+                "rural_towns rt " +
             "INNER JOIN " +
-                "rural_areas ra ON rp.ruralAreaId = ra.id " +
+                "rural_areas ra ON rt.ruralAreaId = ra.id " +
             "INNER JOIN " +
                 "lgas l ON ra.lgaId = l.id " +
             "INNER JOIN " +

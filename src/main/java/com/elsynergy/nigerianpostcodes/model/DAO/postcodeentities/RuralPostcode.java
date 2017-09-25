@@ -1,15 +1,5 @@
 package com.elsynergy.nigerianpostcodes.model.DAO.postcodeentities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.Audit;
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.RuralArea;
 
 /**
@@ -17,20 +7,12 @@ import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.RuralArea;
 * @author silver.ibenye
 *
 */
-@Entity
-@Table(name = "rural_postcodes")
-public class RuralPostcode extends Audit
+public class RuralPostcode
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false, updatable = false)
     private Integer id;
 
-    @Column(name = "town")
     private String town;
 
-    @ManyToOne(optional=false)
-    @JoinColumn(name="ruralAreaId", nullable=false)
     private RuralArea ruralArea;
 
     public Integer getId()

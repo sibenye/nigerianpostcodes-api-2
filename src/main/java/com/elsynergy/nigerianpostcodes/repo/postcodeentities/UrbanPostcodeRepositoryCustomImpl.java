@@ -34,13 +34,13 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
                             "ut.name AS town, " +
                             "ua.id AS urbanAreaId, " +
                             "ua.name AS area, " +
-                            "up.id, " +
-                            "up.street, " +
+                            "us.id, " +
+                            "us.street, " +
                             "ua.postcode " +
                         "FROM " +
-                            "urban_postcodes up " +
+                            "urban_streets us " +
                         "INNER JOIN " +
-                            "urban_areas ua ON up.urbanAreaId = ua.id " +
+                            "urban_areas ua ON us.urbanAreaId = ua.id " +
                         "INNER JOIN " +
                             "urban_towns ut ON ua.urbanTownId = ut.id " +
                         "INNER JOIN " +
@@ -52,7 +52,7 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
                         "AND " +
                             "ua.name = COALESCE(?, ua.name) " +
                         "AND " +
-                            "up.street = COALESCE(?, up.street)";
+                            "us.street = COALESCE(?, us.street)";
 
         List<UrbanPostcode> urbanPostcodes = new ArrayList<>();
 
@@ -98,13 +98,13 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
                 "ut.name AS town, " +
                 "ua.id AS urbanAreaId, " +
                 "ua.name AS area, " +
-                "up.id, " +
-                "up.street, " +
+                "us.id, " +
+                "us.street, " +
                 "ua.postcode " +
             "FROM " +
-                "urban_postcodes up " +
+                "urban_streets us " +
             "INNER JOIN " +
-                "urban_areas ua ON up.urbanAreaId = ua.id " +
+                "urban_areas ua ON us.urbanAreaId = ua.id " +
             "INNER JOIN " +
                 "urban_towns ut ON ua.urbanTownId = ut.id " +
             "INNER JOIN " +
@@ -114,9 +114,9 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
             "AND " +
                 "ut.name = ? " +
             "AND " +
-                "up.street LIKE ? " +
+                "us.street LIKE ? " +
             "ORDER BY " +
-                "up.street";
+                "us.street";
 
         List<UrbanPostcode> urbanPostcodes = new ArrayList<>();
 
@@ -165,13 +165,13 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
                 "ut.name AS town, " +
                 "ua.id AS urbanAreaId, " +
                 "ua.name AS area, " +
-                "up.id, " +
-                "up.street, " +
+                "us.id, " +
+                "us.street, " +
                 "ua.postcode " +
             "FROM " +
-                "urban_postcodes up " +
+                "urban_streets us " +
             "INNER JOIN " +
-                "urban_areas ua ON up.urbanAreaId = ua.id " +
+                "urban_areas ua ON us.urbanAreaId = ua.id " +
             "INNER JOIN " +
                 "urban_towns ut ON ua.urbanTownId = ut.id " +
             "INNER JOIN " +
