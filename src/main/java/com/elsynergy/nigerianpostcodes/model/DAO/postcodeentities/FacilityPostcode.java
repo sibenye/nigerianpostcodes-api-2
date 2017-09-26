@@ -1,15 +1,5 @@
 package com.elsynergy.nigerianpostcodes.model.DAO.postcodeentities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.Audit;
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.LocalGovernmentArea;
 
 /**
@@ -17,29 +7,16 @@ import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.LocalGovernm
 * @author silver.ibenye
 *
 */
-@Entity
-@Table(name = "facility_postcodes")
-public class FacilityPostcode extends Audit
+public class FacilityPostcode
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false, updatable = false)
     private Integer id;
 
-    @Column(name = "facility")
     private String facility;
 
-    @Column(name = "postcode")
     private String postcode;
 
-    @Column(name = "latitude")
-    private String latitude;
+    private String town;
 
-    @Column(name = "longitude")
-    private String longitude;
-
-    @ManyToOne(optional=false)
-    @JoinColumn(name="lgaid", nullable=false)
     private LocalGovernmentArea localGovernmentArea;
 
     public Integer getId()
@@ -72,24 +49,14 @@ public class FacilityPostcode extends Audit
         this.postcode = postcode;
     }
 
-    public String getLatitude()
+    public String getTown()
     {
-        return this.latitude;
+        return this.town;
     }
 
-    public void setLatitude(final String latitude)
+    public void setTown(final String town)
     {
-        this.latitude = latitude;
-    }
-
-    public String getLongitude()
-    {
-        return this.longitude;
-    }
-
-    public void setLongitude(final String longitude)
-    {
-        this.longitude = longitude;
+        this.town = town;
     }
 
     public LocalGovernmentArea getLocalGovernmentArea()

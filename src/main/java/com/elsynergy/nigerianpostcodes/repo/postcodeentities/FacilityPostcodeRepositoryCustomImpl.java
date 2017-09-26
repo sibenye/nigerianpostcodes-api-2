@@ -33,9 +33,10 @@ public class FacilityPostcodeRepositoryCustomImpl implements FacilityPostcodeRep
                             "l.name AS lgaName, " +
                             "fp.id, " +
                             "fp.facility, " +
+                            "fp.town, " +
                             "fp.postcode " +
                         "FROM " +
-                            "facility_postcodes fp " +
+                            "facilities fp " +
                         "INNER JOIN " +
                             "lgas l ON fp.lgaId = l.id " +
                         "INNER JOIN " +
@@ -66,6 +67,7 @@ public class FacilityPostcodeRepositoryCustomImpl implements FacilityPostcodeRep
 
             facilityPostcode.setId(rs.getInt("id"));
             facilityPostcode.setFacility(rs.getString("facility"));
+            facilityPostcode.setTown(rs.getString("town"));
             facilityPostcode.setPostcode(rs.getString("postcode"));
             facilityPostcode.setLocalGovernmentArea(lga);
 
@@ -86,9 +88,10 @@ public class FacilityPostcodeRepositoryCustomImpl implements FacilityPostcodeRep
                 "l.name AS lgaName, " +
                 "fp.id, " +
                 "fp.facility, " +
+                "fp.town, " +
                 "fp.postcode " +
             "FROM " +
-                "facility_postcodes fp " +
+                "facilities fp " +
             "INNER JOIN " +
                 "lgas l ON fp.lgaId = l.id " +
             "INNER JOIN " +
@@ -115,6 +118,7 @@ public class FacilityPostcodeRepositoryCustomImpl implements FacilityPostcodeRep
 
             facilityPostcode.setId(rs.getInt("id"));
             facilityPostcode.setFacility(rs.getString("facility"));
+            facilityPostcode.setTown(rs.getString("town"));
             facilityPostcode.setPostcode(rs.getString("postcode"));
             facilityPostcode.setLocalGovernmentArea(lga);
 
