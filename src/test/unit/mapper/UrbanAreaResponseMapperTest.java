@@ -32,6 +32,7 @@ public class UrbanAreaResponseMapperTest
         state.setName("Abia");
 
         final UrbanTown urbanTown = new UrbanTown();
+        urbanTown.setId(12);
         urbanTown.setName("testTown");
         urbanTown.setState(state);
 
@@ -44,6 +45,7 @@ public class UrbanAreaResponseMapperTest
 
         assertEquals(in.getId(), out.getUrbanAreaId());
         assertEquals(in.getName(), out.getUrbanAreaName());
+        assertEquals(in.getUrbanTown().getId(), out.getUrbanTownId());
         assertEquals(in.getUrbanTown().getName(), out.getUrbanTownName());
         assertEquals(in.getUrbanTown().getState().getCode(), out.getStateCode());
         assertEquals(in.getUrbanTown().getState().getName(), out.getStateName());

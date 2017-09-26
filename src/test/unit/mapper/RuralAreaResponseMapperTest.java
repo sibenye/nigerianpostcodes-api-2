@@ -32,6 +32,7 @@ public class RuralAreaResponseMapperTest
         state.setName("Abia");
 
         final LocalGovernmentArea lga = new LocalGovernmentArea();
+        lga.setId(15);
         lga.setName("testLga");
         lga.setState(state);
 
@@ -44,6 +45,8 @@ public class RuralAreaResponseMapperTest
 
         assertEquals(in.getId(), out.getRuralAreaId());
         assertEquals(in.getName(), out.getRuralAreaName());
+        assertEquals(in.getLocalGovernmentArea().getId(), out.getLocalGovernmentAreaId());
+        assertEquals(in.getLocalGovernmentArea().getName(), out.getLocalGovernmentAreaName());
         assertEquals(in.getLocalGovernmentArea().getState().getCode(), out.getStateCode());
         assertEquals(in.getLocalGovernmentArea().getState().getName(), out.getStateName());
     }

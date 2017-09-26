@@ -8,6 +8,8 @@ public class UrbanAreaResponse extends BaseEntityResponse
 
     private String urbanAreaName;
 
+    private Integer urbanTownId;
+
     private String urbanTownName;
 
     private String stateCode;
@@ -16,10 +18,10 @@ public class UrbanAreaResponse extends BaseEntityResponse
 
     public Integer getUrbanAreaId()
     {
-        return urbanAreaId;
+        return this.urbanAreaId;
     }
 
-    public void setUrbanAreaId(Integer urbanAreaId)
+    public void setUrbanAreaId(final Integer urbanAreaId)
     {
         this.urbanAreaId = urbanAreaId;
     }
@@ -32,6 +34,16 @@ public class UrbanAreaResponse extends BaseEntityResponse
     public void setUrbanAreaName(final String urbanAreaName)
     {
         this.urbanAreaName = urbanAreaName;
+    }
+
+    public Integer getUrbanTownId()
+    {
+        return urbanTownId;
+    }
+
+    public void setUrbanTownId(Integer urbanTownId)
+    {
+        this.urbanTownId = urbanTownId;
     }
 
     public String getUrbanTownName()

@@ -18,7 +18,11 @@ public interface RuralAreaRepository extends CrudRepository<RuralArea, Integer>
 
     public List<RuralArea> findByLocalGovernmentAreaStateCodeAndLocalGovernmentAreaName(String stateCode, String localGovernmentAreaName);
 
+    public List<RuralArea> findByLocalGovernmentAreaStateCodeAndLocalGovernmentAreaId(String stateCode, Integer localGovernmentAreaId);
+
     public List<RuralArea> findByLocalGovernmentAreaStateCodeAndName(String stateCode, String ruralAreaName);
+
+    public List<RuralArea> findByLocalGovernmentAreaStateCodeAndId(String stateCode, Integer ruralAreaId);
 
     public List<RuralArea> findByLocalGovernmentAreaStateCodeAndLocalGovernmentAreaNameAndName(String stateCode, String localGovernmentAreaName, String name);
 
