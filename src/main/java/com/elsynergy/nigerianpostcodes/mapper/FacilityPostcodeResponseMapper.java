@@ -21,6 +21,7 @@ public class FacilityPostcodeResponseMapper implements IResponseMapper<FacilityP
         final FacilityPostcodeResponse out = new FacilityPostcodeResponse();
         out.setFacilityName(toMap.getFacility());
         out.setPostcode(toMap.getPostcode());
+        out.setTown(toMap.getTown());
         out.setLocalGovernmentAreaName(toMap.getLocalGovernmentArea().getName());
         out.setStateCode(toMap.getLocalGovernmentArea().getState().getCode());
         out.setStateName(toMap.getLocalGovernmentArea().getState().getName());

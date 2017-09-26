@@ -41,7 +41,7 @@ public class PostcodeRepositoryCustomImpl implements PostcodeRepositoryCustom
                 "DISTINCT postcode,  " +
                 "'facility' AS type " +
             "FROM " +
-                "facility_postcodes " +
+                "facilities " +
             "WHERE " +
                 "postcode = ?";
 

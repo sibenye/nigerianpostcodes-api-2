@@ -6,6 +6,8 @@ public class FacilityPostcodeResponse extends BaseEntityResponse
 {
     private String facilityName;
 
+    private String town;
+
     private String localGovernmentAreaName;
 
     private String stateCode;
@@ -22,6 +24,16 @@ public class FacilityPostcodeResponse extends BaseEntityResponse
     public void setFacilityName(final String facilityName)
     {
         this.facilityName = facilityName;
+    }
+
+    public String getTown()
+    {
+        return town;
+    }
+
+    public void setTown(String town)
+    {
+        this.town = town;
     }
 
     public String getLocalGovernmentAreaName()

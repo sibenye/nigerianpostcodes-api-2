@@ -39,12 +39,14 @@ public class FacilityPostcodeResponseMapperTest
         final FacilityPostcode in = new FacilityPostcode();
         in.setFacility("testFacility");
         in.setPostcode("345678");
+        in.setTown("testTown");
         in.setLocalGovernmentArea(localGovernmentArea);
 
         final FacilityPostcodeResponse out = this.facilityPostcodeResponseMapper.map(in);
 
         assertEquals(in.getFacility(), out.getFacilityName());
         assertEquals(in.getPostcode(), out.getPostcode());
+        assertEquals(in.getTown(), out.getTown());
         assertEquals(in.getLocalGovernmentArea().getName(), out.getLocalGovernmentAreaName());
         assertEquals(in.getLocalGovernmentArea().getState().getCode(), out.getStateCode());
         assertEquals(in.getLocalGovernmentArea().getState().getName(), out.getStateName());
