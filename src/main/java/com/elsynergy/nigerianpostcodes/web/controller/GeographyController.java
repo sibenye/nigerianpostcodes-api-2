@@ -42,42 +42,42 @@ public class GeographyController
     @RequestMapping(method = RequestMethod.GET, value = "/states/{stateCode}/lgas")
     public @ResponseBody ApiResponse getLGAs(
             @Valid @PathVariable final String stateCode,
-            @Valid @RequestParam ( required = false ) final String localGovtAreaName
+            @Valid @RequestParam ( required = false ) final Integer localGovtAreaId
             ) throws ResourceNotFoundException
     {
-        return new ApiResponse(this.geographyService.getLocalGovernmentArea(stateCode, localGovtAreaName));
+        return new ApiResponse(this.geographyService.getLocalGovernmentArea(stateCode, localGovtAreaId));
     }
 
     @ApiOperation(value = "Retrieve Rural Areas.")
     @RequestMapping(method = RequestMethod.GET, value = "/states/{stateCode}/ruralAreas")
     public @ResponseBody ApiResponse getRuralAreas(
             @Valid @PathVariable final String stateCode,
-            @Valid @RequestParam ( required = false ) final String localGovtAreaName,
-            @Valid @RequestParam ( required = false ) final String ruralAreaName
+            @Valid @RequestParam ( required = false ) final Integer localGovtAreaId,
+            @Valid @RequestParam ( required = false ) final Integer ruralAreaId
             ) throws ResourceNotFoundException
     {
-        return new ApiResponse(this.geographyService.getRuralArea(stateCode, localGovtAreaName, ruralAreaName));
+        return new ApiResponse(this.geographyService.getRuralArea(stateCode, localGovtAreaId, ruralAreaId));
     }
 
     @ApiOperation(value = "Retrieve Urban Areas.")
     @RequestMapping(method = RequestMethod.GET, value = "/states/{stateCode}/urbanAreas")
     public @ResponseBody ApiResponse getUrbanAreas(
             @Valid @PathVariable final String stateCode,
-            @Valid @RequestParam ( required = false ) final String urbanTownName,
-            @Valid @RequestParam ( required = false ) final String urbanAreaName
+            @Valid @RequestParam ( required = false ) final Integer urbanTownId,
+            @Valid @RequestParam ( required = false ) final Integer urbanAreaId
             ) throws ResourceNotFoundException
     {
-        return new ApiResponse(this.geographyService.getUrbanArea(stateCode, urbanTownName, urbanAreaName));
+        return new ApiResponse(this.geographyService.getUrbanArea(stateCode, urbanTownId, urbanAreaId));
     }
 
     @ApiOperation(value = "Retrieve Urban Towns.")
     @RequestMapping(method = RequestMethod.GET, value = "/states/{stateCode}/urbanTowns")
     public @ResponseBody ApiResponse getUrbanTowns(
             @Valid @PathVariable final String stateCode,
-            @Valid @RequestParam ( required = false ) final String urbanTownName
+            @Valid @RequestParam ( required = false ) final Integer urbanTownId
             ) throws ResourceNotFoundException
     {
-        return new ApiResponse(this.geographyService.getUrbanTown(stateCode, urbanTownName));
+        return new ApiResponse(this.geographyService.getUrbanTown(stateCode, urbanTownId));
     }
 
 }

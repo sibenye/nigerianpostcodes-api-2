@@ -21,6 +21,7 @@ public class RuralAreaResponseMapper implements IResponseMapper<RuralArea, Rural
         final RuralAreaResponse ruralAreaResponse = new RuralAreaResponse();
         ruralAreaResponse.setRuralAreaId(toMap.getId());
         ruralAreaResponse.setRuralAreaName(toMap.getName());
+        ruralAreaResponse.setLocalGovernmentAreaId(toMap.getLocalGovernmentArea().getId());
         ruralAreaResponse.setLocalGovernmentAreaName(toMap.getLocalGovernmentArea().getName());
         ruralAreaResponse.setStateCode(toMap.getLocalGovernmentArea().getState().getCode());
         ruralAreaResponse.setStateName(toMap.getLocalGovernmentArea().getState().getName());

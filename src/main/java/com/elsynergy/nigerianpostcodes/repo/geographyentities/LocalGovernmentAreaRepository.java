@@ -20,5 +20,7 @@ public interface LocalGovernmentAreaRepository extends CrudRepository<LocalGover
 
     public List<LocalGovernmentArea> findByStateCodeAndName(String stateCode, String localGovtAreaName);
 
+    public List<LocalGovernmentArea> findByStateCodeAndId(String stateCode, Integer localGovtAreaId);
+
     public Optional<LocalGovernmentArea> findOneByStateCodeAndName(String stateCode, String localGovtAreaName);
 }

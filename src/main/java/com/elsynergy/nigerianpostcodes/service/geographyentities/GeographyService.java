@@ -100,12 +100,13 @@ public class GeographyService
         return new ApiFindResponse(stateResponses);
     }
 
-    public ApiFindResponse getLocalGovernmentArea(final String stateCode, final String localGovtAreaName) throws ResourceNotFoundException
+    public ApiFindResponse getLocalGovernmentArea(final String stateCode, final Integer localGovtAreaId)
+            throws ResourceNotFoundException
     {
         List<LocalGovernmentArea> localGovernmentAreas = new ArrayList<>();
 
-        if (stateCode != null && localGovtAreaName != null) {
-            localGovernmentAreas = this.localGovernmentAreaRepository.findByStateCodeAndName(stateCode, localGovtAreaName);
+        if (localGovtAreaId != null) {
+            localGovernmentAreas = this.localGovernmentAreaRepository.findByStateCodeAndId(stateCode, localGovtAreaId);
         } else {
             localGovernmentAreas = this.localGovernmentAreaRepository.findByStateCode(stateCode);
         }
@@ -123,17 +124,15 @@ public class GeographyService
         return new ApiFindResponse(localGovernmentAreaResponses);
     }
 
-    public ApiFindResponse getRuralArea(final String stateCode, final String localGovtAreaName, final String ruralAreaName)
+    public ApiFindResponse getRuralArea(final String stateCode, final Integer localGovtAreaId, final Integer ruralAreaId)
             throws ResourceNotFoundException
     {
         List<RuralArea> ruralAreas = new ArrayList<>();
 
-        if (stateCode != null && localGovtAreaName != null && ruralAreaName != null) {
-            ruralAreas = this.ruralAreaRepository.findByLocalGovernmentAreaStateCodeAndLocalGovernmentAreaNameAndName(stateCode, localGovtAreaName, ruralAreaName);
-        } else if (stateCode != null && localGovtAreaName != null) {
-            ruralAreas = this.ruralAreaRepository.findByLocalGovernmentAreaStateCodeAndLocalGovernmentAreaName(stateCode, localGovtAreaName);
-        } else if (stateCode != null && ruralAreaName != null) {
-            ruralAreas = this.ruralAreaRepository.findByLocalGovernmentAreaStateCodeAndName(stateCode, ruralAreaName);
+        if (ruralAreaId != null) {
+            ruralAreas = this.ruralAreaRepository.findByLocalGovernmentAreaStateCodeAndId(stateCode, ruralAreaId);
+        } else if (localGovtAreaId != null) {
+            ruralAreas = this.ruralAreaRepository.findByLocalGovernmentAreaStateCodeAndLocalGovernmentAreaId(stateCode, localGovtAreaId);
         } else {
             ruralAreas = this.ruralAreaRepository.findByLocalGovernmentAreaStateCode(stateCode);
         }
@@ -152,17 +151,15 @@ public class GeographyService
 
     }
 
-    public ApiFindResponse getUrbanArea(final String stateCode, final String urbanTownName, final String urbanAreaName)
+    public ApiFindResponse getUrbanArea(final String stateCode, final Integer urbanTownId, final Integer urbanAreaId)
             throws ResourceNotFoundException
     {
         List<UrbanArea> urbanAreas = new ArrayList<>();
 
-        if (stateCode != null && urbanTownName != null && urbanAreaName != null) {
-            urbanAreas = this.urbanAreaRepository.findByUrbanTownStateCodeAndUrbanTownNameAndName(stateCode, urbanTownName, urbanAreaName);
-        } else if (stateCode != null && urbanTownName != null) {
-            urbanAreas = this.urbanAreaRepository.findByUrbanTownStateCodeAndUrbanTownName(stateCode, urbanTownName);
-        } else if (stateCode != null && urbanAreaName != null) {
-            urbanAreas = this.urbanAreaRepository.findByUrbanTownStateCodeAndName(stateCode, urbanAreaName);
+        if (urbanAreaId != null) {
+            urbanAreas = this.urbanAreaRepository.findByUrbanTownStateCodeAndId(stateCode, urbanAreaId);
+        } else if (urbanTownId != null) {
+            urbanAreas = this.urbanAreaRepository.findByUrbanTownStateCodeAndUrbanTownId(stateCode, urbanTownId);
         } else {
             urbanAreas = this.urbanAreaRepository.findByUrbanTownStateCode(stateCode);
         }
@@ -181,13 +178,13 @@ public class GeographyService
 
     }
 
-    public ApiFindResponse getUrbanTown(final String stateCode, final String urbanTownName)
+    public ApiFindResponse getUrbanTown(final String stateCode, final Integer urbanTownId)
             throws ResourceNotFoundException
     {
         List<UrbanTown> urbanTowns = new ArrayList<>();
 
-        if (stateCode != null && urbanTownName != null) {
-            urbanTowns = this.urbanTownRepository.findByStateCodeAndName(stateCode, urbanTownName);
+        if (urbanTownId != null) {
+             urbanTowns = this.urbanTownRepository.findByStateCodeAndId(stateCode, urbanTownId);
         }else {
             urbanTowns = this.urbanTownRepository.findByStateCode(stateCode);
         }
