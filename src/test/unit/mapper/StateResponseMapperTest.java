@@ -29,12 +29,16 @@ public class StateResponseMapperTest
         in.setCode("AB");
         in.setId(1);
         in.setName("Abia");
+        in.setCapital("Umuahia");
+        in.setRegion(4);
 
         final StateResponse out = this.stateResponseMapper.map(in);
 
         assertEquals(in.getId(), out.getStateId());
         assertEquals(in.getCode(), out.getStateCode());
         assertEquals(in.getName(), out.getStateName());
+        assertEquals(in.getCapital(), out.getStateCapital());
+        assertEquals(in.getRegion(), out.getStateRegion());
     }
 
 }

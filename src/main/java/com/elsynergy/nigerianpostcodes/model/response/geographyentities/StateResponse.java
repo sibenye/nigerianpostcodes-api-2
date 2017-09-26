@@ -10,12 +10,16 @@ public class StateResponse extends BaseEntityResponse
 
     private String stateName;
 
+    private String stateCapital;
+
+    private Integer stateRegion;
+
     public Integer getStateId()
     {
-        return stateId;
+        return this.stateId;
     }
 
-    public void setStateId(Integer stateId)
+    public void setStateId(final Integer stateId)
     {
         this.stateId = stateId;
     }
@@ -38,6 +42,26 @@ public class StateResponse extends BaseEntityResponse
     public void setStateName(final String stateName)
     {
         this.stateName = stateName;
+    }
+
+    public String getStateCapital()
+    {
+        return this.stateCapital;
+    }
+
+    public void setStateCapital(final String stateCapital)
+    {
+        this.stateCapital = stateCapital;
+    }
+
+    public Integer getStateRegion()
+    {
+        return this.stateRegion;
+    }
+
+    public void setStateRegion(final Integer stateRegion)
+    {
+        this.stateRegion = stateRegion;
     }
 
 }

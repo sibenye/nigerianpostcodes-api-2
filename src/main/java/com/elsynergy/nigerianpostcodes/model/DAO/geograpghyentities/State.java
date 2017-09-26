@@ -2,7 +2,13 @@ package com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities;
 
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
 *
@@ -26,6 +32,12 @@ public class State
 
     @OneToMany(mappedBy="state")
     private Set<LocalGovernmentArea> localGovernmentAreas;
+
+    @Column(name = "capital")
+    private String capital;
+
+    @Column(name = "region")
+    private Integer region;
 
     public Integer getId()
     {
@@ -65,6 +77,26 @@ public class State
     public void setLocalGovernmentAreas(final Set<LocalGovernmentArea> localGovernmentAreas)
     {
         this.localGovernmentAreas = localGovernmentAreas;
+    }
+
+    public String getCapital()
+    {
+        return this.capital;
+    }
+
+    public void setCapital(final String capital)
+    {
+        this.capital = capital;
+    }
+
+    public Integer getRegion()
+    {
+        return this.region;
+    }
+
+    public void setRegion(final Integer region)
+    {
+        this.region = region;
     }
 
 }
