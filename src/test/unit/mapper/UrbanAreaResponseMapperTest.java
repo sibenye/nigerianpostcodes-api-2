@@ -39,11 +39,13 @@ public class UrbanAreaResponseMapperTest
         final UrbanArea in = new UrbanArea();
         in.setId(1);
         in.setName("testArea");
+        in.setPostcode(1234);
         in.setUrbanTown(urbanTown);
 
         final UrbanAreaResponse out = this.urbanAreaResponseMapper.map(in);
 
         assertEquals(in.getId(), out.getUrbanAreaId());
+        assertEquals(in.getPostcode(), out.getPostcode());
         assertEquals(in.getName(), out.getUrbanAreaName());
         assertEquals(in.getUrbanTown().getId(), out.getUrbanTownId());
         assertEquals(in.getUrbanTown().getName(), out.getUrbanTownName());

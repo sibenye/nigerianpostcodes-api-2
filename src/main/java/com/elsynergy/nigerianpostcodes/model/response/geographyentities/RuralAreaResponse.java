@@ -16,6 +16,8 @@ public class RuralAreaResponse extends BaseEntityResponse
 
     private String stateName;
 
+    private Integer postcode;
+
     public Integer getRuralAreaId()
     {
         return this.ruralAreaId;
@@ -38,10 +40,10 @@ public class RuralAreaResponse extends BaseEntityResponse
 
     public Integer getLocalGovernmentAreaId()
     {
-        return localGovernmentAreaId;
+        return this.localGovernmentAreaId;
     }
 
-    public void setLocalGovernmentAreaId(Integer localGovernmentAreaId)
+    public void setLocalGovernmentAreaId(final Integer localGovernmentAreaId)
     {
         this.localGovernmentAreaId = localGovernmentAreaId;
     }
@@ -74,6 +76,16 @@ public class RuralAreaResponse extends BaseEntityResponse
     public void setStateName(final String stateName)
     {
         this.stateName = stateName;
+    }
+
+    public Integer getPostcode()
+    {
+        return postcode;
+    }
+
+    public void setPostcode(Integer postcode)
+    {
+        this.postcode = postcode;
     }
 
 }
