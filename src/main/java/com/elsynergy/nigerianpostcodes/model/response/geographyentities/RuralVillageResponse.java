@@ -2,11 +2,11 @@ package com.elsynergy.nigerianpostcodes.model.response.geographyentities;
 
 import com.elsynergy.nigerianpostcodes.model.response.BaseEntityResponse;
 
-public class RuralTownResponse extends BaseEntityResponse
+public class RuralVillageResponse extends BaseEntityResponse
 {
-    private Integer ruralTownId;
+    private Integer ruralVillageId;
 
-    private String ruralTownName;
+    private String ruralVillageName;
 
     private Integer ruralAreaId;
 
@@ -20,24 +20,24 @@ public class RuralTownResponse extends BaseEntityResponse
 
     private String stateName;
 
-    public Integer getRuralTownId()
+    public Integer getRuralVillageId()
     {
-        return this.ruralTownId;
+        return this.ruralVillageId;
     }
 
-    public void setRuralTownId(final Integer ruralTownId)
+    public void setRuralVillageId(final Integer ruralVillageId)
     {
-        this.ruralTownId = ruralTownId;
+        this.ruralVillageId = ruralVillageId;
     }
 
-    public String getRuralTownName()
+    public String getRuralVillageName()
     {
-        return this.ruralTownName;
+        return this.ruralVillageName;
     }
 
-    public void setRuralTownName(final String ruralTownName)
+    public void setRuralVillageName(final String ruralVillageName)
     {
-        this.ruralTownName = ruralTownName;
+        this.ruralVillageName = ruralVillageName;
     }
 
     public Integer getRuralAreaId()

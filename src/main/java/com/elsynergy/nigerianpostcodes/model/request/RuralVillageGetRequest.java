@@ -2,13 +2,13 @@ package com.elsynergy.nigerianpostcodes.model.request;
 
 import io.swagger.annotations.ApiParam;
 
-public class RuralTownGetRequest extends GeographyGetRequest
+public class RuralVillageGetRequest extends GeographyGetRequest
 {
     @ApiParam(value = "Rural Area id")
     private Integer ruralAreaId;
 
-    @ApiParam(value = "Rural Town id")
-    private Integer ruralTownId;
+    @ApiParam(value = "Rural Village id")
+    private Integer ruralVillageId;
 
     public Integer getRuralAreaId()
     {
@@ -20,14 +20,14 @@ public class RuralTownGetRequest extends GeographyGetRequest
         this.ruralAreaId = ruralAreaId;
     }
 
-    public Integer getRuralTownId()
+    public Integer getRuralVillageId()
     {
-        return this.ruralTownId;
+        return this.ruralVillageId;
     }
 
-    public void setRuralTownId(final Integer ruralTownId)
+    public void setRuralVillageId(final Integer ruralVillageId)
     {
-        this.ruralTownId = ruralTownId;
+        this.ruralVillageId = ruralVillageId;
     }
 
 }
