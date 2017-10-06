@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.elsynergy.nigerianpostcodes.model.request.LocalGovernmentAreaGetRequest;
 import com.elsynergy.nigerianpostcodes.model.request.RuralAreaGetRequest;
-import com.elsynergy.nigerianpostcodes.model.request.RuralTownGetRequest;
+import com.elsynergy.nigerianpostcodes.model.request.RuralVillageGetRequest;
 import com.elsynergy.nigerianpostcodes.model.request.UrbanAreaGetRequest;
 import com.elsynergy.nigerianpostcodes.model.request.UrbanStreetGetRequest;
 import com.elsynergy.nigerianpostcodes.model.request.UrbanTownGetRequest;
@@ -69,12 +69,12 @@ public class GeographyController
     }
 
     @ApiOperation(value = "Retrieve Rural Villages.")
-    @RequestMapping(method = RequestMethod.GET, value = "/ruralTowns")
-    public @ResponseBody ApiResponse getRuralTowns(
-            @Valid @ModelAttribute final RuralTownGetRequest request
+    @RequestMapping(method = RequestMethod.GET, value = "/ruralVillages")
+    public @ResponseBody ApiResponse getRuralVillages(
+            @Valid @ModelAttribute final RuralVillageGetRequest request
             ) throws ResourceNotFoundException
     {
-        return new ApiResponse(this.geographyService.getRuralTown(request.getRuralAreaId(), request.getRuralTownId()));
+        return new ApiResponse(this.geographyService.getRuralVillage(request.getRuralAreaId(), request.getRuralVillageId()));
     }
 
     @ApiOperation(value = "Retrieve Urban Towns.")

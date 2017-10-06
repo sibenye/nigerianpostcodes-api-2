@@ -2,8 +2,8 @@ package com.elsynergy.nigerianpostcodes.mapper;
 
 import org.springframework.stereotype.Component;
 
-import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.RuralTown;
-import com.elsynergy.nigerianpostcodes.model.response.geographyentities.RuralTownResponse;
+import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.RuralVillage;
+import com.elsynergy.nigerianpostcodes.model.response.geographyentities.RuralVillageResponse;
 
 /**
  * Maps RuralTown to RuralTownResponse.
@@ -12,15 +12,15 @@ import com.elsynergy.nigerianpostcodes.model.response.geographyentities.RuralTow
  *
  */
 @Component
-public class RuralTownResponseMapper implements IResponseMapper<RuralTown, RuralTownResponse>
+public class RuralVillageResponseMapper implements IResponseMapper<RuralVillage, RuralVillageResponse>
 {
 
     @Override
-    public RuralTownResponse map(final RuralTown toMap)
+    public RuralVillageResponse map(final RuralVillage toMap)
     {
-        final RuralTownResponse ruralTownResponse = new RuralTownResponse();
-        ruralTownResponse.setRuralTownId(toMap.getId());
-        ruralTownResponse.setRuralTownName(toMap.getTown());
+        final RuralVillageResponse ruralTownResponse = new RuralVillageResponse();
+        ruralTownResponse.setRuralVillageId(toMap.getId());
+        ruralTownResponse.setRuralVillageName(toMap.getTown());
         ruralTownResponse.setRuralAreaId(toMap.getRuralArea().getId());
         ruralTownResponse.setRuralAreaName(toMap.getRuralArea().getName());
         ruralTownResponse.setLocalGovernmentAreaId(toMap.getRuralArea().getLocalGovernmentArea().getId());

@@ -7,7 +7,7 @@ import org.springframework.validation.Validator;
 import com.elsynergy.nigerianpostcodes.model.request.GeographyGetRequest;
 import com.elsynergy.nigerianpostcodes.model.request.LocalGovernmentAreaGetRequest;
 import com.elsynergy.nigerianpostcodes.model.request.RuralAreaGetRequest;
-import com.elsynergy.nigerianpostcodes.model.request.RuralTownGetRequest;
+import com.elsynergy.nigerianpostcodes.model.request.RuralVillageGetRequest;
 import com.elsynergy.nigerianpostcodes.model.request.UrbanAreaGetRequest;
 import com.elsynergy.nigerianpostcodes.model.request.UrbanStreetGetRequest;
 import com.elsynergy.nigerianpostcodes.model.request.UrbanTownGetRequest;
@@ -35,8 +35,8 @@ public class GeographyGetRequestValidator implements Validator
             this.validate((LocalGovernmentAreaGetRequest) target, errors);
         } else if (target instanceof RuralAreaGetRequest) {
             this.validate((RuralAreaGetRequest) target, errors);
-        } else if (target instanceof RuralTownGetRequest) {
-            this.validate((RuralTownGetRequest) target, errors);
+        } else if (target instanceof RuralVillageGetRequest) {
+            this.validate((RuralVillageGetRequest) target, errors);
         } else if (target instanceof UrbanTownGetRequest) {
             this.validate((UrbanTownGetRequest) target, errors);
         } else if (target instanceof UrbanAreaGetRequest) {
@@ -62,11 +62,11 @@ public class GeographyGetRequestValidator implements Validator
         }
     }
 
-    private void validate(final RuralTownGetRequest request, final Errors errors)
+    private void validate(final RuralVillageGetRequest request, final Errors errors)
     {
         if (request.getRuralAreaId() == null
-                && request.getRuralTownId() == null) {
-            errors.reject("missingRequiredField", "ruralAreaId or ruralTownId is required.");
+                && request.getRuralVillageId() == null) {
+            errors.reject("missingRequiredField", "ruralAreaId or ruralVillageId is required.");
         }
     }
 

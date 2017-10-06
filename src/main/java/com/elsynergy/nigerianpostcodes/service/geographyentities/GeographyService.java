@@ -9,14 +9,14 @@ import org.springframework.stereotype.Service;
 
 import com.elsynergy.nigerianpostcodes.mapper.LocalGovernmentAreaResponseMapper;
 import com.elsynergy.nigerianpostcodes.mapper.RuralAreaResponseMapper;
-import com.elsynergy.nigerianpostcodes.mapper.RuralTownResponseMapper;
+import com.elsynergy.nigerianpostcodes.mapper.RuralVillageResponseMapper;
 import com.elsynergy.nigerianpostcodes.mapper.StateResponseMapper;
 import com.elsynergy.nigerianpostcodes.mapper.UrbanAreaResponseMapper;
 import com.elsynergy.nigerianpostcodes.mapper.UrbanStreetResponseMapper;
 import com.elsynergy.nigerianpostcodes.mapper.UrbanTownResponseMapper;
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.LocalGovernmentArea;
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.RuralArea;
-import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.RuralTown;
+import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.RuralVillage;
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.State;
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.UrbanArea;
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.UrbanStreet;
@@ -29,14 +29,14 @@ import com.elsynergy.nigerianpostcodes.model.request.admin.UrbanTownRequest;
 import com.elsynergy.nigerianpostcodes.model.response.ApiFindResponse;
 import com.elsynergy.nigerianpostcodes.model.response.geographyentities.LocalGovernmentAreaResponse;
 import com.elsynergy.nigerianpostcodes.model.response.geographyentities.RuralAreaResponse;
-import com.elsynergy.nigerianpostcodes.model.response.geographyentities.RuralTownResponse;
+import com.elsynergy.nigerianpostcodes.model.response.geographyentities.RuralVillageResponse;
 import com.elsynergy.nigerianpostcodes.model.response.geographyentities.StateResponse;
 import com.elsynergy.nigerianpostcodes.model.response.geographyentities.UrbanAreaResponse;
 import com.elsynergy.nigerianpostcodes.model.response.geographyentities.UrbanStreetResponse;
 import com.elsynergy.nigerianpostcodes.model.response.geographyentities.UrbanTownResponse;
 import com.elsynergy.nigerianpostcodes.repo.geographyentities.LocalGovernmentAreaRepository;
 import com.elsynergy.nigerianpostcodes.repo.geographyentities.RuralAreaRepository;
-import com.elsynergy.nigerianpostcodes.repo.geographyentities.RuralTownRepository;
+import com.elsynergy.nigerianpostcodes.repo.geographyentities.RuralVillageRepository;
 import com.elsynergy.nigerianpostcodes.repo.geographyentities.StateRepository;
 import com.elsynergy.nigerianpostcodes.repo.geographyentities.UrbanAreaRepository;
 import com.elsynergy.nigerianpostcodes.repo.geographyentities.UrbanStreetRepository;
@@ -89,10 +89,10 @@ public class GeographyService
     private UrbanStreetResponseMapper urbanStreetResponseMapper;
 
     @Autowired
-    private RuralTownRepository ruralTownRepository;
+    private RuralVillageRepository ruralVillageRepository;
 
     @Autowired
-    private RuralTownResponseMapper ruralTownResponseMapper;
+    private RuralVillageResponseMapper ruralVillageResponseMapper;
 
 
 
@@ -255,30 +255,30 @@ public class GeographyService
 
     }
 
-    public ApiFindResponse getRuralTown(final Integer ruralAreaId, final Integer ruralTownId)
+    public ApiFindResponse getRuralVillage(final Integer ruralAreaId, final Integer ruralVillageId)
             throws ResourceNotFoundException
     {
-        List<RuralTown> ruralTowns = new ArrayList<>();
+        List<RuralVillage> ruralVillages = new ArrayList<>();
 
-        if (ruralTownId != null) {
-            final RuralTown ruralTown = this.ruralTownRepository.findOne(ruralTownId);
+        if (ruralVillageId != null) {
+            final RuralVillage ruralVillage = this.ruralVillageRepository.findOne(ruralVillageId);
 
-            if (ruralTown == null) {
+            if (ruralVillage == null) {
                 throw new ResourceNotFoundException();
             }
 
-            ruralTowns.add(ruralTown);
+            ruralVillages.add(ruralVillage);
         } else {
-            ruralTowns = this.ruralTownRepository.findByRuralAreaId(ruralAreaId);
+            ruralVillages = this.ruralVillageRepository.findByRuralAreaId(ruralAreaId);
         }
 
-        final List<RuralTownResponse> ruralTownResponses = new ArrayList<>();
+        final List<RuralVillageResponse> ruralVillageResponses = new ArrayList<>();
 
-        for (final RuralTown ruralTown : ruralTowns) {
-            ruralTownResponses.add(this.ruralTownResponseMapper.map(ruralTown));
+        for (final RuralVillage ruralTown : ruralVillages) {
+            ruralVillageResponses.add(this.ruralVillageResponseMapper.map(ruralTown));
         }
 
-        return new ApiFindResponse(ruralTownResponses);
+        return new ApiFindResponse(ruralVillageResponses);
 
     }
 

@@ -17,8 +17,8 @@ import com.elsynergy.nigerianpostcodes.model.DAO.accountentities.Audit;
 *
 */
 @Entity
-@Table(name = "rural_towns")
-public class RuralTown extends Audit
+@Table(name = "rural_villages")
+public class RuralVillage extends Audit
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
