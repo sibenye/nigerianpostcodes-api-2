@@ -1,6 +1,6 @@
 package com.elsynergy.nigerianpostcodes.model.request.admin;
 
-public class UrbanTownRequest extends GeographyRequest
+public class UrbanTownRequest extends GeographyPostRequest
 {
     private Integer urbanTownId;
 

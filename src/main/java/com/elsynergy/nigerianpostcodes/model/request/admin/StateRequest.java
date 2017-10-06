@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiParam;
  * @author silver.ibenye
  *
  */
-public class StateRequest extends GeographyRequest
+public class StateRequest extends GeographyPostRequest
 {
     @ApiParam(value = "State id")
     private Integer id;

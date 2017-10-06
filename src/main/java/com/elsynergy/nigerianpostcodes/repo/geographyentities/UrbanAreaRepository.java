@@ -18,7 +18,7 @@ public interface UrbanAreaRepository extends CrudRepository<UrbanArea, Integer>
 
     public List<UrbanArea> findByUrbanTownStateCodeAndUrbanTownName(String stateCode, String urbanTownName);
 
-    public List<UrbanArea> findByUrbanTownStateCodeAndUrbanTownId(String stateCode, Integer urbanTownId);
+    public List<UrbanArea> findByUrbanTownId(Integer urbanTownId);
 
     public List<UrbanArea> findByUrbanTownStateCodeAndName(String stateCode, String urbanAreaName);
 

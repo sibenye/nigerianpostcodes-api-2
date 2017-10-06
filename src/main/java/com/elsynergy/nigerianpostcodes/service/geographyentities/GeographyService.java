@@ -9,13 +9,17 @@ import org.springframework.stereotype.Service;
 
 import com.elsynergy.nigerianpostcodes.mapper.LocalGovernmentAreaResponseMapper;
 import com.elsynergy.nigerianpostcodes.mapper.RuralAreaResponseMapper;
+import com.elsynergy.nigerianpostcodes.mapper.RuralTownResponseMapper;
 import com.elsynergy.nigerianpostcodes.mapper.StateResponseMapper;
 import com.elsynergy.nigerianpostcodes.mapper.UrbanAreaResponseMapper;
+import com.elsynergy.nigerianpostcodes.mapper.UrbanStreetResponseMapper;
 import com.elsynergy.nigerianpostcodes.mapper.UrbanTownResponseMapper;
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.LocalGovernmentArea;
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.RuralArea;
+import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.RuralTown;
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.State;
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.UrbanArea;
+import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.UrbanStreet;
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.UrbanTown;
 import com.elsynergy.nigerianpostcodes.model.request.admin.LocalGovernmentAreaRequest;
 import com.elsynergy.nigerianpostcodes.model.request.admin.RuralAreaRequest;
@@ -25,13 +29,17 @@ import com.elsynergy.nigerianpostcodes.model.request.admin.UrbanTownRequest;
 import com.elsynergy.nigerianpostcodes.model.response.ApiFindResponse;
 import com.elsynergy.nigerianpostcodes.model.response.geographyentities.LocalGovernmentAreaResponse;
 import com.elsynergy.nigerianpostcodes.model.response.geographyentities.RuralAreaResponse;
+import com.elsynergy.nigerianpostcodes.model.response.geographyentities.RuralTownResponse;
 import com.elsynergy.nigerianpostcodes.model.response.geographyentities.StateResponse;
 import com.elsynergy.nigerianpostcodes.model.response.geographyentities.UrbanAreaResponse;
+import com.elsynergy.nigerianpostcodes.model.response.geographyentities.UrbanStreetResponse;
 import com.elsynergy.nigerianpostcodes.model.response.geographyentities.UrbanTownResponse;
 import com.elsynergy.nigerianpostcodes.repo.geographyentities.LocalGovernmentAreaRepository;
 import com.elsynergy.nigerianpostcodes.repo.geographyentities.RuralAreaRepository;
+import com.elsynergy.nigerianpostcodes.repo.geographyentities.RuralTownRepository;
 import com.elsynergy.nigerianpostcodes.repo.geographyentities.StateRepository;
 import com.elsynergy.nigerianpostcodes.repo.geographyentities.UrbanAreaRepository;
+import com.elsynergy.nigerianpostcodes.repo.geographyentities.UrbanStreetRepository;
 import com.elsynergy.nigerianpostcodes.repo.geographyentities.UrbanTownRepository;
 import com.elsynergy.nigerianpostcodes.web.exception.BadRequestException;
 import com.elsynergy.nigerianpostcodes.web.exception.ResourceNotFoundException;
@@ -74,6 +82,19 @@ public class GeographyService
     @Autowired
     private UrbanTownResponseMapper urbanTownResponseMapper;
 
+    @Autowired
+    private UrbanStreetRepository urbanStreetRepository;
+
+    @Autowired
+    private UrbanStreetResponseMapper urbanStreetResponseMapper;
+
+    @Autowired
+    private RuralTownRepository ruralTownRepository;
+
+    @Autowired
+    private RuralTownResponseMapper ruralTownResponseMapper;
+
+
 
     /**
      * Retrieve states/state.
@@ -106,13 +127,15 @@ public class GeographyService
         List<LocalGovernmentArea> localGovernmentAreas = new ArrayList<>();
 
         if (localGovtAreaId != null) {
-            localGovernmentAreas = this.localGovernmentAreaRepository.findByStateCodeAndId(stateCode, localGovtAreaId);
+            final LocalGovernmentArea localGovernmentArea = this.localGovernmentAreaRepository.findOne(localGovtAreaId);
+
+            if (localGovernmentArea == null) {
+                throw new ResourceNotFoundException();
+            }
+
+            localGovernmentAreas.add(localGovernmentArea);
         } else {
             localGovernmentAreas = this.localGovernmentAreaRepository.findByStateCode(stateCode);
-        }
-
-        if (localGovernmentAreas.size() == 0) {
-            throw new ResourceNotFoundException();
         }
 
         final List<LocalGovernmentAreaResponse> localGovernmentAreaResponses = new ArrayList<>();
@@ -124,21 +147,21 @@ public class GeographyService
         return new ApiFindResponse(localGovernmentAreaResponses);
     }
 
-    public ApiFindResponse getRuralArea(final String stateCode, final Integer localGovtAreaId, final Integer ruralAreaId)
+    public ApiFindResponse getRuralArea(final Integer localGovtAreaId, final Integer ruralAreaId)
             throws ResourceNotFoundException
     {
         List<RuralArea> ruralAreas = new ArrayList<>();
 
         if (ruralAreaId != null) {
-            ruralAreas = this.ruralAreaRepository.findByLocalGovernmentAreaStateCodeAndId(stateCode, ruralAreaId);
-        } else if (localGovtAreaId != null) {
-            ruralAreas = this.ruralAreaRepository.findByLocalGovernmentAreaStateCodeAndLocalGovernmentAreaId(stateCode, localGovtAreaId);
-        } else {
-            ruralAreas = this.ruralAreaRepository.findByLocalGovernmentAreaStateCode(stateCode);
-        }
+            final RuralArea ruralArea = this.ruralAreaRepository.findOne(ruralAreaId);
 
-        if (ruralAreas.size() == 0) {
-            throw new ResourceNotFoundException();
+            if (ruralArea == null) {
+                throw new ResourceNotFoundException();
+            }
+
+            ruralAreas.add(ruralArea);
+        } else {
+            ruralAreas = this.ruralAreaRepository.findByLocalGovernmentAreaId(localGovtAreaId);
         }
 
         final List<RuralAreaResponse> ruralAreaResponses = new ArrayList<>();
@@ -151,21 +174,21 @@ public class GeographyService
 
     }
 
-    public ApiFindResponse getUrbanArea(final String stateCode, final Integer urbanTownId, final Integer urbanAreaId)
+    public ApiFindResponse getUrbanArea(final Integer urbanTownId, final Integer urbanAreaId)
             throws ResourceNotFoundException
     {
         List<UrbanArea> urbanAreas = new ArrayList<>();
 
         if (urbanAreaId != null) {
-            urbanAreas = this.urbanAreaRepository.findByUrbanTownStateCodeAndId(stateCode, urbanAreaId);
-        } else if (urbanTownId != null) {
-            urbanAreas = this.urbanAreaRepository.findByUrbanTownStateCodeAndUrbanTownId(stateCode, urbanTownId);
-        } else {
-            urbanAreas = this.urbanAreaRepository.findByUrbanTownStateCode(stateCode);
-        }
+            final UrbanArea urbanArea = this.urbanAreaRepository.findOne(urbanAreaId);
 
-        if (urbanAreas.size() == 0) {
-            throw new ResourceNotFoundException();
+            if (urbanArea == null) {
+                throw new ResourceNotFoundException();
+            }
+
+            urbanAreas.add(urbanArea);
+        } else {
+            urbanAreas = this.urbanAreaRepository.findByUrbanTownId(urbanTownId);
         }
 
         final List<UrbanAreaResponse> urbanAreaResponses = new ArrayList<>();
@@ -184,13 +207,15 @@ public class GeographyService
         List<UrbanTown> urbanTowns = new ArrayList<>();
 
         if (urbanTownId != null) {
-             urbanTowns = this.urbanTownRepository.findByStateCodeAndId(stateCode, urbanTownId);
+            final UrbanTown urbanTown = this.urbanTownRepository.findOne(urbanTownId);
+
+            if (urbanTown == null) {
+                throw new ResourceNotFoundException();
+            }
+
+            urbanTowns.add(urbanTown);
         }else {
             urbanTowns = this.urbanTownRepository.findByStateCode(stateCode);
-        }
-
-        if (urbanTowns.size() == 0) {
-            throw new ResourceNotFoundException();
         }
 
         final List<UrbanTownResponse> urbanTownResponses = new ArrayList<>();
@@ -200,6 +225,60 @@ public class GeographyService
         }
 
         return new ApiFindResponse(urbanTownResponses);
+
+    }
+
+    public ApiFindResponse getUrbanStreet(final Integer urbanAreaId, final Integer urbanStreetId)
+            throws ResourceNotFoundException
+    {
+        List<UrbanStreet> urbanStreets = new ArrayList<>();
+
+        if (urbanStreetId != null) {
+            final UrbanStreet urbanStreet = this.urbanStreetRepository.findOne(urbanStreetId);
+
+            if (urbanStreet == null) {
+                throw new ResourceNotFoundException();
+            }
+
+            urbanStreets.add(urbanStreet);
+        } else {
+            urbanStreets = this.urbanStreetRepository.findByUrbanAreaId(urbanAreaId);
+        }
+
+        final List<UrbanStreetResponse> urbanStreetResponses = new ArrayList<>();
+
+        for (final UrbanStreet urbanStreet: urbanStreets) {
+            urbanStreetResponses.add(this.urbanStreetResponseMapper.map(urbanStreet));
+        }
+
+        return new ApiFindResponse(urbanStreetResponses);
+
+    }
+
+    public ApiFindResponse getRuralTown(final Integer ruralAreaId, final Integer ruralTownId)
+            throws ResourceNotFoundException
+    {
+        List<RuralTown> ruralTowns = new ArrayList<>();
+
+        if (ruralTownId != null) {
+            final RuralTown ruralTown = this.ruralTownRepository.findOne(ruralTownId);
+
+            if (ruralTown == null) {
+                throw new ResourceNotFoundException();
+            }
+
+            ruralTowns.add(ruralTown);
+        } else {
+            ruralTowns = this.ruralTownRepository.findByRuralAreaId(ruralAreaId);
+        }
+
+        final List<RuralTownResponse> ruralTownResponses = new ArrayList<>();
+
+        for (final RuralTown ruralTown : ruralTowns) {
+            ruralTownResponses.add(this.ruralTownResponseMapper.map(ruralTown));
+        }
+
+        return new ApiFindResponse(ruralTownResponses);
 
     }
 

@@ -29,7 +29,7 @@ public class UrbanStreet extends Audit
     private String street;
 
     @ManyToOne(optional=false)
-    @JoinColumn(name="urbanAreaId", nullable=false)
+    @JoinColumn(name="urbanareaid", nullable=false)
     private UrbanArea urbanArea;
 
     public Integer getId()

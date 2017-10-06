@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import com.elsynergy.nigerianpostcodes.model.request.admin.GeographyRequest;
+import com.elsynergy.nigerianpostcodes.model.request.admin.GeographyPostRequest;
 import com.elsynergy.nigerianpostcodes.model.request.admin.LocalGovernmentAreaRequest;
 import com.elsynergy.nigerianpostcodes.model.request.admin.RuralAreaRequest;
 import com.elsynergy.nigerianpostcodes.model.request.admin.StateRequest;
@@ -18,13 +18,13 @@ import com.elsynergy.nigerianpostcodes.model.request.admin.UrbanTownRequest;
  *
  */
 @Component
-public class GeographyRequestValidator implements Validator
+public class GeographyPostRequestValidator implements Validator
 {
 
     @Override
     public boolean supports(final Class<?> clazz)
     {
-        return GeographyRequest.class.isAssignableFrom(clazz);
+        return GeographyPostRequest.class.isAssignableFrom(clazz);
     }
 
     @Override

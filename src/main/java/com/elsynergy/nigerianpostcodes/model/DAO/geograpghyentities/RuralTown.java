@@ -29,7 +29,7 @@ public class RuralTown extends Audit
     private String town;
 
     @ManyToOne(optional=false)
-    @JoinColumn(name="ruralAreaId", nullable=false)
+    @JoinColumn(name="ruralareaid", nullable=false)
     private RuralArea ruralArea;
 
     public Integer getId()

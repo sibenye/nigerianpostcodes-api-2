@@ -20,7 +20,7 @@ import com.elsynergy.nigerianpostcodes.model.response.ApiResponse;
 import com.elsynergy.nigerianpostcodes.service.geographyentities.GeographyService;
 import com.elsynergy.nigerianpostcodes.web.exception.BadRequestException;
 import com.elsynergy.nigerianpostcodes.web.exception.ResourceNotFoundException;
-import com.elsynergy.nigerianpostcodes.web.validation.GeographyRequestValidator;
+import com.elsynergy.nigerianpostcodes.web.validation.GeographyPostRequestValidator;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -35,7 +35,7 @@ import io.swagger.annotations.ApiOperation;
 public class GeographyAdminController
 {
     @Autowired
-    private GeographyRequestValidator requestValidator;
+    private GeographyPostRequestValidator requestValidator;
 
     @Autowired
     private GeographyService geographyService;
