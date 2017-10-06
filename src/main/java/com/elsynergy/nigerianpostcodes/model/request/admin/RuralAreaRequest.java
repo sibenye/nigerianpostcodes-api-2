@@ -5,7 +5,7 @@ package com.elsynergy.nigerianpostcodes.model.request.admin;
  * @author silver.ibenye
  *
  */
-public class RuralAreaRequest extends GeographyRequest
+public class RuralAreaRequest extends GeographyPostRequest
 {
     private Integer ruralAreaId;
 

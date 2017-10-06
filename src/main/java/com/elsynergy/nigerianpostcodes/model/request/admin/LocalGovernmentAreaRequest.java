@@ -5,7 +5,7 @@ package com.elsynergy.nigerianpostcodes.model.request.admin;
  * @author silver.ibenye
  *
  */
-public class LocalGovernmentAreaRequest extends GeographyRequest
+public class LocalGovernmentAreaRequest extends GeographyPostRequest
 {
     private Integer lgaId;
 
