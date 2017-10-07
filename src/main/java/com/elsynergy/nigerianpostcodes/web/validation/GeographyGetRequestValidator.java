@@ -6,6 +6,7 @@ import org.springframework.validation.Validator;
 
 import com.elsynergy.nigerianpostcodes.model.request.GeographyGetRequest;
 import com.elsynergy.nigerianpostcodes.model.request.LocalGovernmentAreaGetRequest;
+import com.elsynergy.nigerianpostcodes.model.request.PostOfficeFacilityGetRequest;
 import com.elsynergy.nigerianpostcodes.model.request.RuralAreaGetRequest;
 import com.elsynergy.nigerianpostcodes.model.request.RuralVillageGetRequest;
 import com.elsynergy.nigerianpostcodes.model.request.UrbanAreaGetRequest;
@@ -43,6 +44,8 @@ public class GeographyGetRequestValidator implements Validator
             this.validate((UrbanAreaGetRequest) target, errors);
         } else if (target instanceof UrbanStreetGetRequest) {
             this.validate((UrbanStreetGetRequest) target, errors);
+        } else if (target instanceof PostOfficeFacilityGetRequest) {
+            this.validate((PostOfficeFacilityGetRequest) target, errors);
         }
     }
 
@@ -91,6 +94,14 @@ public class GeographyGetRequestValidator implements Validator
         if ((request.getStateCode() == null || request.getStateCode().isEmpty())
                 && (request.getUrbanTownId() == null)) {
             errors.reject("missingRequiredField", "stateCode or urbanTownId is required");
+        }
+    }
+
+    private void validate(final PostOfficeFacilityGetRequest request, final Errors errors)
+    {
+        if ((request.getStateCode() == null || request.getStateCode().isEmpty())
+                && request.getLgaId() == null && request.getPostOfficeFacilityId() == null) {
+            errors.reject("missingRequiredField", "stateCode, or lgaId, or postOfficeFacilityId is required");
         }
     }
 }

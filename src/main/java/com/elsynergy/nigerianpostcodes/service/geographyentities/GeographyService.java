@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.elsynergy.nigerianpostcodes.mapper.LocalGovernmentAreaResponseMapper;
+import com.elsynergy.nigerianpostcodes.mapper.PostOfficeFacilityResponseMapper;
 import com.elsynergy.nigerianpostcodes.mapper.RuralAreaResponseMapper;
 import com.elsynergy.nigerianpostcodes.mapper.RuralVillageResponseMapper;
 import com.elsynergy.nigerianpostcodes.mapper.StateResponseMapper;
@@ -15,6 +16,7 @@ import com.elsynergy.nigerianpostcodes.mapper.UrbanAreaResponseMapper;
 import com.elsynergy.nigerianpostcodes.mapper.UrbanStreetResponseMapper;
 import com.elsynergy.nigerianpostcodes.mapper.UrbanTownResponseMapper;
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.LocalGovernmentArea;
+import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.PostOfficeFacility;
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.RuralArea;
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.RuralVillage;
 import com.elsynergy.nigerianpostcodes.model.DAO.geograpghyentities.State;
@@ -28,6 +30,7 @@ import com.elsynergy.nigerianpostcodes.model.request.admin.UrbanAreaRequest;
 import com.elsynergy.nigerianpostcodes.model.request.admin.UrbanTownRequest;
 import com.elsynergy.nigerianpostcodes.model.response.ApiFindResponse;
 import com.elsynergy.nigerianpostcodes.model.response.geographyentities.LocalGovernmentAreaResponse;
+import com.elsynergy.nigerianpostcodes.model.response.geographyentities.PostOfficeFacilityResponse;
 import com.elsynergy.nigerianpostcodes.model.response.geographyentities.RuralAreaResponse;
 import com.elsynergy.nigerianpostcodes.model.response.geographyentities.RuralVillageResponse;
 import com.elsynergy.nigerianpostcodes.model.response.geographyentities.StateResponse;
@@ -35,6 +38,7 @@ import com.elsynergy.nigerianpostcodes.model.response.geographyentities.UrbanAre
 import com.elsynergy.nigerianpostcodes.model.response.geographyentities.UrbanStreetResponse;
 import com.elsynergy.nigerianpostcodes.model.response.geographyentities.UrbanTownResponse;
 import com.elsynergy.nigerianpostcodes.repo.geographyentities.LocalGovernmentAreaRepository;
+import com.elsynergy.nigerianpostcodes.repo.geographyentities.PostOfficeFacilityRepository;
 import com.elsynergy.nigerianpostcodes.repo.geographyentities.RuralAreaRepository;
 import com.elsynergy.nigerianpostcodes.repo.geographyentities.RuralVillageRepository;
 import com.elsynergy.nigerianpostcodes.repo.geographyentities.StateRepository;
@@ -93,6 +97,12 @@ public class GeographyService
 
     @Autowired
     private RuralVillageResponseMapper ruralVillageResponseMapper;
+
+    @Autowired
+    private PostOfficeFacilityRepository postOfficeFacilityRepository;
+
+    @Autowired
+    PostOfficeFacilityResponseMapper postOfficeFacilityResponseMapper;
 
 
 
@@ -279,6 +289,35 @@ public class GeographyService
         }
 
         return new ApiFindResponse(ruralVillageResponses);
+
+    }
+
+    public ApiFindResponse getPostOfficeFacility(final String stateCode, final Integer lgaId, final Integer postOfficeFacilityId)
+            throws ResourceNotFoundException
+    {
+        List<PostOfficeFacility> postOfficeFacilities = new ArrayList<>();
+
+        if (postOfficeFacilityId != null) {
+            final PostOfficeFacility postOfficeFacility = this.postOfficeFacilityRepository.findOne(postOfficeFacilityId);
+
+            if (postOfficeFacility == null) {
+                throw new ResourceNotFoundException();
+            }
+
+            postOfficeFacilities.add(postOfficeFacility);
+        } else if (lgaId != null) {
+            postOfficeFacilities = this.postOfficeFacilityRepository.findByLocalGovernmentAreaId(lgaId);
+        } else {
+            postOfficeFacilities = this.postOfficeFacilityRepository.findByLocalGovernmentAreaStateCode(stateCode);
+        }
+
+        final List<PostOfficeFacilityResponse> postOfficeFacilityResponses = new ArrayList<>();
+
+        for (final PostOfficeFacility postOfficeFacility : postOfficeFacilities) {
+            postOfficeFacilityResponses.add(this.postOfficeFacilityResponseMapper.map(postOfficeFacility));
+        }
+
+        return new ApiFindResponse(postOfficeFacilityResponses);
 
     }
 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.elsynergy.nigerianpostcodes.model.request.LocalGovernmentAreaGetRequest;
+import com.elsynergy.nigerianpostcodes.model.request.PostOfficeFacilityGetRequest;
 import com.elsynergy.nigerianpostcodes.model.request.RuralAreaGetRequest;
 import com.elsynergy.nigerianpostcodes.model.request.RuralVillageGetRequest;
 import com.elsynergy.nigerianpostcodes.model.request.UrbanAreaGetRequest;
@@ -102,6 +103,15 @@ public class GeographyController
             ) throws ResourceNotFoundException
     {
         return new ApiResponse(this.geographyService.getUrbanStreet(request.getUrbanAreaId(), request.getUrbanStreetId()));
+    }
+
+    @ApiOperation(value = "Retrieve Post Office Facilities.")
+    @RequestMapping(method = RequestMethod.GET, value = "/facilities")
+    public @ResponseBody ApiResponse getPostOfficeFacilities(
+            @Valid @ModelAttribute final PostOfficeFacilityGetRequest request
+            ) throws ResourceNotFoundException
+    {
+        return new ApiResponse(this.geographyService.getPostOfficeFacility(request.getStateCode(), request.getLgaId(), request.getPostOfficeFacilityId()));
     }
 
     @InitBinder
