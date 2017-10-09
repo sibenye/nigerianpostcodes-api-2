@@ -16,7 +16,7 @@ public class UrbanAreaResponse extends BaseEntityResponse
 
     private String stateName;
 
-    private Integer postcode;
+    private String postcode;
 
     public Integer getUrbanAreaId()
     {
@@ -78,12 +78,12 @@ public class UrbanAreaResponse extends BaseEntityResponse
         this.stateName = stateName;
     }
 
-    public Integer getPostcode()
+    public String getPostcode()
     {
         return this.postcode;
     }
 
-    public void setPostcode(final Integer postcode)
+    public void setPostcode(final String postcode)
     {
         this.postcode = postcode;
     }

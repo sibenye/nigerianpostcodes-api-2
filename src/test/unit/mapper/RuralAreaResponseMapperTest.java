@@ -39,7 +39,7 @@ public class RuralAreaResponseMapperTest
         final RuralArea in = new RuralArea();
         in.setId(1);
         in.setName("testRuralArea");
-        in.setPostcode(1234);
+        in.setPostcode("1234");
         in.setLocalGovernmentArea(lga);
 
         final RuralAreaResponse out = this.ruralAreaResponseMapper.map(in);

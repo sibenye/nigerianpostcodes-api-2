@@ -8,7 +8,7 @@ public class UrbanAreaRequest extends GeographyPostRequest
 
     private Integer urbanTownId;
 
-    private Integer postcode;
+    private String postcode;
 
     public Integer getUrbanAreaId()
     {
@@ -40,12 +40,12 @@ public class UrbanAreaRequest extends GeographyPostRequest
         this.urbanTownId = urbanTownId;
     }
 
-    public Integer getPostcode()
+    public String getPostcode()
     {
         return this.postcode;
     }
 
-    public void setPostcode(final Integer postcode)
+    public void setPostcode(final String postcode)
     {
         this.postcode = postcode;
     }
