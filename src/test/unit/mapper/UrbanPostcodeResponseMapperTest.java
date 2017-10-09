@@ -38,7 +38,7 @@ public class UrbanPostcodeResponseMapperTest
 
         final UrbanArea urbanArea = new UrbanArea();
         urbanArea.setName("testArea");
-        urbanArea.setPostcode(34677);
+        urbanArea.setPostcode("34677");
         urbanArea.setUrbanTown(urbanTown);
 
         final UrbanPostcode in = new UrbanPostcode();

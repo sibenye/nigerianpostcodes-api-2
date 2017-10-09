@@ -75,7 +75,7 @@ public class RuralPostcodeRepositoryCustomImpl implements RuralPostcodeRepositor
 
             ruralArea.setId(rs.getInt("ruralAreaId"));
             ruralArea.setName(rs.getString("district"));
-            ruralArea.setPostcode(rs.getInt("postcode"));
+            ruralArea.setPostcode(rs.getString("postcode"));
             ruralArea.setLocalGovernmentArea(lga);
 
             ruralPostcode.setId(rs.getInt("id"));
@@ -132,7 +132,7 @@ public class RuralPostcodeRepositoryCustomImpl implements RuralPostcodeRepositor
 
             ruralArea.setId(rs.getInt("ruralAreaId"));
             ruralArea.setName(rs.getString("district"));
-            ruralArea.setPostcode(rs.getInt("postcode"));
+            ruralArea.setPostcode(rs.getString("postcode"));
             ruralArea.setLocalGovernmentArea(lga);
 
             ruralPostcode.setId(rs.getInt("id"));

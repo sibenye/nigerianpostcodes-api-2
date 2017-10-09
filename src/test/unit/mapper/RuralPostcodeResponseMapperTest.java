@@ -39,7 +39,7 @@ public class RuralPostcodeResponseMapperTest
 
         final RuralArea ruralArea = new RuralArea();
         ruralArea.setName("testDistrict");
-        ruralArea.setPostcode(23444);
+        ruralArea.setPostcode("23444");
         ruralArea.setLocalGovernmentArea(localGovernmentArea);
 
         final RuralPostcode in = new RuralPostcode();

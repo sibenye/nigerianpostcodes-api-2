@@ -33,7 +33,7 @@ public class RuralArea extends Audit
     private LocalGovernmentArea localGovernmentArea;
 
     @Column(name = "postcode")
-    private Integer postcode;
+    private String postcode;
 
     public Integer getId()
     {
@@ -65,12 +65,12 @@ public class RuralArea extends Audit
         this.localGovernmentArea = localGovernmentArea;
     }
 
-    public Integer getPostcode()
+    public String getPostcode()
     {
         return this.postcode;
     }
 
-    public void setPostcode(final Integer postcode)
+    public void setPostcode(final String postcode)
     {
         this.postcode = postcode;
     }

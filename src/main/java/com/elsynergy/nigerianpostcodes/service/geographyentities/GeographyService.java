@@ -516,7 +516,7 @@ public class GeographyService
         return this.localGovernmentAreaResponseMapper.map(savedLga);
     }
 
-    private RuralAreaResponse addRuralArea(final String ruralAreaName, final Integer lgaId, final Integer postcode)
+    private RuralAreaResponse addRuralArea(final String ruralAreaName, final Integer lgaId, final String postcode)
             throws ResourceNotFoundException, BadRequestException
     {
         //ensure LgaName is valid
@@ -543,7 +543,7 @@ public class GeographyService
         return this.ruralAreaResponseMapper.map(savedRuralArea);
     }
 
-    private RuralAreaResponse updateRuralArea(final Integer ruralAreaId, final String ruralAreaName, final Integer lgaId, final Integer postcode)
+    private RuralAreaResponse updateRuralArea(final Integer ruralAreaId, final String ruralAreaName, final Integer lgaId, final String postcode)
             throws ResourceNotFoundException, BadRequestException
     {
         //ensure ruralArea Id is valid
@@ -636,7 +636,7 @@ public class GeographyService
         return this.urbanTownResponseMapper.map(savedUrbanTown);
     }
 
-    private UrbanAreaResponse addUrbanArea(final String urbanAreaName, final Integer urbanTownId, final Integer postcode)
+    private UrbanAreaResponse addUrbanArea(final String urbanAreaName, final Integer urbanTownId, final String postcode)
             throws ResourceNotFoundException, BadRequestException
     {
         //ensure urbanTownId is valid
@@ -664,7 +664,7 @@ public class GeographyService
         return this.urbanAreaResponseMapper.map(savedUrbanArea);
     }
 
-    private UrbanAreaResponse updateUrbanArea(final Integer urbanAreaId, final String urbanAreaName, final Integer urbanTownId, final Integer postcode)
+    private UrbanAreaResponse updateUrbanArea(final Integer urbanAreaId, final String urbanAreaName, final Integer urbanTownId, final String postcode)
             throws ResourceNotFoundException, BadRequestException
     {
         //ensure Urban Area Id is valid

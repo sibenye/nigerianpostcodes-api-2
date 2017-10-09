@@ -13,7 +13,7 @@ public class RuralAreaRequest extends GeographyPostRequest
 
     private Integer lgaId;
 
-    private Integer postcode;
+    private String postcode;
 
     public Integer getRuralAreaId()
     {
@@ -45,12 +45,12 @@ public class RuralAreaRequest extends GeographyPostRequest
         this.lgaId = lgaId;
     }
 
-    public Integer getPostcode()
+    public String getPostcode()
     {
         return this.postcode;
     }
 
-    public void setPostcode(final Integer postcode)
+    public void setPostcode(final String postcode)
     {
         this.postcode = postcode;
     }
