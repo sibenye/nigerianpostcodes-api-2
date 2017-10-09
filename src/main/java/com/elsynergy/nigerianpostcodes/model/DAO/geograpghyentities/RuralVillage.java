@@ -25,8 +25,8 @@ public class RuralVillage extends Audit
     @Column(name = "id", nullable = false, updatable = false)
     private Integer id;
 
-    @Column(name = "town")
-    private String town;
+    @Column(name = "name")
+    private String name;
 
     @ManyToOne(optional=false)
     @JoinColumn(name="ruralareaid", nullable=false)
@@ -42,14 +42,14 @@ public class RuralVillage extends Audit
         this.id = id;
     }
 
-    public String getTown()
+    public String getName()
     {
-        return this.town;
+        return this.name;
     }
 
-    public void setTown(final String town)
+    public void setName(final String name)
     {
-        this.town = town;
+        this.name = name;
     }
 
     public RuralArea getRuralArea()

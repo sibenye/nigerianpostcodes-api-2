@@ -6,48 +6,48 @@ public class UrbanAreaRequest extends GeographyPostRequest
 
     private String urbanAreaName;
 
-    private String urbanTownName;
+    private Integer urbanTownId;
 
-    private String stateCode;
+    private Integer postcode;
 
     public Integer getUrbanAreaId()
     {
-        return urbanAreaId;
+        return this.urbanAreaId;
     }
 
-    public void setUrbanAreaId(Integer urbanAreaId)
+    public void setUrbanAreaId(final Integer urbanAreaId)
     {
         this.urbanAreaId = urbanAreaId;
     }
 
     public String getUrbanAreaName()
     {
-        return urbanAreaName;
+        return this.urbanAreaName;
     }
 
-    public void setUrbanAreaName(String urbanAreaName)
+    public void setUrbanAreaName(final String urbanAreaName)
     {
         this.urbanAreaName = urbanAreaName;
     }
 
-    public String getUrbanTownName()
+    public Integer getUrbanTownId()
     {
-        return urbanTownName;
+        return this.urbanTownId;
     }
 
-    public void setUrbanTownName(String urbanTownName)
+    public void setUrbanTownId(final Integer urbanTownId)
     {
-        this.urbanTownName = urbanTownName;
+        this.urbanTownId = urbanTownId;
     }
 
-    public String getStateCode()
+    public Integer getPostcode()
     {
-        return stateCode;
+        return this.postcode;
     }
 
-    public void setStateCode(String stateCode)
+    public void setPostcode(final Integer postcode)
     {
-        this.stateCode = stateCode;
+        this.postcode = postcode;
     }
 
 }

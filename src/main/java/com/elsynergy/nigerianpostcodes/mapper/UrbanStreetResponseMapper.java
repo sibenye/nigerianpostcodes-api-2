@@ -20,7 +20,7 @@ public class UrbanStreetResponseMapper implements IResponseMapper<UrbanStreet, U
     {
         final UrbanStreetResponse urbanStreetResponse = new UrbanStreetResponse();
         urbanStreetResponse.setUrbanStreetId(toMap.getId());
-        urbanStreetResponse.setUrbanStreetName(toMap.getStreet());
+        urbanStreetResponse.setUrbanStreetName(toMap.getName());
         urbanStreetResponse.setUrbanAreaId(toMap.getUrbanArea().getId());
         urbanStreetResponse.setUrbanAreaName(toMap.getUrbanArea().getName());
         urbanStreetResponse.setUrbanTownName(toMap.getUrbanArea().getUrbanTown().getName());

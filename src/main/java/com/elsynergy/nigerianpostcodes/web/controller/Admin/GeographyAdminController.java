@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.elsynergy.nigerianpostcodes.model.request.admin.LocalGovernmentAreaRequest;
 import com.elsynergy.nigerianpostcodes.model.request.admin.RuralAreaRequest;
+import com.elsynergy.nigerianpostcodes.model.request.admin.RuralVillageRequest;
 import com.elsynergy.nigerianpostcodes.model.request.admin.StateRequest;
 import com.elsynergy.nigerianpostcodes.model.request.admin.UrbanAreaRequest;
+import com.elsynergy.nigerianpostcodes.model.request.admin.UrbanStreetRequest;
 import com.elsynergy.nigerianpostcodes.model.request.admin.UrbanTownRequest;
 import com.elsynergy.nigerianpostcodes.model.response.ApiResponse;
 import com.elsynergy.nigerianpostcodes.service.geographyentities.GeographyService;
@@ -83,6 +85,24 @@ public class GeographyAdminController
             ) throws BadRequestException, ResourceNotFoundException
     {
         return new ApiResponse(this.geographyService.postUrbanArea(request));
+    }
+
+    @ApiOperation(value = "Add/Update Urban Street.")
+    @RequestMapping(method = RequestMethod.POST, value = "/urbanStreets")
+    public @ResponseBody ApiResponse postUrbanStreet(
+            @Valid @RequestBody final UrbanStreetRequest request
+            ) throws BadRequestException, ResourceNotFoundException
+    {
+        return new ApiResponse(this.geographyService.postUrbanStreet(request));
+    }
+
+    @ApiOperation(value = "Add/Update Rural Village.")
+    @RequestMapping(method = RequestMethod.POST, value = "/ruralVillages")
+    public @ResponseBody ApiResponse postRuralVillage(
+            @Valid @RequestBody final RuralVillageRequest request
+            ) throws BadRequestException, ResourceNotFoundException
+    {
+        return new ApiResponse(this.geographyService.postRuralVillage(request));
     }
 
     @InitBinder

@@ -35,7 +35,7 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
                             "ua.id AS urbanAreaId, " +
                             "ua.name AS area, " +
                             "us.id, " +
-                            "us.street, " +
+                            "us.name AS street, " +
                             "ua.postcode " +
                         "FROM " +
                             "urban_streets us " +
@@ -52,7 +52,7 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
                         "AND " +
                             "ua.name = COALESCE(?, ua.name) " +
                         "AND " +
-                            "us.street = COALESCE(?, us.street)";
+                            "us.name = COALESCE(?, us.name)";
 
         List<UrbanPostcode> urbanPostcodes = new ArrayList<>();
 
@@ -99,7 +99,7 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
                 "ua.id AS urbanAreaId, " +
                 "ua.name AS area, " +
                 "us.id, " +
-                "us.street, " +
+                "us.name AS street, " +
                 "ua.postcode " +
             "FROM " +
                 "urban_streets us " +
@@ -114,9 +114,9 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
             "AND " +
                 "ut.name = ? " +
             "AND " +
-                "us.street LIKE ? " +
+                "us.name LIKE ? " +
             "ORDER BY " +
-                "us.street";
+                "us.name";
 
         List<UrbanPostcode> urbanPostcodes = new ArrayList<>();
 
@@ -166,7 +166,7 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
                 "ua.id AS urbanAreaId, " +
                 "ua.name AS area, " +
                 "us.id, " +
-                "us.street, " +
+                "us.name AS street, " +
                 "ua.postcode " +
             "FROM " +
                 "urban_streets us " +

@@ -11,9 +11,9 @@ public class RuralAreaRequest extends GeographyPostRequest
 
     private String ruralAreaName;
 
-    private String lgaName;
+    private Integer lgaId;
 
-    private String stateCode;
+    private Integer postcode;
 
     public Integer getRuralAreaId()
     {
@@ -35,24 +35,24 @@ public class RuralAreaRequest extends GeographyPostRequest
         this.ruralAreaName = ruralAreaName;
     }
 
-    public String getLgaName()
+    public Integer getLgaId()
     {
-        return this.lgaName;
+        return this.lgaId;
     }
 
-    public void setLgaName(final String lgaName)
+    public void setLgaId(final Integer lgaId)
     {
-        this.lgaName = lgaName;
+        this.lgaId = lgaId;
     }
 
-    public String getStateCode()
+    public Integer getPostcode()
     {
-        return this.stateCode;
+        return this.postcode;
     }
 
-    public void setStateCode(final String stateCode)
+    public void setPostcode(final Integer postcode)
     {
-        this.stateCode = stateCode;
+        this.postcode = postcode;
     }
 
 }
