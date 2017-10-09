@@ -7,8 +7,10 @@ import org.springframework.validation.Validator;
 import com.elsynergy.nigerianpostcodes.model.request.admin.GeographyPostRequest;
 import com.elsynergy.nigerianpostcodes.model.request.admin.LocalGovernmentAreaRequest;
 import com.elsynergy.nigerianpostcodes.model.request.admin.RuralAreaRequest;
+import com.elsynergy.nigerianpostcodes.model.request.admin.RuralVillageRequest;
 import com.elsynergy.nigerianpostcodes.model.request.admin.StateRequest;
 import com.elsynergy.nigerianpostcodes.model.request.admin.UrbanAreaRequest;
+import com.elsynergy.nigerianpostcodes.model.request.admin.UrbanStreetRequest;
 import com.elsynergy.nigerianpostcodes.model.request.admin.UrbanTownRequest;
 
 /**
@@ -40,6 +42,10 @@ public class GeographyPostRequestValidator implements Validator
             this.validate((UrbanTownRequest) target, errors);
         } else if (target instanceof UrbanAreaRequest) {
             this.validate((UrbanAreaRequest) target, errors);
+        } else if (target instanceof UrbanStreetRequest) {
+            this.validate((UrbanStreetRequest) target, errors);
+        } else if (target instanceof RuralVillageRequest) {
+            this.validate((RuralVillageRequest) target, errors);
         }
     }
 
@@ -71,14 +77,12 @@ public class GeographyPostRequestValidator implements Validator
             errors.rejectValue("ruralAreaName", "missingRequiredField", "ruralAreaName is required.");
         }
 
-        if (request.getLgaName() == null
-                || request.getLgaName().isEmpty()) {
-            errors.rejectValue("lgaName", "missingRequiredField", "lgaName is required.");
+        if (request.getLgaId() == null) {
+            errors.rejectValue("lgaId", "missingRequiredField", "lgaId is required.");
         }
 
-        if (request.getStateCode() == null
-                || request.getStateCode().isEmpty()) {
-            errors.rejectValue("stateCode", "missingRequiredField", "stateCode is required.");
+        if (request.getPostcode() == null) {
+            errors.rejectValue("postcode", "missingRequiredField", "postcode is required.");
         }
     }
 
@@ -102,14 +106,36 @@ public class GeographyPostRequestValidator implements Validator
             errors.rejectValue("urbanAreaName", "missingRequiredField", "urbanAreaName is required.");
         }
 
-        if (request.getUrbanTownName() == null
-                || request.getUrbanTownName().isEmpty()) {
-            errors.rejectValue("urbanTownName", "missingRequiredField", "urbanTownName is required.");
+        if (request.getUrbanTownId() == null) {
+            errors.rejectValue("urbanTownId", "missingRequiredField", "urbanTownId is required.");
         }
 
-        if (request.getStateCode() == null
-                || request.getStateCode().isEmpty()) {
-            errors.rejectValue("stateCode", "missingRequiredField", "stateCode is required.");
+        if (request.getPostcode() == null) {
+            errors.rejectValue("postcode", "missingRequiredField", "postcode is required.");
+        }
+    }
+
+    private void validate(final UrbanStreetRequest request, final Errors errors)
+    {
+        if (request.getUrbanStreetName() == null
+                || request.getUrbanStreetName().isEmpty()) {
+            errors.rejectValue("urbanStreetName", "missingRequiredField", "urbanStreetName is required.");
+        }
+
+        if (request.getUrbanAreaId() == null) {
+            errors.rejectValue("urbanAreaId", "missingRequiredField", "urbanAreaId is required.");
+        }
+    }
+
+    private void validate(final RuralVillageRequest request, final Errors errors)
+    {
+        if (request.getRuralVillageName() == null
+                || request.getRuralVillageName().isEmpty()) {
+            errors.rejectValue("ruralVillageName", "missingRequiredField", "ruralVillageName is required.");
+        }
+
+        if (request.getRuralAreaId() == null) {
+            errors.rejectValue("ruralAreaId", "missingRequiredField", "ruralAreaId is required.");
         }
     }
 

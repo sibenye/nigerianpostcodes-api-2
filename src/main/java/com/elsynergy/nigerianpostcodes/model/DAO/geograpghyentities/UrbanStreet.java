@@ -25,8 +25,8 @@ public class UrbanStreet extends Audit
     @Column(name = "id", nullable = false, updatable = false)
     private Integer id;
 
-    @Column(name = "street")
-    private String street;
+    @Column(name = "name")
+    private String name;
 
     @ManyToOne(optional=false)
     @JoinColumn(name="urbanareaid", nullable=false)
@@ -42,14 +42,14 @@ public class UrbanStreet extends Audit
         this.id = id;
     }
 
-    public String getStreet()
+    public String getName()
     {
-        return this.street;
+        return this.name;
     }
 
-    public void setStreet(final String street)
+    public void setName(final String name)
     {
-        this.street = street;
+        this.name = name;
     }
 
     public UrbanArea getUrbanArea()
