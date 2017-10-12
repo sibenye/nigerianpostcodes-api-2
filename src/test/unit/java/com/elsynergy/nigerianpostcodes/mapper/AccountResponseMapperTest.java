@@ -1,4 +1,4 @@
-package mapper;
+package com.elsynergy.nigerianpostcodes.mapper;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
