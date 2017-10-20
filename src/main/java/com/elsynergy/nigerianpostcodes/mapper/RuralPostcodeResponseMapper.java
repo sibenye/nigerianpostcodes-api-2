@@ -19,8 +19,8 @@ public class RuralPostcodeResponseMapper implements IResponseMapper<RuralPostcod
     public RuralPostcodeResponse map(final RuralPostcode toMap)
     {
         final RuralPostcodeResponse out = new RuralPostcodeResponse();
-        out.setDistrict(toMap.getRuralArea().getName());
-        out.setTown(toMap.getTown());
+        out.setRuralAreaName(toMap.getRuralArea().getName());
+        out.setRuralVillageName(toMap.getRuralVillageName());
         out.setPostcode(toMap.getRuralArea().getPostcode());
         out.setLocalGovernmentAreaName(toMap.getRuralArea().getLocalGovernmentArea().getName());
         out.setStateCode(toMap.getRuralArea().getLocalGovernmentArea().getState().getCode());

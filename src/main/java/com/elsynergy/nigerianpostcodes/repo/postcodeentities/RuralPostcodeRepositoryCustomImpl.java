@@ -79,7 +79,7 @@ public class RuralPostcodeRepositoryCustomImpl implements RuralPostcodeRepositor
             ruralArea.setLocalGovernmentArea(lga);
 
             ruralPostcode.setId(rs.getInt("id"));
-            ruralPostcode.setTown(rs.getString("village"));
+            ruralPostcode.setRuralVillageName(rs.getString("village"));
             ruralPostcode.setRuralArea(ruralArea);
 
             return ruralPostcode;
@@ -136,7 +136,7 @@ public class RuralPostcodeRepositoryCustomImpl implements RuralPostcodeRepositor
             ruralArea.setLocalGovernmentArea(lga);
 
             ruralPostcode.setId(rs.getInt("id"));
-            ruralPostcode.setTown(rs.getString("village"));
+            ruralPostcode.setRuralVillageName(rs.getString("village"));
             ruralPostcode.setRuralArea(ruralArea);
 
             return ruralPostcode;

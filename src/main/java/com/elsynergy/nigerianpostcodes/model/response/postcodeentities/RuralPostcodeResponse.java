@@ -4,9 +4,9 @@ import com.elsynergy.nigerianpostcodes.model.response.BaseEntityResponse;
 
 public class RuralPostcodeResponse extends BaseEntityResponse
 {
-    private String town;
+    private String ruralVillageName;
 
-    private String district;
+    private String ruralAreaName;
 
     private String localGovernmentAreaName;
 
@@ -16,24 +16,24 @@ public class RuralPostcodeResponse extends BaseEntityResponse
 
     private String postcode;
 
-    public String getTown()
+    public String getRuralVillageName()
     {
-        return this.town;
+        return this.ruralVillageName;
     }
 
-    public void setTown(final String town)
+    public void setRuralVillageName(final String ruralVillageName)
     {
-        this.town = town;
+        this.ruralVillageName = ruralVillageName;
     }
 
-    public String getDistrict()
+    public String getRuralAreaName()
     {
-        return this.district;
+        return this.ruralAreaName;
     }
 
-    public void setDistrict(final String district)
+    public void setRuralAreaName(final String ruralAreaName)
     {
-        this.district = district;
+        this.ruralAreaName = ruralAreaName;
     }
 
     public String getLocalGovernmentAreaName()

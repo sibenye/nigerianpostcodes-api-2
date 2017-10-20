@@ -66,8 +66,8 @@ public class FacilityPostcodeRepositoryCustomImpl implements FacilityPostcodeRep
             lga.setState(state);
 
             facilityPostcode.setId(rs.getInt("id"));
-            facilityPostcode.setFacility(rs.getString("facility"));
-            facilityPostcode.setTown(rs.getString("town"));
+            facilityPostcode.setFacilityName(rs.getString("facility"));
+            facilityPostcode.setTownName(rs.getString("town"));
             facilityPostcode.setPostcode(rs.getString("postcode"));
             facilityPostcode.setLocalGovernmentArea(lga);
 
@@ -117,8 +117,8 @@ public class FacilityPostcodeRepositoryCustomImpl implements FacilityPostcodeRep
             lga.setState(state);
 
             facilityPostcode.setId(rs.getInt("id"));
-            facilityPostcode.setFacility(rs.getString("facility"));
-            facilityPostcode.setTown(rs.getString("town"));
+            facilityPostcode.setFacilityName(rs.getString("facility"));
+            facilityPostcode.setTownName(rs.getString("town"));
             facilityPostcode.setPostcode(rs.getString("postcode"));
             facilityPostcode.setLocalGovernmentArea(lga);
 

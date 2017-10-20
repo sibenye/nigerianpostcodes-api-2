@@ -11,11 +11,11 @@ public class FacilityPostcode
 {
     private Integer id;
 
-    private String facility;
+    private String facilityName;
 
     private String postcode;
 
-    private String town;
+    private String townName;
 
     private LocalGovernmentArea localGovernmentArea;
 
@@ -29,14 +29,14 @@ public class FacilityPostcode
         this.id = id;
     }
 
-    public String getFacility()
+    public String getFacilityName()
     {
-        return this.facility;
+        return this.facilityName;
     }
 
-    public void setFacility(final String facility)
+    public void setFacilityName(final String facilityName)
     {
-        this.facility = facility;
+        this.facilityName = facilityName;
     }
 
     public String getPostcode()
@@ -49,14 +49,14 @@ public class FacilityPostcode
         this.postcode = postcode;
     }
 
-    public String getTown()
+    public String getTownName()
     {
-        return this.town;
+        return this.townName;
     }
 
-    public void setTown(final String town)
+    public void setTownName(final String townName)
     {
-        this.town = town;
+        this.townName = townName;
     }
 
     public LocalGovernmentArea getLocalGovernmentArea()

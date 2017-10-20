@@ -11,7 +11,7 @@ public class UrbanPostcode
 {
     private Integer id;
 
-    private String street;
+    private String urbanStreetName;
 
     private UrbanArea urbanArea;
 
@@ -25,14 +25,14 @@ public class UrbanPostcode
         this.id = id;
     }
 
-    public String getStreet()
+    public String getUrbanStreetName()
     {
-        return this.street;
+        return this.urbanStreetName;
     }
 
-    public void setStreet(final String street)
+    public void setUrbanStreetName(final String street)
     {
-        this.street = street;
+        this.urbanStreetName = street;
     }
 
     public UrbanArea getUrbanArea()

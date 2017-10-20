@@ -4,11 +4,11 @@ import com.elsynergy.nigerianpostcodes.model.response.BaseEntityResponse;
 
 public class UrbanPostcodeResponse extends BaseEntityResponse
 {
-    private String street;
+    private String urbanStreetName;
 
-    private String area;
+    private String urbanAreaName;
 
-    private String town;
+    private String urbanTownName;
 
     private String stateCode;
 
@@ -16,34 +16,34 @@ public class UrbanPostcodeResponse extends BaseEntityResponse
 
     private String postcode;
 
-    public String getStreet()
+    public String getUrbanStreetName()
     {
-        return this.street;
+        return this.urbanStreetName;
     }
 
-    public void setStreet(final String street)
+    public void setUrbanStreetName(final String urbanStreetName)
     {
-        this.street = street;
+        this.urbanStreetName = urbanStreetName;
     }
 
-    public String getArea()
+    public String getUrbanAreaName()
     {
-        return this.area;
+        return this.urbanAreaName;
     }
 
-    public void setArea(final String area)
+    public void setUrbanAreaName(final String urbanAreaName)
     {
-        this.area = area;
+        this.urbanAreaName = urbanAreaName;
     }
 
-    public String getTown()
+    public String getUrbanTownName()
     {
-        return this.town;
+        return this.urbanTownName;
     }
 
-    public void setTown(final String town)
+    public void setUrbanTownName(final String urbanTownName)
     {
-        this.town = town;
+        this.urbanTownName = urbanTownName;
     }
 
     public String getStateCode()

@@ -11,7 +11,7 @@ public class RuralPostcode
 {
     private Integer id;
 
-    private String town;
+    private String ruralVillageName;
 
     private RuralArea ruralArea;
 
@@ -25,14 +25,14 @@ public class RuralPostcode
         this.id = id;
     }
 
-    public String getTown()
+    public String getRuralVillageName()
     {
-        return this.town;
+        return this.ruralVillageName;
     }
 
-    public void setTown(final String town)
+    public void setRuralVillageName(final String ruralVillageName)
     {
-        this.town = town;
+        this.ruralVillageName = ruralVillageName;
     }
 
     public RuralArea getRuralArea()

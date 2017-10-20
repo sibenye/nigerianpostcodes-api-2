@@ -107,18 +107,18 @@ public class PostcodeServiceTest
 
         this.facilityPostcode = new FacilityPostcode();
         this.facilityPostcode.setId(1);
-        this.facilityPostcode.setFacility("testFacility");
+        this.facilityPostcode.setFacilityName("testFacility");
         this.facilityPostcode.setPostcode("120983");
         this.facilityPostcode.setLocalGovernmentArea(localGovernmentArea);
 
         this.ruralPostcode = new RuralPostcode();
         this.ruralPostcode.setId(1);
-        this.ruralPostcode.setTown("testTown");
+        this.ruralPostcode.setRuralVillageName("testTown");
         this.ruralPostcode.setRuralArea(ruralArea);;
 
         this.urbanPostcode = new UrbanPostcode();
         this.urbanPostcode.setId(1);
-        this.urbanPostcode.setStreet("testStreet");
+        this.urbanPostcode.setUrbanStreetName("testStreet");
         this.urbanPostcode.setUrbanArea(urbanArea);
 
         this.facilityPostcodeRequest = new FacilityPostcodeRequest();

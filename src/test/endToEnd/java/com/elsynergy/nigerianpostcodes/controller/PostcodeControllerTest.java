@@ -58,8 +58,8 @@ public class PostcodeControllerTest
         .andExpect(jsonPath("$.response.numberOfResults", greaterThan(0)))
         .andExpect(jsonPath("$.response.content", hasSize(greaterThan(0))))
         .andExpect(jsonPath("$.response.content..postcode").exists())
-        .andExpect(jsonPath("$.response.content..town").exists())
-        .andExpect(jsonPath("$.response.content..district").exists())
+        .andExpect(jsonPath("$.response.content..ruralVillageName").exists())
+        .andExpect(jsonPath("$.response.content..ruralAreaName").exists())
         .andExpect(jsonPath("$.response.content..localGovernmentAreaName").exists())
         .andExpect(jsonPath("$.response.content..stateCode").exists())
         .andExpect(jsonPath("$.response.content..stateName").exists());
@@ -135,9 +135,9 @@ public class PostcodeControllerTest
         .andExpect(jsonPath("$.response.numberOfResults", greaterThan(0)))
         .andExpect(jsonPath("$.response.content", hasSize(greaterThan(0))))
         .andExpect(jsonPath("$.response.content..postcode").exists())
-        .andExpect(jsonPath("$.response.content..street").exists())
-        .andExpect(jsonPath("$.response.content..area").exists())
-        .andExpect(jsonPath("$.response.content..town").exists())
+        .andExpect(jsonPath("$.response.content..urbanStreetName").exists())
+        .andExpect(jsonPath("$.response.content..urbanAreaName").exists())
+        .andExpect(jsonPath("$.response.content..urbanTownName").exists())
         .andExpect(jsonPath("$.response.content..stateCode").exists())
         .andExpect(jsonPath("$.response.content..stateName").exists());
 
@@ -214,7 +214,7 @@ public class PostcodeControllerTest
         .andExpect(jsonPath("$.response.content", hasSize(greaterThan(0))))
         .andExpect(jsonPath("$.response.content..postcode").exists())
         .andExpect(jsonPath("$.response.content..facilityName").exists())
-        .andExpect(jsonPath("$.response.content..town").exists())
+        .andExpect(jsonPath("$.response.content..townName").exists())
         .andExpect(jsonPath("$.response.content..localGovernmentAreaName").exists())
         .andExpect(jsonPath("$.response.content..stateCode").exists())
         .andExpect(jsonPath("$.response.content..stateName").exists());
@@ -273,9 +273,9 @@ public class PostcodeControllerTest
         .andExpect(jsonPath("$.response.numberOfResults", greaterThan(0)))
         .andExpect(jsonPath("$.response.content", hasSize(greaterThan(0))))
         .andExpect(jsonPath("$.response.content..postcode").exists())
-        .andExpect(jsonPath("$.response.content..street").exists())
-        .andExpect(jsonPath("$.response.content..area").exists())
-        .andExpect(jsonPath("$.response.content..town").exists())
+        .andExpect(jsonPath("$.response.content..urbanStreetName").exists())
+        .andExpect(jsonPath("$.response.content..urbanAreaName").exists())
+        .andExpect(jsonPath("$.response.content..urbanTownName").exists())
         .andExpect(jsonPath("$.response.content..stateCode").exists())
         .andExpect(jsonPath("$.response.content..stateName").exists());
 

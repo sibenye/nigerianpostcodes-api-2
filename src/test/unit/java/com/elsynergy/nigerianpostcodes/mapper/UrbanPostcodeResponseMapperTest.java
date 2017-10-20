@@ -42,15 +42,15 @@ public class UrbanPostcodeResponseMapperTest
         urbanArea.setUrbanTown(urbanTown);
 
         final UrbanPostcode in = new UrbanPostcode();
-        in.setStreet("testStreet");
+        in.setUrbanStreetName("testStreet");
         in.setUrbanArea(urbanArea);
 
         final UrbanPostcodeResponse out = this.urbanPostcodeResponseMapper.map(in);
 
         assertEquals(in.getUrbanArea().getPostcode(), out.getPostcode());
-        assertEquals(in.getStreet(), out.getStreet());
-        assertEquals(in.getUrbanArea().getName(), out.getArea());
-        assertEquals(in.getUrbanArea().getUrbanTown().getName(), out.getTown());
+        assertEquals(in.getUrbanStreetName(), out.getUrbanStreetName());
+        assertEquals(in.getUrbanArea().getName(), out.getUrbanAreaName());
+        assertEquals(in.getUrbanArea().getUrbanTown().getName(), out.getUrbanTownName());
         assertEquals(in.getUrbanArea().getUrbanTown().getState().getCode(), out.getStateCode());
         assertEquals(in.getUrbanArea().getUrbanTown().getState().getName(), out.getStateName());
     }

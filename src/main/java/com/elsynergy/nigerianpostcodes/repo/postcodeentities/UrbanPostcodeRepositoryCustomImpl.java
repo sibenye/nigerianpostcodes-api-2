@@ -78,7 +78,7 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
             urbanArea.setUrbanTown(urbanTown);
 
             urbanPostcode.setId(rs.getInt("id"));
-            urbanPostcode.setStreet(rs.getString("street"));
+            urbanPostcode.setUrbanStreetName(rs.getString("street"));
             urbanPostcode.setUrbanArea(urbanArea);
 
             return urbanPostcode;
@@ -144,7 +144,7 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
             urbanArea.setUrbanTown(urbanTown);
 
             urbanPostcode.setId(rs.getInt("id"));
-            urbanPostcode.setStreet(rs.getString("street"));
+            urbanPostcode.setUrbanStreetName(rs.getString("street"));
             urbanPostcode.setUrbanArea(urbanArea);
 
             return urbanPostcode;
@@ -203,7 +203,7 @@ public class UrbanPostcodeRepositoryCustomImpl implements UrbanPostcodeRepositor
             urbanArea.setUrbanTown(urbanTown);
 
             urbanPostcode.setId(rs.getInt("id"));
-            urbanPostcode.setStreet(rs.getString("street"));
+            urbanPostcode.setUrbanStreetName(rs.getString("street"));
             urbanPostcode.setUrbanArea(urbanArea);
 
             return urbanPostcode;
