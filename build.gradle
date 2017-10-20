@@ -24,6 +24,8 @@ repositories {
 }
 
 configurations {
+    endToEndTestCompile.extendsFrom testCompile
+    endToEndTestRuntime.extendsFrom testRuntime
     newrelic // Allow for the copying of the NewRelic agent at run time.
 }
 
@@ -37,6 +39,8 @@ dependencies {
     compile 'io.springfox:springfox-swagger2:2.4.0'
     compile 'io.springfox:springfox-swagger-ui:2.4.0'
     compile "org.apache.tomcat:tomcat-jdbc:7.0.19"
+    compile 'org.apache.httpcomponents:httpclient:4.5.2'
+    compile 'org.apache.commons:commons-lang3:3.5'
 
     compile 'org.springframework.boot:spring-boot-starter-web:1.4.1.RELEASE'
     compile 'org.springframework.boot:spring-boot-starter-actuator:1.4.1.RELEASE'
@@ -56,16 +60,33 @@ dependencies {
     testCompile 'com.jayway.jsonpath:json-path-assert'
     testCompile 'junit:junit'
     testCompile 'org.mockito:mockito-all:1.10.19'
-    testCompile 'org.springframework:spring-test'
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
 
 // Non-default java source sets.
 sourceSets {
     test {
         java {
-            srcDir 'src/test/unit'
+            srcDir 'src/test/unit/java'
         }
     }
+    endToEndTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir 'src/test/endToEnd/java'
+        }
+        resources {
+            srcDir 'src/test/endToEnd/resources'
+        }
+    }
+}
+
+// Run all End To End tests.
+task e2e(type: Test) {
+    testClassesDir = sourceSets.endToEndTest.output.classesDir
+    classpath = sourceSets.endToEndTest.runtimeClasspath
+    outputs.upToDateWhen { false }
 }
 
 // Copy version file to resources root.
@@ -92,6 +113,10 @@ task copyNewRelicConfig(type: Copy, group: 'build') {
 compileJava {
     dependsOn copyVersionFile
 }
+
+// Run e2e tests.
+check.dependsOn e2e
+e2e.mustRunAfter test
 
 project.tasks.build.dependsOn('copyNewrelicAgent')
 project.tasks.build.dependsOn('copyNewRelicConfig')

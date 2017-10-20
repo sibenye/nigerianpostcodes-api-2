@@ -1,4 +1,4 @@
-package service;
+package com.elsynergy.nigerianpostcodes.service;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anySet;

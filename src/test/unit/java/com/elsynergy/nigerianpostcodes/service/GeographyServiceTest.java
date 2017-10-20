@@ -1,4 +1,4 @@
-package service;
+package com.elsynergy.nigerianpostcodes.service;
 
 import com.elsynergy.nigerianpostcodes.mapper.LocalGovernmentAreaResponseMapper;
 import com.elsynergy.nigerianpostcodes.mapper.StateResponseMapper;
