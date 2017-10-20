@@ -76,9 +76,6 @@ sourceSets {
             runtimeClasspath += main.output + test.output
             srcDir 'src/test/endToEnd/java'
         }
-        resources {
-            srcDir 'src/test/endToEnd/resources'
-        }
     }
 }
 
