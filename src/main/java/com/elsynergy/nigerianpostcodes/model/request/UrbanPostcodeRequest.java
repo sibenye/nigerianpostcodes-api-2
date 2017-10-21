@@ -9,42 +9,42 @@ import io.swagger.annotations.ApiParam;
  */
 public class UrbanPostcodeRequest extends PostcodeRequest
 {
-    @ApiParam(value = "Town.")
-    private String town;
+    @ApiParam(value = "Urban Town Name.")
+    private String urbaTownName;
 
-    @ApiParam(value = "Area.")
-    private String area;
+    @ApiParam(value = "Urban Area Name.")
+    private String urbanAreaName;
 
-    @ApiParam(value = "Street.")
-    private String street;
+    @ApiParam(value = "Urban Street Name.")
+    private String urbanStreetName;
 
-    public String getTown()
+    public String getUrbanTownName()
     {
-        return this.town;
+        return this.urbaTownName;
     }
 
-    public void setTown(final String town)
+    public void setUrbanTownName(final String urbanTownName)
     {
-        this.town = town;
+        this.urbaTownName = urbanTownName;
     }
 
-    public String getArea()
+    public String getUrbanAreaName()
     {
-        return this.area;
+        return this.urbanAreaName;
     }
 
-    public void setArea(final String area)
+    public void setUrbanAreaName(final String urbanAreaName)
     {
-        this.area = area;
+        this.urbanAreaName = urbanAreaName;
     }
 
-    public String getStreet()
+    public String getUrbanStreetName()
     {
-        return this.street;
+        return this.urbanStreetName;
     }
 
-    public void setStreet(final String street)
+    public void setUrbanStreetName(final String urbanStreetName)
     {
-        this.street = street;
+        this.urbanStreetName = urbanStreetName;
     }
 }

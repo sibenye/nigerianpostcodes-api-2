@@ -64,11 +64,11 @@ public class PostcodeController
     @RequestMapping(method = RequestMethod.GET, value = "/urban-postcodes/search")
     public @ResponseBody ApiResponse searchUrbanPostcodes(
             @Valid @RequestParam ( required = true ) final String stateCode,
-            @Valid @RequestParam ( required = true ) final String town,
+            @Valid @RequestParam ( required = true ) final String urbanTownName,
             @Valid @RequestParam ( required = true ) final String hint
             ) throws ResourceNotFoundException
     {
-        return new ApiResponse(this.postcodeService.searchUrbanPostcodes(stateCode, town, hint));
+        return new ApiResponse(this.postcodeService.searchUrbanPostcodes(stateCode, urbanTownName, hint));
     }
 
     @ApiOperation(value = "Reverse Lookup Postcode")

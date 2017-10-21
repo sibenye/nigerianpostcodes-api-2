@@ -129,14 +129,14 @@ public class PostcodeServiceTest
         this.ruralPostcodeRequest = new RuralPostcodeRequest();
         this.ruralPostcodeRequest.setStateCode("AB");
         this.ruralPostcodeRequest.setLocalGovtAreaName("testLga");
-        this.ruralPostcodeRequest.setDistrict("testDistrict");
-        this.ruralPostcodeRequest.setTown("testTown");
+        this.ruralPostcodeRequest.setRuralAreaName("testDistrict");
+        this.ruralPostcodeRequest.setRuralVillageName("testTown");
 
         this.urbanPostcodeRequest = new UrbanPostcodeRequest();
         this.urbanPostcodeRequest.setStateCode("AB");
-        this.urbanPostcodeRequest.setArea("testArea");
-        this.urbanPostcodeRequest.setTown("testTown");
-        this.urbanPostcodeRequest.setStreet("testStreet");
+        this.urbanPostcodeRequest.setUrbanAreaName("testArea");
+        this.urbanPostcodeRequest.setUrbanTownName("testTown");
+        this.urbanPostcodeRequest.setUrbanStreetName("testStreet");
     }
 
     @Test
@@ -233,7 +233,7 @@ public class PostcodeServiceTest
         when(this.ruralPostcodeRepository.getRuralPostcodes(
                 anyString(), anyString(), anyString(), anyString())).thenReturn(ruralPostcodes);
 
-        this.ruralPostcodeRequest.setTown(null);
+        this.ruralPostcodeRequest.setRuralVillageName(null);
 
         this.postcodeService.getRuralPostcodes(this.ruralPostcodeRequest);
 
@@ -251,8 +251,8 @@ public class PostcodeServiceTest
         when(this.ruralPostcodeRepository.getRuralPostcodes(
                 anyString(), anyString(), anyString(), anyString())).thenReturn(ruralPostcodes);
 
-        this.ruralPostcodeRequest.setTown(null);
-        this.ruralPostcodeRequest.setDistrict(null);
+        this.ruralPostcodeRequest.setRuralVillageName(null);
+        this.ruralPostcodeRequest.setRuralAreaName(null);
 
         this.postcodeService.getRuralPostcodes(this.ruralPostcodeRequest);
 
@@ -270,8 +270,8 @@ public class PostcodeServiceTest
         when(this.ruralPostcodeRepository.getRuralPostcodes(
                 anyString(), anyString(), anyString(), anyString())).thenReturn(ruralPostcodes);
 
-        this.ruralPostcodeRequest.setTown(null);
-        this.ruralPostcodeRequest.setDistrict(null);
+        this.ruralPostcodeRequest.setRuralVillageName(null);
+        this.ruralPostcodeRequest.setRuralAreaName(null);
         this.ruralPostcodeRequest.setLocalGovtAreaName(null);
 
         this.postcodeService.getRuralPostcodes(this.ruralPostcodeRequest);
@@ -324,7 +324,7 @@ public class PostcodeServiceTest
                 anyString(), anyString(), anyString(), anyString()))
                 .thenReturn(urbanPostcodes);
 
-        this.urbanPostcodeRequest.setStreet(null);
+        this.urbanPostcodeRequest.setUrbanStreetName(null);
 
         this.postcodeService.getUrbanPostcodes(this.urbanPostcodeRequest);
 
@@ -343,8 +343,8 @@ public class PostcodeServiceTest
                 anyString(), anyString(), anyString(), anyString()))
                 .thenReturn(urbanPostcodes);
 
-        this.urbanPostcodeRequest.setStreet(null);
-        this.urbanPostcodeRequest.setArea(null);
+        this.urbanPostcodeRequest.setUrbanStreetName(null);
+        this.urbanPostcodeRequest.setUrbanAreaName(null);
 
         this.postcodeService.getUrbanPostcodes(this.urbanPostcodeRequest);
 
@@ -363,9 +363,9 @@ public class PostcodeServiceTest
                 anyString(), anyString(), anyString(), anyString()))
                 .thenReturn(urbanPostcodes);
 
-        this.urbanPostcodeRequest.setStreet(null);
-        this.urbanPostcodeRequest.setArea(null);
-        this.urbanPostcodeRequest.setTown(null);
+        this.urbanPostcodeRequest.setUrbanStreetName(null);
+        this.urbanPostcodeRequest.setUrbanAreaName(null);
+        this.urbanPostcodeRequest.setUrbanTownName(null);
 
         this.postcodeService.getUrbanPostcodes(this.urbanPostcodeRequest);
 

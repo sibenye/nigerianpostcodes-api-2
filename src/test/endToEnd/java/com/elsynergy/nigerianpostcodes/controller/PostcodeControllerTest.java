@@ -93,7 +93,7 @@ public class PostcodeControllerTest
 
       //by stateCode and ruralAreaName
         this.qBuilder.addParam("stateCode", "KO");
-        this.qBuilder.addParam("district", "Adavi");
+        this.qBuilder.addParam("ruralAreaName", "Adavi");
         this.mvc.perform(get(this.qBuilder.buildUri()))
         .andDo(print())
         .andExpect(status().isOk())
@@ -111,7 +111,7 @@ public class PostcodeControllerTest
 
         //by stateCode and villageName
         this.qBuilder.addParam("stateCode", "KO");
-        this.qBuilder.addParam("town", "Abagiri");
+        this.qBuilder.addParam("ruralVillageName", "Abagiri");
         this.mvc.perform(get(this.qBuilder.buildUri()))
         .andDo(print())
         .andExpect(status().isOk())
@@ -153,7 +153,7 @@ public class PostcodeControllerTest
 
         //by stateCode and urbanTownName
         this.qBuilder.addParam("stateCode", "KO");
-        this.qBuilder.addParam("town", "Kabba");
+        this.qBuilder.addParam("urbanTownName", "Kabba");
         this.mvc.perform(get(this.qBuilder.buildUri()))
         .andDo(print())
         .andExpect(status().isOk())
@@ -171,7 +171,7 @@ public class PostcodeControllerTest
 
         //by stateCode and urbanAreaName
         this.qBuilder.addParam("stateCode", "KO");
-        this.qBuilder.addParam("area", "Sir James Oloruntoba Way");
+        this.qBuilder.addParam("urbanAreaName", "Sir James Oloruntoba Way");
         this.mvc.perform(get(this.qBuilder.buildUri()))
         .andDo(print())
         .andExpect(status().isOk())
@@ -189,7 +189,7 @@ public class PostcodeControllerTest
 
         //by stateCode and urbanStreetName
         this.qBuilder.addParam("stateCode", "KO");
-        this.qBuilder.addParam("street", "Ayeteju  St.");
+        this.qBuilder.addParam("urbanStreetName", "Ayeteju  St.");
         this.mvc.perform(get(this.qBuilder.buildUri()))
         .andDo(print())
         .andExpect(status().isOk())
@@ -265,7 +265,7 @@ public class PostcodeControllerTest
         this.qBuilder.setPath(endpoint);
 
         this.qBuilder.addParam("stateCode", "KO");
-        this.qBuilder.addParam("town", "Kabba");
+        this.qBuilder.addParam("urbanTownName", "Kabba");
         this.qBuilder.addParam("hint", "ay");
         this.mvc.perform(get(this.qBuilder.buildUri()))
         .andDo(print())

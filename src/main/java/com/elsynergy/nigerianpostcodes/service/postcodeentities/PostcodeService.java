@@ -73,7 +73,7 @@ public class PostcodeService
 
     public ApiFindResponse getRuralPostcodes(final RuralPostcodeRequest request) throws ResourceNotFoundException {
         final List<RuralPostcode> ruralPostcodes = this.ruralPostcodeRepository.getRuralPostcodes(
-                request.getStateCode(), request.getLocalGovtAreaName(), request.getDistrict(), request.getTown());
+                request.getStateCode(), request.getLocalGovtAreaName(), request.getRuralAreaName(), request.getRuralVillageName());
 
         if (ruralPostcodes.size() == 0) {
             throw new ResourceNotFoundException();
@@ -89,7 +89,7 @@ public class PostcodeService
 
     public ApiFindResponse getUrbanPostcodes(final UrbanPostcodeRequest request) throws ResourceNotFoundException {
         final List<UrbanPostcode> urbanPostcodes = this.urbanPostcodeRepository.getUrbanPostcodes(
-                request.getStateCode(), request.getTown(), request.getArea(), request.getStreet());
+                request.getStateCode(), request.getUrbanTownName(), request.getUrbanAreaName(), request.getUrbanStreetName());
 
         if (urbanPostcodes.size() == 0) {
             throw new ResourceNotFoundException();

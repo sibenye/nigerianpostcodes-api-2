@@ -12,11 +12,11 @@ public class RuralPostcodeRequest extends PostcodeRequest
     @ApiParam(value = "Local Government Area Name.")
     private String localGovtAreaName;
 
-    @ApiParam(value = "District.")
-    private String district;
+    @ApiParam(value = "Rural Area Name.")
+    private String ruralAreaName;
 
-    @ApiParam(value = "Town.")
-    private String town;
+    @ApiParam(value = "Rural Village Name.")
+    private String ruralVillageName;
 
     public String getLocalGovtAreaName()
     {
@@ -28,23 +28,23 @@ public class RuralPostcodeRequest extends PostcodeRequest
         this.localGovtAreaName = localGovtAreaName;
     }
 
-    public String getDistrict()
+    public String getRuralAreaName()
     {
-        return this.district;
+        return this.ruralAreaName;
     }
 
-    public void setDistrict(final String district)
+    public void setRuralAreaName(final String ruralAreaName)
     {
-        this.district = district;
+        this.ruralAreaName = ruralAreaName;
     }
 
-    public String getTown()
+    public String getRuralVillageName()
     {
-        return this.town;
+        return this.ruralVillageName;
     }
 
-    public void setTown(final String town)
+    public void setRuralVillageName(final String ruralVillageName)
     {
-        this.town = town;
+        this.ruralVillageName = ruralVillageName;
     }
 }
